@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using NewtonVR;
 
-public class fadeInOut : MonoBehaviour {
+public class fadeInOutDogan : MonoBehaviour {
 	public Canvas _faderCanvas;
 	public RawImage _faderImage;
 	public Color _faderTargetColor;

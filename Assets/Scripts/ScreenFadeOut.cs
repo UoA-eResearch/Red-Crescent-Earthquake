@@ -17,7 +17,7 @@ public class ScreenFadeOut : MonoBehaviour
     public Color fadeColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
     private Material fadeMaterial = null;
-    private bool isFading = false;
+	public bool isFading = false;
     private YieldInstruction fadeInstruction = new WaitForEndOfFrame();
 
     /// <summary>
