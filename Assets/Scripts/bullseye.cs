@@ -11,7 +11,8 @@ public class bullseye : MonoBehaviour {
 	public string _hammerOrBracket = "bracket" ;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		ring2 = transform.Find("rings/red ring (1)");
 		ring2.gameObject.SetActive(false);
 		StartCoroutine(Activate2ndRing());
@@ -34,7 +35,7 @@ public class bullseye : MonoBehaviour {
 	void OnCollisionEnter (Collision collision) {
 		if (collision.transform.tag == "HammerInteraction") 
 		{
-			if (_hammerOrBracket == "bracket" && collision.transform.name == "L-bracket") 
+			if (_hammerOrBracket == "bracket" && collision.transform.name == "L-bracket") 			// objects in the scene must be NAMED "L-bracket".  Don't change their names!
 			{
 				collision.transform.GetComponent<AudioSource>().Play();
 				sequenceManager.NextHammerTarget(nextStep);	
