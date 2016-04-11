@@ -41,6 +41,7 @@ public class firstAidBag : MonoBehaviour {
 			Destroy (collision.gameObject);
 			Instantiate (ParticleFailure,ParticleSpawn.transform.position, Quaternion.identity);
 			Failure.Play();
+			_sequenceManager.PlayNoAudio();
 		}
 	}
 }

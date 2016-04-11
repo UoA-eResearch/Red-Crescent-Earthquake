@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;  				// added by Andrew for Lists
 using UnityEngine.UI;
 
 public class sequenceManager : MonoBehaviour {
@@ -39,6 +40,8 @@ public class sequenceManager : MonoBehaviour {
 
 	public AudioClip getUnderTable;
 	public AudioClip holdOn;
+
+	public List<AudioClip> noAudio = new List<AudioClip> ();
 	// end of Audio for TV
 
 
@@ -93,6 +96,8 @@ public class sequenceManager : MonoBehaviour {
 		_circleUnderTable.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
 
+		//noAudio = new List<AudioClip> ();
+
 		//_timerRenderer = GameObject.Find("Timer Text").GetComponent<Renderer>();
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
 		Debug.Log("timerR = " + _timerRenderer);
@@ -106,7 +111,6 @@ public class sequenceManager : MonoBehaviour {
 	void Update () {
 		// update time on TV screen
 		_timeRemaining = _timerStart + 179 - Time.time;
-		Debug.Log("_timeR = " + _timeRemaining);
 		if (_timeRemaining < 0 && _quakeHasStarted == false) {
 			_quakeHasStarted = true;
 			StopAllCoroutines();	
@@ -303,6 +307,14 @@ public class sequenceManager : MonoBehaviour {
 		yield return new WaitForSeconds(_tvAudioSource.clip.length);
 		_tvAudioSource.clip = topCorner;
 		_tvAudioSource.Play();
+	}
+
+	public void PlayNoAudio() {
+		new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
+		int randomClip = Random.Range(0, noAudio.Count);
+		_tvAudioSource.clip = noAudio[randomClip];
+		_tvAudioSource.Play();
+		//Debug.Log("play no audio + " + _tvAudioSource.clip);
 	}
 
 
