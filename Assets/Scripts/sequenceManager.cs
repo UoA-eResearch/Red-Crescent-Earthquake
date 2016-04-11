@@ -18,8 +18,8 @@ public class sequenceManager : MonoBehaviour {
     private EarthquakeController _earthquakeController;
 	private Transform _timerRenderer;
 	public bool _quakeHasStarted;				//may not need to be pulic
-	private GameObject _circleUnderTable;
-	private GameObject _greenCircleUnderTable;
+	private GameObject _redCircleUnderTable;
+	public GameObject _greenCircleUnderTable;
 
 	// Audio for the TV
 	private AudioSource _tvAudioSource;
@@ -91,9 +91,10 @@ public class sequenceManager : MonoBehaviour {
 		_hammerTarget3.SetActive(false);
 		_hammerTarget4.SetActive(false);
 
-		_circleUnderTable = GameObject.Find("Red Circle Under Table");
-		_greenCircleUnderTable = GameObject.Find("Green Circle Under Table");
-		_circleUnderTable.SetActive(false);
+		_redCircleUnderTable = GameObject.Find("Red Circle Under Table");
+		//_greenCircleUnderTable = GameObject.Find("Green Circle Under Table");
+
+		_redCircleUnderTable.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
 
 		//noAudio = new List<AudioClip> ();
@@ -258,7 +259,7 @@ public class sequenceManager : MonoBehaviour {
 		_tvImage.material = dropCoverHoldImg;
 		_tvAudioSource.clip = getUnderTable;  // use the longer clip with "get under... hold on... hold on..."
 		_tvAudioSource.Play();
-		_circleUnderTable.SetActive(true);
+		_redCircleUnderTable.SetActive(true);
 		_greenCircleUnderTable.SetActive(true);
 		yield return new WaitForSeconds(getUnderTable.length);
 		_tvAudioSource.clip = holdOn;
