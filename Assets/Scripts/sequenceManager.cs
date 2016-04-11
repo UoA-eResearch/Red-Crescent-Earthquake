@@ -283,6 +283,9 @@ public class sequenceManager : MonoBehaviour {
 			_hammerTarget4.SetActive(false);
 			_tvAudioSource.clip = target2done;
 			_tvAudioSource.Play();
+			new WaitForSeconds(target2done.length);
+			StopAllCoroutines();		
+			StartCoroutine(DropCoverHold());
 			// trigger start of quake?  or don't bother since it'll be timer based anyway?
 		} 
 	}
