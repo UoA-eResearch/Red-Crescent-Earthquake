@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class toMainScene : MonoBehaviour {
 
 	public string _loadScene;
-	public GameObject _earthquakeBook;
+	public GameObject _earthquakeBookEN;
+	public GameObject _earthquakeBookTR;
 	private bool _triggered;
 	private float _duration;
 	private float _elapsedTime;
@@ -20,11 +21,18 @@ public class toMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (_earthquakeBook.GetComponent<NVRInteractableItem> ().IsAttached) {
+		if (_earthquakeBookEN.GetComponent<NVRInteractableItem> ().IsAttached) {
 		
 
 			_triggered = true;
 		
+		}
+
+		if (_earthquakeBookTR.GetComponent<NVRInteractableItem> ().IsAttached) {
+
+
+			_triggered = true;
+
 		}
 
 		if (_triggered) {
