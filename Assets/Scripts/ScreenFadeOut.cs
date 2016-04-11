@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections; // required for Coroutines
 
+
 /// <summary>
 /// Fades the screen from black after a new scene is loaded.
 /// </summary>
@@ -10,6 +11,7 @@ public class ScreenFadeOut : MonoBehaviour
     /// How long it takes to fade.
     /// </summary>
     public float fadeTime = 2.0f;
+
 
     /// <summary>
     /// The initial screen color.
@@ -72,6 +74,8 @@ public class ScreenFadeOut : MonoBehaviour
             color.a = 0.0f + Mathf.Clamp01(elapsedTime / fadeTime);
             fadeMaterial.color = color;
         }
+
+
     }
 
     /// <summary>

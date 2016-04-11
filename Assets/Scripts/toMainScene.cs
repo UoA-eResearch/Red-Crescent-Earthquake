@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using NewtonVR;
+using UnityEngine.SceneManagement;
 
 public class toMainScene : MonoBehaviour {
 
 	public string _loadScene;
 	public GameObject _earthquakeBook;
 	private bool _triggered;
+	private float _duration;
+	private float _elapsedTime;
 
 	void Start () {
 	
+		_duration = this.GetComponent<ScreenFadeOut> ().fadeTime;
+
 	}
 	
 	// Update is called once per frame
@@ -23,15 +28,24 @@ public class toMainScene : MonoBehaviour {
 		}
 
 		if (_triggered) {
-			GetComponent<ScreenFadeOut>().enabled = true;
+			this.GetComponent<ScreenFadeOut> ().enabled = true;
 
-			if (!GetComponent<ScreenFadeOut> ().isFading) {
-			
-				Application.LoadLevel (_loadScene);
+			StartCoroutine (StartFade ());
 
-			}
 		
 		}
 
+
+
+	}
+
+	IEnumerator StartFade(){
+	
+		yield return new WaitForSeconds (_duration);
+
+
+		SceneManager.LoadScene (_loadScene);
+
+	//	Debug.Log ("bitti");
 	}
 }
