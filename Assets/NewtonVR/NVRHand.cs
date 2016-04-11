@@ -17,6 +17,7 @@ namespace NewtonVR
         public bool UseButtonUp = false;
         public bool UseButtonPressed = false;
 
+        public GameObject HandModel;
         public Rigidbody Rigidbody;
 
         private VisibilityLevel CurrentVisibility = VisibilityLevel.Visible;
@@ -128,6 +129,13 @@ namespace NewtonVR
                     SetVisibility(VisibilityLevel.Visible);
                     CurrentHandState = HandState.GripDownNotInteracting;
                 }
+            }
+            else if (HoldButtonPressed == true && IsInteracting == true)
+            {
+                VisibilityLocked = true;
+                SetVisibility(VisibilityLevel.Invisible);
+                HandModel.SetActive(false);
+
             }
             else if (HoldButtonDown == true && IsInteracting == true)
             {

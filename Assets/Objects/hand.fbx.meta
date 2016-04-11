@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: d8190f6a39811d442bb541fbc797685f
-timeCreated: 1459626284
+guid: 919237003671b5c428a7ea0b6d179f59
+timeCreated: 1460410490
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: hand_obj:Hand
+    100000: Hand
+    100002: //RootNode
     100004: joint1
     100006: joint10
     100008: joint11
@@ -29,8 +29,11 @@ ModelImporter:
     100042: joint7
     100044: joint8
     100046: joint9
-    400000: //RootNode
-    400002: hand_obj:Hand
+    100048: nurbsCircle1
+    100050: nurbsCircle2
+    100052: pCylinder1
+    400000: Hand
+    400002: //RootNode
     400004: joint1
     400006: joint10
     400008: joint11
@@ -53,10 +56,15 @@ ModelImporter:
     400042: joint7
     400044: joint8
     400046: joint9
-    4300000: hand_obj:Hand
+    400048: nurbsCircle1
+    400050: nurbsCircle2
+    400052: pCylinder1
+    4300000: Hand
+    4300002: pCylinder1
     7400000: Take 001
     9500000: //RootNode
-    13700000: hand_obj:Hand
+    13700000: Hand
+    13700002: pCylinder1
   materials:
     importMaterials: 1
     materialName: 0
