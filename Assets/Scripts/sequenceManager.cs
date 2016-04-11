@@ -91,7 +91,7 @@ public class sequenceManager : MonoBehaviour {
 		_hammerTarget3.SetActive(false);
 		_hammerTarget4.SetActive(false);
 
-		_circleUnderTable = GameObject.Find("Circle Under Table");
+		_circleUnderTable = GameObject.Find("Red Circle Under Table");
 		_greenCircleUnderTable = GameObject.Find("Green Circle Under Table");
 		_circleUnderTable.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
