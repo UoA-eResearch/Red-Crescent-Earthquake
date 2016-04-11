@@ -23654,6 +23654,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fbbc214e85b864de6a3da99f407f6dd5, type: 3}
   - {fileID: 8300000, guid: d752820021afc4ac492c18a9b4803741, type: 3}
   - {fileID: 8300000, guid: d770016acb66a433e96d5225b80fed2b, type: 3}
+  yesAudio:
+  - {fileID: 8300000, guid: 2ad193dbcde944713979664ec64f2416, type: 3}
+  - {fileID: 8300000, guid: 1336a88ab60374d6a9352c426020606e, type: 3}
+  - {fileID: 8300000, guid: 3db2978017c0742eda104cd0ec23f6ff, type: 3}
   hammerIntro: {fileID: 8300000, guid: a688c8de38fec4796968f76720fef588, type: 3}
   target1done: {fileID: 8300000, guid: 6442207129f734b11915899fed968de2, type: 3}
   target2done: {fileID: 8300000, guid: e9eb7d5f19edc415da8c175c3e885bc1, type: 3}

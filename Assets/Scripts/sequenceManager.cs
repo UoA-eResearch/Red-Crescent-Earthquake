@@ -42,6 +42,7 @@ public class sequenceManager : MonoBehaviour {
 	public AudioClip holdOn;
 
 	public List<AudioClip> noAudio = new List<AudioClip> ();
+	public List<AudioClip> yesAudio = new List<AudioClip> ();
 	// end of Audio for TV
 
 
@@ -318,5 +319,11 @@ public class sequenceManager : MonoBehaviour {
 		//Debug.Log("play no audio + " + _tvAudioSource.clip);
 	}
 
-
+	public void PlayYesAudio() {
+		new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
+		int randomYesClip = Random.Range(0, yesAudio.Count);
+		_tvAudioSource.clip = yesAudio[randomYesClip];
+		_tvAudioSource.Play();
+		Debug.Log("play yes audio + " + _tvAudioSource.clip);
+	}
 }
