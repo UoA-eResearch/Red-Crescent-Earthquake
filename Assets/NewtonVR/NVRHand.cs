@@ -83,6 +83,8 @@ namespace NewtonVR
             if (Controller == null || CurrentHandState == HandState.Uninitialized)
                 return;
 
+            HandModel.SetActive(true);
+
             HoldButtonPressed = Controller.GetPress(HoldButton);
             HoldButtonDown = Controller.GetPressDown(HoldButton);
             HoldButtonUp = Controller.GetPressUp(HoldButton);
