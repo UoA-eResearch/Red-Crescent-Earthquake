@@ -93,19 +93,19 @@ namespace NewtonVR
             UseButtonDown = Controller.GetPressDown(UseButton);
             UseButtonUp = Controller.GetPressUp(UseButton);
 
-            if (HoldButtonUp)
+            if (HoldButtonUp || UseButtonUp)
             {
                 VisibilityLocked = false;
             }
 
-            if (HoldButtonDown == true)
+            if (HoldButtonDown == true || UseButtonDown == true)
             {
                 if (CurrentlyInteracting == null)
                 {
                     PickupClosest();
                 }
             }
-            else if (HoldButtonUp == true && CurrentlyInteracting != null)
+            else if (HoldButtonUp == true || UseButtonUp == true && CurrentlyInteracting != null)
             {
                 EndInteraction(null);
             }
@@ -132,14 +132,14 @@ namespace NewtonVR
                     CurrentHandState = HandState.GripDownNotInteracting;
                 }
             }
-            else if (HoldButtonPressed == true && IsInteracting == true)
+            else if (HoldButtonPressed == true || UseButtonPressed == true && IsInteracting == true)
             {
-                VisibilityLocked = true;
-                SetVisibility(VisibilityLevel.Invisible);
+           
                 HandModel.SetActive(false);
 
             }
-            else if (HoldButtonDown == true && IsInteracting == true)
+            
+            else if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == true)
             {
                 if (CurrentHandState != HandState.GripDownInteracting && VisibilityLocked == false)
                 {
@@ -409,6 +409,9 @@ namespace NewtonVR
             {
                 case "vr_controller_05_wireless_b":
                     Transform dk1Trackhat = this.transform.FindChild("trackhat");
+
+                   
+
                     if (dk1Trackhat == null)
                     {
                         // Dk1 controller model has trackhat
@@ -423,6 +426,9 @@ namespace NewtonVR
                     {
                         dk1TrackhatCollider = dk1Trackhat.gameObject.AddComponent<SphereCollider>();
                         dk1TrackhatCollider.isTrigger = true;
+                        dk1TrackhatCollider.center = new Vector3(0, 0, 0);
+                        dk1TrackhatCollider.radius = 1000000;
+                      
                     }
 
                     Colliders = new Collider[] { dk1TrackhatCollider };
