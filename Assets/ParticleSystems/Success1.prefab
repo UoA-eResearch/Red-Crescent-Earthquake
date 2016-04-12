@@ -27,7 +27,6 @@ GameObject:
   - 4: {fileID: 436708}
   - 198: {fileID: 19892952}
   - 199: {fileID: 19997726}
-  - 114: {fileID: 11481686}
   m_Layer: 0
   m_Name: Success1
   m_TagString: Untagged
@@ -60,17 +59,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 436708}
   m_RootOrder: 0
---- !u!114 &11481686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &19823686
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1690,7 +1678,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4278647657
+        rgba: 4283694675
       minMaxState: 0
     startSize:
       scalar: 1

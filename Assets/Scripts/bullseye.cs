@@ -9,6 +9,9 @@ public class bullseye : MonoBehaviour {
 	public int nextStep;
 	public string _hammerOrBracket = "bracket" ;
 
+	// Particle
+	public GameObject ParticleSystemSuccess;
+
 
 	void Start () 
 	{
@@ -34,6 +37,7 @@ public class bullseye : MonoBehaviour {
 			if (_hammerOrBracket == "bracket" && collision.transform.name == "L-bracket") 			// objects in the scene must be NAMED "L-bracket".  Don't change their names!
 			{
 				collision.transform.GetComponent<AudioSource>().Play();
+				Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 				collision.transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
 				collision.transform.rotation = transform.rotation;
 				collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
