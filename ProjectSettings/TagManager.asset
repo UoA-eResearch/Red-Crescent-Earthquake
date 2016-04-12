@@ -8,6 +8,7 @@ TagManager:
   - WrongItem
   - HammerInteraction
   - Fader
+  - Hand
   layers:
   - Default
   - TransparentFX

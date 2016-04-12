@@ -6,6 +6,7 @@ public class holdTarget : MonoBehaviour {
 	private Transform _lookTarget;
 	private GameObject _redSphere;
 	private GameObject _greenSphere;
+	private GameObject _sprite;
 
 
 	// Use this for initialization
@@ -13,6 +14,7 @@ public class holdTarget : MonoBehaviour {
 		_lookTarget = GameObject.Find("BullSkull").transform;
 		_redSphere = GameObject.Find("Red Sphere");
 		_greenSphere = GameObject.Find("Green Sphere");
+		_sprite = GameObject.Find("Hold Here Sprite");
 		_greenSphere.SetActive(false);
 	}
 	
@@ -28,6 +30,8 @@ public class holdTarget : MonoBehaviour {
 			{
 				_redSphere.SetActive(false);
 				_greenSphere.SetActive(true);
+				_sprite.SetActive(false);
+
 
 				//ParticleSystemTable.SetActive(true);		// Particles On
 			}
@@ -35,11 +39,14 @@ public class holdTarget : MonoBehaviour {
 	}
 
 	void OnTriggerExit (Collider other) {
-		if (other.name == "BullSkull") {
+		if (other.tag == "Hand") {
+			Debug.Log("hand left trigger");
 			if (_greenSphere.activeInHierarchy) 
 			{
 				_greenSphere.SetActive(false);
 				_redSphere.SetActive(true);
+				_sprite.SetActive(true);
+
 
 				//ParticleSystemTable.SetActive(false);		// Particles off
 			}
