@@ -17,7 +17,7 @@ namespace NewtonVR
         public bool UseButtonUp = false;
         public bool UseButtonPressed = false;
 
-        public GameObject HandModel;
+        [SerializeField]private Transform HandModel;
         public Rigidbody Rigidbody;
 
         private VisibilityLevel CurrentVisibility = VisibilityLevel.Visible;
@@ -67,12 +67,12 @@ namespace NewtonVR
         private void Awake()
         {
             CurrentlyHoveringOver = new Dictionary<NVRInteractable, Dictionary<Collider, float>>();
-
+            
             LastPositions = new Vector3[EstimationSamples];
             LastRotations = new Quaternion[EstimationSamples];
             LastDeltas = new float[EstimationSamples];
             EstimationSampleIndex = 0;
-
+            HandModel = transform.Find("Hand");
             VisibilityLocked = false;
 
             SteamVR_Utils.Event.Listen("render_model_loaded", RenderModelLoaded);
@@ -82,8 +82,8 @@ namespace NewtonVR
         {
             if (Controller == null || CurrentHandState == HandState.Uninitialized)
                 return;
-
-            HandModel.SetActive(true);
+            
+            HandModel.gameObject.SetActive(true);
 
             HoldButtonPressed = Controller.GetPress(HoldButton);
             HoldButtonDown = Controller.GetPressDown(HoldButton);
@@ -123,7 +123,7 @@ namespace NewtonVR
 
         private void UpdateVisibilityAndColliders()
         {
-            if (HoldButtonPressed == true && IsInteracting == false)
+            if (HoldButtonPressed == true || UseButtonPressed == true && IsInteracting == false)
             {
                 if (CurrentHandState != HandState.GripDownNotInteracting && VisibilityLocked == false)
                 {
@@ -135,7 +135,7 @@ namespace NewtonVR
             else if (HoldButtonPressed == true || UseButtonPressed == true && IsInteracting == true)
             {
            
-                HandModel.SetActive(false);
+                HandModel.gameObject.SetActive(false);
 
             }
             
