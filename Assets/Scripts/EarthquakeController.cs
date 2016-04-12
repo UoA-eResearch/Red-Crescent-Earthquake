@@ -12,6 +12,16 @@ public class EarthquakeController : MonoBehaviour {
 	private AudioSource _rumbleAudiosource;
 	private AudioSource CitySiren;
 
+	// Room Events Objects
+
+	public GameObject Picture;
+	public GameObject Plant;
+	public GameObject Lamp;
+	public GameObject Mirror;
+	public GameObject Vase;
+	public GameObject Lamp1;
+	public GameObject Lamp2;
+
 	// camera shake effect
 	private Transform _cameraToShake;
 	private bool _shakeCamera;
@@ -56,6 +66,12 @@ public class EarthquakeController : MonoBehaviour {
 			ShakeCamera();
 			//Debug.Log("CAMERA SHAKING");
 		}
+
+		// TESTER BUTTON
+		//if (Input.GetKeyDown(KeyCode.A))
+		//{
+		//	Lamps();	
+		//}
 	}
 
 
@@ -79,6 +95,15 @@ public class EarthquakeController : MonoBehaviour {
 	void QuakeStarter()
 	{
 		StartCoroutine(QuakeSequence());
+
+		// Room Events
+
+		Invoke ("PictureFall", 5);
+		Invoke ("MirrorFall", 7);
+		Invoke ("PlantFall", 8);
+		Invoke ("LampFall", 10);
+		Invoke ("VaseFall", 3);
+		Invoke ("Lamps", 1);
 	}
 
 	IEnumerator QuakeSequence () {
@@ -114,4 +139,39 @@ public class EarthquakeController : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 		_lightSparks2.SetActive(true);
 	}
+
+	// ROOM EVENTS
+
+	void PictureFall()
+	{
+		Picture.GetComponent<Rigidbody>().useGravity = true;
+	}
+
+	void MirrorFall()
+	{
+		Mirror.GetComponent<Rigidbody>().useGravity = true;
+	}
+
+	void PlantFall()
+	{
+		Plant.GetComponent<PlantAnim>().PlantFall();
+	}
+
+	void LampFall()
+	{
+		Lamp.GetComponent<Rigidbody>().AddForce (new Vector3 (0, 0, 1.5f), ForceMode.Impulse);
+	}
+
+	void VaseFall()
+	{
+		Vase.GetComponent<Rigidbody>().AddForce (new Vector3 (1.5f, 0, 0), ForceMode.Impulse);
+	}
+
+	void Lamps()
+	{
+		Lamp1.GetComponent<LampSwing1>().Lamp1Go();
+		Lamp2.GetComponent<LampSwing2>().Lamp2Go();
+	}
+
+
 }
