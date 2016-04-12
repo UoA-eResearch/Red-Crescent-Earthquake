@@ -105,7 +105,6 @@ public class sequenceManager : MonoBehaviour {
 
 		//_timerRenderer = GameObject.Find("Timer Text").GetComponent<Renderer>();
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
-		Debug.Log("timerR = " + _timerRenderer);
 		_timerRenderer.gameObject.SetActive(false);
 
 		// Begin the game sequence
