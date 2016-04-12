@@ -8,7 +8,7 @@ public class AttachHand : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.position.Set(1000000, 3000000, -6000000);
+        transform.position.Set(0, -1000000, -6000000);
     }
 	
 	// Update is called once per frame

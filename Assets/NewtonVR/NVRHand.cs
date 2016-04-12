@@ -427,7 +427,7 @@ namespace NewtonVR
                         dk1TrackhatCollider = dk1Trackhat.gameObject.AddComponent<SphereCollider>();
                         dk1TrackhatCollider.isTrigger = true;
                         dk1TrackhatCollider.center = new Vector3(0, 0, 0);
-                        dk1TrackhatCollider.radius = 1000000;
+                        dk1TrackhatCollider.radius = 200000;
                       
                     }
 
