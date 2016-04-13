@@ -6,6 +6,7 @@ public class holdTarget : MonoBehaviour {
 	private Transform _lookTarget;
 	public GameObject _redSphere;
 	public GameObject _greenSphere;
+	public GameObject _mySprite;
 
 
 	// Use this for initialization
@@ -15,7 +16,8 @@ public class holdTarget : MonoBehaviour {
 		Debug.Log("redsphere = " + _redSphere);
 		//_greenSphere = GameObject.Find("Green Sphere");
 		_greenSphere.SetActive(false);
-
+		_mySprite = GameObject.Find("sprite");
+		Debug.Log("my sprite = " + _mySprite);
 	}
 	
 	// Update is called once per frame
@@ -31,6 +33,7 @@ public class holdTarget : MonoBehaviour {
 				Debug.Log("hand in target");
 				_redSphere.SetActive(false);
 				_greenSphere.SetActive(true);
+				_mySprite.SetActive(false);
 
 				//ParticleSystemTable.SetActive(true);		// Particles On
 			}
@@ -38,11 +41,12 @@ public class holdTarget : MonoBehaviour {
 	}
 
 	void OnTriggerExit (Collider other) {
-		if (other.name == "BullSkull") {
+		if (other.tag == "Hand") {
 			if (_greenSphere.activeInHierarchy) 
 			{
 				_greenSphere.SetActive(false);
 				_redSphere.SetActive(true);
+				_mySprite.SetActive(true); 
 
 				//ParticleSystemTable.SetActive(false);		// Particles off
 			}
