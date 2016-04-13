@@ -4,16 +4,18 @@ using System.Collections;
 public class holdTarget : MonoBehaviour {
 
 	private Transform _lookTarget;
-	private GameObject _redSphere;
-	private GameObject _greenSphere;
+	public GameObject _redSphere;
+	public GameObject _greenSphere;
 
 
 	// Use this for initialization
 	void Start () {
 		_lookTarget = GameObject.Find("BullSkull").transform;
-		_redSphere = GameObject.Find("Red Sphere");
-		_greenSphere = GameObject.Find("Green Sphere");
+		//_redSphere = GameObject.Find("Hold Target/Red Sphere");
+		Debug.Log("redsphere = " + _redSphere);
+		//_greenSphere = GameObject.Find("Green Sphere");
 		_greenSphere.SetActive(false);
+
 	}
 	
 	// Update is called once per frame
@@ -26,6 +28,7 @@ public class holdTarget : MonoBehaviour {
 		if (other.tag == "Hand") {
 			if (_redSphere.activeInHierarchy) 
 			{
+				Debug.Log("hand in target");
 				_redSphere.SetActive(false);
 				_greenSphere.SetActive(true);
 
