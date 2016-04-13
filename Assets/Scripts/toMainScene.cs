@@ -21,19 +21,19 @@ public class toMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (_earthquakeBookEN.GetComponent<NVRInteractableItem> ().IsAttached) {
+		if (_earthquakeBookEN.GetComponent<NVRInteractableItem> ().IsAttached || Input.GetKeyDown(KeyCode.Space)) {
 		
 
 			_triggered = true;
 		
 		}
 
-		if (_earthquakeBookTR.GetComponent<NVRInteractableItem> ().IsAttached) {
+		/*if (_earthquakeBookTR.GetComponent<NVRInteractableItem> ().IsAttached) {
 
 
 			_triggered = true;
 
-		}
+		}*/
 
 		if (_triggered) {
 			this.GetComponent<ScreenFadeOut> ().enabled = true;
