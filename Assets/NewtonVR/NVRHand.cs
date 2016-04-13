@@ -18,6 +18,7 @@ namespace NewtonVR
         public bool UseButtonPressed = false;
 
         [SerializeField]private Transform HandModel;
+        
         public Rigidbody Rigidbody;
 
         private VisibilityLevel CurrentVisibility = VisibilityLevel.Visible;
@@ -93,13 +94,16 @@ namespace NewtonVR
             UseButtonDown = Controller.GetPressDown(UseButton);
             UseButtonUp = Controller.GetPressUp(UseButton);
 
-            if (HoldButtonUp || UseButtonUp)
+            if (HoldButtonUp || UseButtonUp && IsInteracting == false)
             {
+                HandModel.GetComponent<HandAnim>().OpenHand();
                 VisibilityLocked = false;
             }
 
-            if (HoldButtonDown == true || UseButtonDown == true)
+            if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == false)
             {
+                HandModel.GetComponent<HandAnim>().CloseHand();
+
                 if (CurrentlyInteracting == null)
                 {
                     PickupClosest();
@@ -130,6 +134,7 @@ namespace NewtonVR
                     VisibilityLocked = true;
                     SetVisibility(VisibilityLevel.Visible);
                     CurrentHandState = HandState.GripDownNotInteracting;
+                    
                 }
             }
             else if (HoldButtonPressed == true || UseButtonPressed == true && IsInteracting == true)
