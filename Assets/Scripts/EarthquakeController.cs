@@ -28,9 +28,11 @@ public class EarthquakeController : MonoBehaviour {
 	private float _shakeStartTime;
 	public float _shakeDuration;
 
-	// Particle Effects (Sami)
+    public bool _earthquakeSequenceFinished = false;
 
-	public GameObject DustBits;
+    // Particle Effects (Sami)
+
+    public GameObject DustBits;
 	public GameObject DustThick;
 	public GameObject BuildingSmoke1;
 	public GameObject BuildingSmoke2;
@@ -88,8 +90,8 @@ public class EarthquakeController : MonoBehaviour {
 
 		if (Time.time > _shakeStartTime + _shakeDuration) {
 			_shakeCamera = false;
-
-		}
+            _earthquakeSequenceFinished = true;
+        }
 	}
 
 	void QuakeStarter()

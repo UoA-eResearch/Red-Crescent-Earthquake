@@ -17,7 +17,7 @@ namespace NewtonVR
         public bool UseButtonUp = false;
         public bool UseButtonPressed = false;
 
-        [SerializeField]private Transform HandModel;
+       // [SerializeField]private Transform HandModel;
         
         public Rigidbody Rigidbody;
 
@@ -73,7 +73,7 @@ namespace NewtonVR
             LastRotations = new Quaternion[EstimationSamples];
             LastDeltas = new float[EstimationSamples];
             EstimationSampleIndex = 0;
-            HandModel = transform.Find("Hand");
+           // HandModel = transform.Find("Hand");
             VisibilityLocked = false;
 
             SteamVR_Utils.Event.Listen("render_model_loaded", RenderModelLoaded);
@@ -84,7 +84,7 @@ namespace NewtonVR
             if (Controller == null || CurrentHandState == HandState.Uninitialized)
                 return;
             
-            HandModel.gameObject.SetActive(true);
+           // HandModel.gameObject.SetActive(true);
 
             HoldButtonPressed = Controller.GetPress(HoldButton);
             HoldButtonDown = Controller.GetPressDown(HoldButton);
@@ -96,13 +96,13 @@ namespace NewtonVR
 
             if (HoldButtonUp || UseButtonUp && IsInteracting == false)
             {
-                HandModel.GetComponent<HandAnim>().OpenHand();
+               // HandModel.GetComponent<HandAnim>().OpenHand();
                 VisibilityLocked = false;
             }
 
             if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == false)
             {
-                HandModel.GetComponent<HandAnim>().CloseHand();
+               // HandModel.GetComponent<HandAnim>().CloseHand();
 
                 if (CurrentlyInteracting == null)
                 {
@@ -140,7 +140,7 @@ namespace NewtonVR
             else if (HoldButtonPressed == true || UseButtonPressed == true && IsInteracting == true)
             {
            
-                HandModel.gameObject.SetActive(false);
+               // HandModel.gameObject.SetActive(false);
 
             }
             
