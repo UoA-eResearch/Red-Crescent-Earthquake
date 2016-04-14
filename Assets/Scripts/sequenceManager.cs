@@ -11,8 +11,8 @@ public class sequenceManager : MonoBehaviour {
 	private float _timerStart;
 	private float _timeRemaining;
 	private Renderer _tvImage;
-	private int _itemsTotal = 8;				// these 2 will not be necessary
-	private int _itemsCollected;			    // if timer is used to trigger next part of sequence (instead of completion of packing all items)
+	private int _itemsTotal = 8;				
+	private int _itemsCollected;			    
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
@@ -21,6 +21,10 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _redCircleUnderTable;
 	public GameObject _greenCircleUnderTable;
 	private GameObject _holdTarget;
+	public bool _headUnderTable;
+	public bool _handOnHoldTarget;
+
+
 
 	// Audio for the TV
 	private AudioSource _tvAudioSource;

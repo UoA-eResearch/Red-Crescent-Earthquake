@@ -5,6 +5,7 @@ public class circleUnderTable : MonoBehaviour {
 
 	private GameObject _redCircle;
 	private GameObject _greenCircle;
+	private sequenceManager _sequenceManager;
 
 	// Particle System
 	public GameObject ParticleSystemTable; 
@@ -12,6 +13,7 @@ public class circleUnderTable : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
 		_redCircle = GameObject.Find("Red Circle Under Table");
 		_greenCircle = GameObject.Find("Green Circle Under Table");
 		_greenCircle.SetActive(false);
@@ -28,6 +30,7 @@ public class circleUnderTable : MonoBehaviour {
 			{
 				_redCircle.SetActive(false);
 				_greenCircle.SetActive(true);
+				_sequenceManager._headUnderTable = true;
 
 				ParticleSystemTable.SetActive(true);		// Particles On
 			}

@@ -7,17 +7,19 @@ public class holdTarget : MonoBehaviour {
 	public GameObject _redSphere;
 	public GameObject _greenSphere;
 	public GameObject _mySprite;
+	private sequenceManager _sequenceManager;
 
 
 	// Use this for initialization
 	void Start () {
 		_lookTarget = GameObject.Find("BullSkull").transform;
 		//_redSphere = GameObject.Find("Hold Target/Red Sphere");
-		Debug.Log("redsphere = " + _redSphere);
+		//Debug.Log("redsphere = " + _redSphere);
 		//_greenSphere = GameObject.Find("Green Sphere");
 		_greenSphere.SetActive(false);
 		_mySprite = GameObject.Find("sprite");
 		Debug.Log("my sprite = " + _mySprite);
+		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
 	}
 	
 	// Update is called once per frame
@@ -34,6 +36,7 @@ public class holdTarget : MonoBehaviour {
 				_redSphere.SetActive(false);
 				_greenSphere.SetActive(true);
 				_mySprite.SetActive(false);
+				_sequenceManager._handOnHoldTarget = true;
 
 				//ParticleSystemTable.SetActive(true);		// Particles On
 			}
