@@ -12,7 +12,7 @@ public class sequenceManager : MonoBehaviour {
 	private float _timeRemaining;
 	private Renderer _tvImage;
 	private int _itemsTotal = 8;				
-	private int _itemsCollected;			    
+	public int _itemsCollected;			    
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
@@ -23,7 +23,7 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _holdTarget;
 	public bool _headUnderTable;
 	public bool _handOnHoldTarget;
-
+	private GameObject _arrow;
 
 
 	// Audio for the TV
@@ -110,6 +110,9 @@ public class sequenceManager : MonoBehaviour {
 		//_timerRenderer = GameObject.Find("Timer Text").GetComponent<Renderer>();
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
 		_timerRenderer.gameObject.SetActive(false);
+
+		_arrow = GameObject.Find("Arrow");
+		_arrow.SetActive(false);
 
 		// Begin the game sequence
 		StartCoroutine(Intro());
@@ -231,6 +234,10 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator PackRollBandage () {
 		_tvText.text = "roll bandage";
 		_tvImage.material = rollBandageImg;
+		_arrow.SetActive(true);
+		Vector3 newArrowPos = GameObject.Find("roll bandage").transform.position;
+		//_arrow.transform.position = new Vector3 (newArrowPos.x, newArrowPos.y, newArrowPos.z);
+		_arrow.transform.position = newArrowPos;
 		//yield return new WaitForSeconds(1);
 		_tvAudioSource.clip = rollBandage;
 		_tvAudioSource.Play();
