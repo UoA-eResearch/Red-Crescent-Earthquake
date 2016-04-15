@@ -98,16 +98,12 @@ public class sequenceManager : MonoBehaviour {
 		_hammerTarget4.SetActive(false);
 
 		_redCircleUnderTable = GameObject.Find("Red Circle Under Table");
-		//_greenCircleUnderTable = GameObject.Find("Green Circle Under Table");
 		_holdTarget = GameObject.Find("Hold Target");
 
 		_redCircleUnderTable.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
 		_holdTarget.SetActive(false);
 
-		//noAudio = new List<AudioClip> ();
-
-		//_timerRenderer = GameObject.Find("Timer Text").GetComponent<Renderer>();
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
 		_timerRenderer.gameObject.SetActive(false);
 
@@ -236,7 +232,6 @@ public class sequenceManager : MonoBehaviour {
 		_tvImage.material = rollBandageImg;
 		_arrow.SetActive(true);
 		Vector3 newArrowPos = GameObject.Find("roll bandage").transform.position;
-		//_arrow.transform.position = new Vector3 (newArrowPos.x, newArrowPos.y, newArrowPos.z);
 		_arrow.transform.position = newArrowPos;
 		//yield return new WaitForSeconds(1);
 		_tvAudioSource.clip = rollBandage;
