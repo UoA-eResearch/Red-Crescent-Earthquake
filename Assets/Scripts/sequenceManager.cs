@@ -23,7 +23,7 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _holdTarget;
 	public bool _headUnderTable;
 	public bool _handOnHoldTarget;
-	private GameObject _arrow;
+
 
 
 	// Audio for the TV
@@ -80,6 +80,14 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _hammerTarget3;
 	private GameObject _hammerTarget4;
 
+	// for Arrow Sequence
+	private GameObject _arrow;
+	private Vector3 _rollBandageStartPos;
+	private int _arrowSequenceStep = 1;
+	private Transform _rollBandage;
+	private GameObject _bag;
+	 
+
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
 		_timerText = GameObject.Find("Dynamic GUI/Timer Text").GetComponent<Text>();
@@ -107,8 +115,14 @@ public class sequenceManager : MonoBehaviour {
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
 		_timerRenderer.gameObject.SetActive(false);
 
+		// for Arrow Sequence
 		_arrow = GameObject.Find("Arrow");
 		_arrow.SetActive(false);
+		_rollBandage = GameObject.Find("roll bandage").transform;
+		_rollBandageStartPos = _rollBandage.position;
+		Debug.Log("roll start pos = " + _rollBandageStartPos);
+		_bag = GameObject.Find("1st Aid Bag");
+		Debug.Log("bag = " + _bag);
 
 		// Begin the game sequence
 		StartCoroutine(Intro());
@@ -139,7 +153,20 @@ public class sequenceManager : MonoBehaviour {
 			StopAllCoroutines();
 			StartCoroutine(HammerIntro());
 		}
+			
+		ArrowSequence();
 	} // end of Update()
+
+	void ArrowSequence () {
+		if (_arrowSequenceStep == 1) {
+			//Debug.Log ("roll dist = " + Vector3.Distance(_rollBandage.position, _rollBandageStartPos));
+			if (Vector3.Distance(_rollBandage.position, _rollBandageStartPos) > 0.1f) {
+				Debug.Log("roll bandage has moved far enough to trigger arrow sequence");
+				_arrow.transform.position = _bag.transform.position;
+				_arrowSequenceStep = 2;
+			}
+		}
+	}
 
 
 	void LateUpdate () {
@@ -333,6 +360,5 @@ public class sequenceManager : MonoBehaviour {
 		int randomYesClip = Random.Range(0, yesAudio.Count);
 		_tvAudioSource.clip = yesAudio[randomYesClip];
 		_tvAudioSource.Play();
-		Debug.Log("play yes audio + " + _tvAudioSource.clip);
 	}
 }
