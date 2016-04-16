@@ -83,7 +83,7 @@ public class sequenceManager : MonoBehaviour {
 	// for Arrow Sequence
 	private GameObject _arrow;
 	private Vector3 _rollBandageStartPos;
-	private int _arrowSequenceStep = 1;
+	private int _arrowSequenceStep = 0;
 	private Transform _rollBandage;
 	private GameObject _bag;
 	 
@@ -159,14 +159,22 @@ public class sequenceManager : MonoBehaviour {
 	} // end of Update()
 
 	void ArrowSequence () {
-		if (_arrowSequenceStep == 1) {
-			// check if arrow has moved (picked up by player)
+		if (_arrowSequenceStep == 1 && _arrow.activeSelf == false) {
+			_arrow.SetActive(true);
+			_arrow.transform.position = _rollBandage.position;
+			_arrowSequenceStep = 2;											// wait until player moves roll bandage
+		}
+		if (_arrowSequenceStep == 2 && _arrow.activeSelf == true) {
+			// check if arrow has moved (picked-up by player)
 			if (Vector3.Distance(_rollBandage.position, _rollBandageStartPos) > 0.1f) {
-				Debug.Log("roll bandage has moved far enough to trigger arrow sequence");
 				_arrow.transform.position = _bag.transform.position;
-				_arrowSequenceStep = 2;
+				//_arrowSequenceStep = 3;
 			}
 		}
+		if (_arrowSequenceStep == 3 && rollBandage == null) {
+			_arrow.SetActive(false);
+			_arrowSequenceStep = 4;
+		}	
 	}
 
 
@@ -190,6 +198,9 @@ public class sequenceManager : MonoBehaviour {
 				}
 			}
 			_checkItem = false;
+			if (_arrow.activeSelf == true) {
+				_arrow.SetActive(false);
+			}
 		}
 	} // end of LateUpdate()
 
@@ -258,9 +269,8 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator PackRollBandage () {
 		_tvText.text = "roll bandage";
 		_tvImage.material = rollBandageImg;
-		_arrow.SetActive(true);
-		Vector3 newArrowPos = GameObject.Find("roll bandage").transform.position;
-		_arrow.transform.position = newArrowPos;
+		_arrowSequenceStep = 1;
+
 		//yield return new WaitForSeconds(1);
 		_tvAudioSource.clip = rollBandage;
 		_tvAudioSource.Play();
