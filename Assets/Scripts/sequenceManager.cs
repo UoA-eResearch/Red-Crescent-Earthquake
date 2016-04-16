@@ -160,7 +160,7 @@ public class sequenceManager : MonoBehaviour {
 
 	void ArrowSequence () {
 		if (_arrowSequenceStep == 1) {
-			//Debug.Log ("roll dist = " + Vector3.Distance(_rollBandage.position, _rollBandageStartPos));
+			// check if arrow has moved (picked up by player)
 			if (Vector3.Distance(_rollBandage.position, _rollBandageStartPos) > 0.1f) {
 				Debug.Log("roll bandage has moved far enough to trigger arrow sequence");
 				_arrow.transform.position = _bag.transform.position;
