@@ -121,6 +121,7 @@ public class sequenceManager : MonoBehaviour {
 		_rollBandage = GameObject.Find("roll bandage").transform;
 		_rollBandageStartPos = _rollBandage.position;
 		Debug.Log("roll start pos = " + _rollBandageStartPos);
+		Debug.Log("roll bandage = " + _rollBandage);
 		_bag = GameObject.Find("1st Aid Bag");
 		Debug.Log("bag = " + _bag);
 
