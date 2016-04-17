@@ -8,14 +8,15 @@ public class AttachHand : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.position.Set(0, -1000000, -6000000);
+        transform.localPosition = new Vector3(0, -1.33f, -5.83f);
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+       
         transform.rotation	= controller.rotation;
-        //transform.SetParent(controller);
+       // transform.SetParent(controller);
         transform.Rotate(0,0,0);
         //hammerIsAttached = true;
     }
