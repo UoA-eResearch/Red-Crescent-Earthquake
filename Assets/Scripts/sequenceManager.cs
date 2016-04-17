@@ -308,7 +308,7 @@ public class sequenceManager : MonoBehaviour {
 		_tvAudioSource.Play();
 		_redCircleUnderTable.SetActive(true);
 		_holdTarget.SetActive(true);
-		_greenCircleUnderTable.SetActive(true);
+		//_greenCircleUnderTable.SetActive(true);
 		yield return new WaitForSeconds(getUnderTable.length);
 		_tvAudioSource.clip = holdOn;
 		_tvAudioSource.Play();
