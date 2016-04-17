@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class firstAidBag : MonoBehaviour {
 
@@ -13,33 +13,40 @@ public class firstAidBag : MonoBehaviour {
 	private AudioSource Success;
 	private AudioSource Failure;
 
+    [HideInInspector]public List<string> CollectedItems;
 
-	void Start () {
+    
+
+    void Start () {
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
+       
 		Success = GameObject.Find("SuccessSound").GetComponent<AudioSource>();
 		Failure = GameObject.Find("FailureSound").GetComponent<AudioSource>();
+        CollectedItems = new List<string>();
 	}
 	
 
-	void Update () {
-	
+	void Update ()
+    {
+       
 	}
 
 
-	void OnCollisionEnter (Collision collision) 
+	void OnCollisionEnter (Collision other) 
 	{
-		if (collision.gameObject.tag == "FirstAidItem") {
-			Destroy (collision.gameObject);
-			_sequenceManager.NewItemCollected(collision.gameObject.name);
-			Instantiate (ParticleSuccess,ParticleSpawn.transform.position, Quaternion.identity);
+		if (other.gameObject.tag == "FirstAidItem") {
+			Destroy (other.gameObject);
+			_sequenceManager.NewItemCollected(other.gameObject.name);
+            CollectedItems.Add(other.gameObject.name);
+            Instantiate (ParticleSuccess,ParticleSpawn.transform.position, Quaternion.identity);
 			Success.Play();
 			_sequenceManager.PlayYesAudio();
 		}
 
 		// DROPPING WRONG ITEM IN BAG
-		if (collision.gameObject.tag == "WrongItem")
+		if (other.gameObject.tag == "WrongItem")
 		{
-			Destroy (collision.gameObject);
+			Destroy (other.gameObject);
 			Instantiate (ParticleFailure,ParticleSpawn.transform.position, Quaternion.identity);
 			Failure.Play();
 			_sequenceManager.PlayNoAudio();

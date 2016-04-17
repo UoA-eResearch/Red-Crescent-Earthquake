@@ -24,8 +24,8 @@ public class EarthquakeController : MonoBehaviour {
 
 	// camera shake effect
 	private Transform _cameraToShake;
-	private bool _shakeCamera;
-	private float _shakeStartTime;
+	public bool _shakeCamera;
+	public float _shakeStartTime;
 	public float _shakeDuration;
 
     public bool _earthquakeSequenceFinished = false;
@@ -38,6 +38,8 @@ public class EarthquakeController : MonoBehaviour {
 	public GameObject BuildingSmoke2;
 	public GameObject BuildingSmoke3;
 	public GameObject BuildingSmoke4;
+
+    private CheckList _checkList;
 
 
 	void Start () {
@@ -59,6 +61,8 @@ public class EarthquakeController : MonoBehaviour {
 		} else {
 			_cameraToShake = GameObject.Find("FPSController/FirstPersonCharacter").transform;
 		}
+
+        _checkList = GameObject.Find("CheckList").GetComponent<CheckList>();
 	}
 	
 
@@ -68,6 +72,11 @@ public class EarthquakeController : MonoBehaviour {
 			ShakeCamera();
 			//Debug.Log("CAMERA SHAKING");
 		}
+
+        if (_earthquakeSequenceFinished == true)
+        {
+            _checkList.enabled = true;
+        }
 
 		// TESTER BUTTON
 		//if (Input.GetKeyDown(KeyCode.A))
@@ -91,6 +100,7 @@ public class EarthquakeController : MonoBehaviour {
 		if (Time.time > _shakeStartTime + _shakeDuration) {
 			_shakeCamera = false;
             _earthquakeSequenceFinished = true;
+            
         }
 	}
 
