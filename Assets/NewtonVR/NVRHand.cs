@@ -98,13 +98,13 @@ namespace NewtonVR
 
             if (HoldButtonUp || UseButtonUp && IsInteracting == false)
             {
-               // Hand.GetComponent<HandAnim>().OpenHand();
+                Hand.GetComponent<HandAnim>().OpenHand();
                 VisibilityLocked = false;
             }
 
             if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == false)
             {
-              //  Hand.GetComponent<HandAnim>().CloseHand();
+               Hand.GetComponent<HandAnim>().CloseHand();
 
                 if (CurrentlyInteracting == null)
                 {
@@ -118,7 +118,7 @@ namespace NewtonVR
 
             if (IsInteracting == true)
             {
-                Hand.gameObject.SetActive(false);
+               
                 CurrentlyInteracting.InteractingUpdate(this);
             }
 
