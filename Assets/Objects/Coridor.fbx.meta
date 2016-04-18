@@ -1,42 +1,19 @@
 fileFormatVersion: 2
-guid: 658e68b1fac457941931ebb292743bbc
-timeCreated: 1459610157
+guid: 3cb3205c594a76d40a7706b6e5b26ada
+timeCreated: 1460994316
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: polySurface22
-    100004: polySurface238
-    100006: polySurface239
-    100008: polySurface241
-    100010: polySurface242
-    100012: polySurface243
-    400000: //RootNode
-    400002: polySurface22
-    400004: polySurface238
-    400006: polySurface239
-    400008: polySurface241
-    400010: polySurface242
-    400012: polySurface243
-    2300000: polySurface22
-    2300002: polySurface238
-    2300004: polySurface239
-    2300006: polySurface241
-    2300008: polySurface242
-    2300010: polySurface243
-    3300000: polySurface22
-    3300002: polySurface238
-    3300004: polySurface239
-    3300006: polySurface241
-    3300008: polySurface242
-    3300010: polySurface243
-    4300000: polySurface22
-    4300002: polySurface238
-    4300004: polySurface239
-    4300006: polySurface241
-    4300008: polySurface242
-    4300010: polySurface243
+    100000: areaLight1
+    100002: //RootNode
+    100004: coridor
+    400000: areaLight1
+    400002: //RootNode
+    400004: coridor
+    2300000: coridor
+    3300000: coridor
+    4300000: coridor
     9500000: //RootNode
   materials:
     importMaterials: 1
