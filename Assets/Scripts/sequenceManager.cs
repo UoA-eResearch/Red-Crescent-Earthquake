@@ -155,7 +155,11 @@ public class sequenceManager : MonoBehaviour {
 		}
 			
 		_timeString = string.Format("{0:0}:{1:00}", Mathf.Floor(_timeRemaining/60), _timeRemaining % 60);
-		_timerText.text = _timeString;
+		if (_quakeHasStarted == false ) {
+			_timerText.text = _timeString;
+		} else {
+			_timerText.text = "";
+		}
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -337,7 +341,10 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	IEnumerator DropCoverHold () {
+		_quakeHasStarted = true;				// hoping this will stop the 2nd earthquake bug
 		_tvText.text = "";
+		//_timerText.text = ""; does not work
+		// _timerText = null;
 		_tvImage.material = dropCoverHoldImg;
 		_tvAudioSource.clip = getUnderTable;  // use the longer clip with "get under... hold on... hold on..."
 		_tvAudioSource.Play();
