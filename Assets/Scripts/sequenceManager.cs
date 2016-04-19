@@ -21,6 +21,8 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _redCircleUnderTable;
 	public GameObject _greenCircleUnderTable;
 	private GameObject _holdTarget;
+	public GameObject ClosedBag;
+	public GameObject OpenBag;
 	public bool _headUnderTable;
 	public bool _handOnHoldTarget;
 
@@ -175,13 +177,19 @@ public class sequenceManager : MonoBehaviour {
 
 		if (_itemsCollected >= _itemsTotal) {
 			// start hammer sequence
+			BagClosed();
 			StartCoroutine(HammerIntro());
 			return;
 		}
 		_checkItem = true;
 	}
 
-
+	// SWAPPING OPEN WITH CLOSED BAG
+	private void BagClosed()
+	{
+		ClosedBag.SetActive(true);
+		OpenBag.SetActive(false);
+	}
 
 	IEnumerator Intro () {
 		yield return new WaitForSeconds(2); //just a pause at the beginning
