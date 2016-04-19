@@ -12,7 +12,7 @@ public class sequenceManager : MonoBehaviour {
 	private float _timeRemaining;
 	private Renderer _tvImage;
 	private int _itemsTotal = 8;				
-	private int _itemsCollected;			    
+	public int _itemsCollected;			    
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
@@ -84,6 +84,14 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _hammerTarget3;
 	private GameObject _hammerTarget4;
 
+
+	// for Arrow Sequence
+	private GameObject _arrow;
+	private Vector3 _rollBandageStartPos;
+	private int _arrowSequenceStep = 0;
+	private Transform _rollBandage;
+	private GameObject _bag;
+
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
 		_timerText = GameObject.Find("Dynamic GUI/Timer Text").GetComponent<Text>();
@@ -108,6 +116,16 @@ public class sequenceManager : MonoBehaviour {
 		_redCircleUnderTable.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
 		_holdTarget.SetActive(false);
+
+		// for Arrow Sequence
+		_arrow = GameObject.Find("Arrow");
+		_arrow.SetActive(false);
+		_rollBandage = GameObject.Find("roll bandage").transform;
+		_rollBandageStartPos = _rollBandage.position;
+		Debug.Log("roll start pos = " + _rollBandageStartPos);
+		Debug.Log("roll bandage = " + _rollBandage);
+		_bag = GameObject.Find("1st Aid Bag");
+		Debug.Log("bag = " + _bag);
 
 		//noAudio = new List<AudioClip> ();
 
@@ -144,7 +162,27 @@ public class sequenceManager : MonoBehaviour {
 			StopAllCoroutines();
 			StartCoroutine(HammerIntro());
 		}
-    } // end of Update()
+		ArrowSequence();
+	} // end of Update()
+
+	void ArrowSequence () {
+		if (_arrowSequenceStep == 1 && _arrow.activeSelf == false) {
+			_arrow.SetActive(true);
+			_arrow.transform.position = _rollBandage.position;
+			_arrowSequenceStep = 2;											// wait until player moves roll bandage
+		}
+		if (_arrowSequenceStep == 2 && _arrow.activeSelf == true) {
+			// check if arrow has moved (picked-up by player)
+			if (Vector3.Distance(_rollBandage.position, _rollBandageStartPos) > 0.1f) {
+				_arrow.transform.position = _bag.transform.position;
+				//_arrowSequenceStep = 3;
+			}
+		}
+		if (_arrowSequenceStep == 3 && rollBandage == null) {
+			_arrow.SetActive(false);
+			_arrowSequenceStep = 4;
+		}	
+	}
 
 
 	void LateUpdate () {
@@ -167,6 +205,10 @@ public class sequenceManager : MonoBehaviour {
 				}
 			}
 			_checkItem = false;
+			if (_arrow.activeSelf == true) {
+				_arrow.SetActive(false);
+			}
+
 		}
 	} // end of LateUpdate()
 
@@ -242,6 +284,8 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator PackRollBandage () {
 		_tvText.text = "roll bandage";
 		_tvImage.material = rollBandageImg;
+		_arrowSequenceStep = 1;
+
 		//yield return new WaitForSeconds(1);
 		_tvAudioSource.clip = rollBandage;
 		_tvAudioSource.Play();

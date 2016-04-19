@@ -46,7 +46,7 @@ public class circleUnderTable : MonoBehaviour {
 			{
 				_redCircle.SetActive(false);
 				_greenCircle.SetActive(true);
-                _sequenceManager._headUnderTable = true;
+                _sequenceManager._headUnderTable = true;	// is this bool called by another function? nothing in sequenceManager.
 
 				ParticleSystemTable.SetActive(true);		// Particles On
 			}
