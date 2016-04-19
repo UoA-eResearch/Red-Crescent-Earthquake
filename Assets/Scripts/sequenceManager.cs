@@ -88,9 +88,11 @@ public class sequenceManager : MonoBehaviour {
 	// for Arrow Sequence
 	private GameObject _arrow;
 	private Vector3 _rollBandageStartPos;
-	private int _arrowSequenceStep = 0;
+	private Vector3 _bracketStartPosition;
+	public int _arrowSequenceStep = 0;  // return to private after testing.  Andrew.
 	private Transform _rollBandage;
 	private GameObject _bag;
+	private GameObject _bracket;
 
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
@@ -126,6 +128,9 @@ public class sequenceManager : MonoBehaviour {
 		Debug.Log("roll bandage = " + _rollBandage);
 		_bag = GameObject.Find("1st Aid Bag");
 		Debug.Log("bag = " + _bag);
+		_bracket = GameObject.FindWithTag("bracket");
+		_bracketStartPosition = _bracket.transform.position;
+		Debug.Log("bracket start pos =  " + _bracketStartPosition);
 
 		//noAudio = new List<AudioClip> ();
 
@@ -182,6 +187,21 @@ public class sequenceManager : MonoBehaviour {
 			_arrow.SetActive(false);
 			_arrowSequenceStep = 4;
 		}	
+		if (_arrowSequenceStep == 4 ) {
+			_arrow.SetActive(true);
+			_arrow.transform.position = _bracket.transform.position;
+			// check if arrow has moved (picked-up by player)
+			if (Vector3.Distance(_bracket.transform.position, _bracketStartPosition) > 0.1f) {
+				_arrowSequenceStep = 5;
+			}
+		}
+		if (_arrowSequenceStep == 5) {
+				_arrow.transform.position = _hammerTarget1.transform.position;
+			}
+		if (_arrowSequenceStep == 6) {			// set by NextHammerTarget() when hammer hits 1st green circle
+			_arrow.SetActive(false);			// turn off the arrow.  we are done with it.
+			_arrowSequenceStep = 7;
+		}
 	}
 
 
@@ -338,6 +358,7 @@ public class sequenceManager : MonoBehaviour {
 			_tvAudioSource.clip = bracket1done;
 			_tvAudioSource.Play();
 			isTarget1done = true;
+			_arrowSequenceStep = 6;
 		} else if (nextStep == 3) {
 			// BRACKET TARGET
 			_hammerTarget2.SetActive(false);
@@ -365,6 +386,7 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	IEnumerator HammerIntro () {
+		_arrowSequenceStep = 4;
 		_tvImage.material = lBracket;
 		_tvText.text = "";
 		_tvAudioSource.clip = hammerIntro;

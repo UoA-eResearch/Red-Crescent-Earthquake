@@ -21,7 +21,6 @@ public class holdTarget : MonoBehaviour {
 		//_greenSphere = GameObject.Find("Green Sphere");
 		_greenSphere.SetActive(false);
 		_mySprite = GameObject.Find("sprite");
-		Debug.Log("my sprite = " + _mySprite);
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
         _earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
     }
