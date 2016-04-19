@@ -32,10 +32,16 @@ public class bullseye : MonoBehaviour {
 	}
 
 	void OnCollisionEnter (Collision collision) {
-		if (collision.transform.tag == "HammerInteraction") 
+		if (collision.transform.tag == "Hammer" && _hammerOrBracket == "hammer") 
 		{
+
+			collision.transform.GetComponent<AudioSource>().Play();
+			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
+			sequenceManager.NextHammerTarget(nextStep);
+
 			if (_hammerOrBracket == "bracket" && collision.transform.name == "L-bracket") 			// objects in the scene must be NAMED "L-bracket".  Don't change their names!
 			{
+				/*
 				collision.transform.GetComponent<AudioSource>().Play();
 				Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 				collision.transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
@@ -43,13 +49,27 @@ public class bullseye : MonoBehaviour {
 				collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
 				sequenceManager.NextHammerTarget(nextStep);	
+				*/
 
 			} else if (_hammerOrBracket == "hammer" && collision.transform.name == "Hammer") 
 			{
+				/*
 				collision.transform.GetComponent<AudioSource>().Play();
 				Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 				sequenceManager.NextHammerTarget(nextStep);
+				*/ 
 			}
+		}
+
+		if (collision.transform.tag == "bracket" && _hammerOrBracket == "bracket") {
+			collision.transform.GetComponent<AudioSource>().Play();
+			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
+			collision.transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
+			collision.transform.rotation = transform.rotation;
+			collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+			sequenceManager.NextHammerTarget(nextStep);	
+
 		}
 	}
 }
