@@ -73,10 +73,10 @@ public class EarthquakeController : MonoBehaviour {
 			//Debug.Log("CAMERA SHAKING");
 		}
 
-        if (_earthquakeSequenceFinished == true)
+       /* if (_earthquakeSequenceFinished == true)
         {
             _checkList.enabled = true;
-        }
+        }*/
 
 		// TESTER BUTTON
 		//if (Input.GetKeyDown(KeyCode.A))
