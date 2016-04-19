@@ -47,6 +47,7 @@ public class bullseye : MonoBehaviour {
 			} else if (_hammerOrBracket == "hammer" && collision.transform.name == "Hammer") 
 			{
 				collision.transform.GetComponent<AudioSource>().Play();
+				Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 				sequenceManager.NextHammerTarget(nextStep);
 			}
 		}
