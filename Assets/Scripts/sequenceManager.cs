@@ -341,7 +341,7 @@ public class sequenceManager : MonoBehaviour {
 		_quakeHasStarted = true;				// hoping this will stop the 2nd earthquake bug
 		_tvText.text = "";
 		_tvImage.material = dropCoverHoldImg;
-		_tvAudioSource.clip = getUnderTable;  // use the longer clip with "get under... hold on... hold on..."
+		_tvAudioSource.clip = getUnderTable;  
 		_tvAudioSource.Play();
 		_redCircleUnderTable.SetActive(true);
 		_holdTarget.SetActive(true);
