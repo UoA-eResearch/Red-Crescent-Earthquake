@@ -8,10 +8,13 @@ public class CheckList : MonoBehaviour
 	private sequenceManager _sequenceManager;
 	private EarthquakeController _earthquakeController;
 	private circleUnderTable _circleUnderTable;
-	private holdTarget _holdTarget;
+    private LeverController _leverController;
+    private holdTarget _holdTarget;
     public List<string> _CollectedItems;
 	private float duration;
     public bool earthquakeFinished = false;
+
+   
 
 
     void Awake()
@@ -21,6 +24,12 @@ public class CheckList : MonoBehaviour
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
 		_circleUnderTable = GameObject.Find("Circle Under Table").GetComponent<circleUnderTable>();
 		_holdTarget = GameObject.Find("Hold Target").GetComponent<holdTarget>();
+        _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
+        PlayerPrefs.SetInt("bag", 0);
+        PlayerPrefs.SetInt("furniture", 0);
+        PlayerPrefs.SetInt("cover", 0);
+        PlayerPrefs.SetInt("levers", 0);
+    
     }
 
     // Use this for initialization
@@ -31,14 +40,20 @@ public class CheckList : MonoBehaviour
         Debug.Log(_CollectedItems.Capacity + " objects were successfully collected.");
         Debug.Log("Collected items are: ");
         DisplayCollectedItems();
-		CheckForHammerTargets();
-		CheckForEarthquakeTasks();
+		
         CheckStartEndTime();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(_CollectedItems.Capacity == 8)
+        {
+            PlayerPrefs.SetInt("bag", 1);
+        }
+
+        CheckForHammerTargets();
+        CheckForEarthquakeTasks(); 
     }
 
     private void CheckStartEndTime()
@@ -60,33 +75,34 @@ public class CheckList : MonoBehaviour
 	{
 		if(_sequenceManager.isTarget1done == true && _sequenceManager.isTarget2done == true)
 		{
-			Debug.Log("All furnitures were successfully secured.");
-		}
-		else
-		{
-			Debug.Log("Furnitures were not successfully secured.");
-		}
+            PlayerPrefs.SetInt("furniture", 1);
+        }
 	}
+
+    private void CheckLevers()
+    {
+        if(_leverController.electricityOff == true && _leverController.gasOff == true)
+        {
+            PlayerPrefs.SetInt("levers", 1);
+        }
+    }
 
 	private void CheckForEarthquakeTasks()
 	{
-        if (_earthquakeController._earthquakeSequenceFinished == true && _circleUnderTable.durationOfStay >= _earthquakeController._shakeDuration)
+        if (_earthquakeController._earthquakeSequenceFinished == true )
 		{
 
-			Debug.Log("The player successfully stayed under the table");
-            
-		}
-		else
-		{
-			Debug.Log("The player did not successfully stayed under the table");
-		}
-        if (_earthquakeController._earthquakeSequenceFinished == true && _holdTarget.durationOfHold >= _earthquakeController._shakeDuration)
+            PlayerPrefs.SetInt("cover", 1);
+
+        }
+		
+        /*if (_earthquakeController._earthquakeSequenceFinished == true && _holdTarget.durationOfHold >= _earthquakeController._shakeDuration)
 		{
 			Debug.Log("The player successfully hold on to the table leg");
 		}
 		else
 		{
 			Debug.Log("The player did not successfully hold on to the table leg");
-		}
+		}*/
 	}
 }
