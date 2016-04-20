@@ -16,6 +16,7 @@ public class sequenceManager : MonoBehaviour {
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
+    private LeverController _leverController;
 	private Transform _timerRenderer;
 	public bool _quakeHasStarted;				//may not need to be pulic
 	private GameObject _redCircleUnderTable;
@@ -101,6 +102,7 @@ public class sequenceManager : MonoBehaviour {
 		_tvAudioSource = GameObject.Find("Sequence Manager/TV Audio Source").GetComponent<AudioSource>();
 		_tvImage = GameObject.Find("Dynamic GUI/Image").GetComponent<Renderer>();
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
+        _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
 
 		// Find and deactivate all hammer targets.  Each will be activated later during the sequence.
 		_hammerTarget1 = GameObject.Find("Hammer Target 1");
@@ -358,6 +360,7 @@ public class sequenceManager : MonoBehaviour {
 
 	IEnumerator GasElecSwitches () {
 		_tvImage.material = gasElecSwitchImg;
+        _leverController.enabled = true;
 		yield return null;
 	}
 		

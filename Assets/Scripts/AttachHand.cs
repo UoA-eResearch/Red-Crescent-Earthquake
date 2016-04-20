@@ -14,7 +14,7 @@ public class AttachHand : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-       
+       // transform.localPosition = new Vector3(0, -1.33f, -5.83f);
         transform.rotation	= controller.rotation;
        // transform.SetParent(controller);
         transform.Rotate(0,0,0);

@@ -14,7 +14,7 @@ namespace NewtonVR
         public float EngageWaitTime = 1f;
 
         protected virtual float DeltaMagic { get { return 2f; } }
-        protected Transform InitialAttachPoint;
+        public Transform InitialAttachPoint;
         protected HingeJoint HingeJoint;
 
         protected bool UseMotor;

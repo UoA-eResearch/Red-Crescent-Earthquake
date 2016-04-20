@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections.Generic;
 
 public class CheckList : MonoBehaviour
@@ -88,5 +89,4 @@ public class CheckList : MonoBehaviour
 			Debug.Log("The player did not successfully hold on to the table leg");
 		}
 	}
-
 }
