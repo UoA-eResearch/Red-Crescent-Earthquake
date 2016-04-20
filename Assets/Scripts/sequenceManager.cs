@@ -124,13 +124,9 @@ public class sequenceManager : MonoBehaviour {
 		_arrow.SetActive(false);
 		_rollBandage = GameObject.Find("roll bandage").transform;
 		_rollBandageStartPos = _rollBandage.position;
-		Debug.Log("roll start pos = " + _rollBandageStartPos);
-		Debug.Log("roll bandage = " + _rollBandage);
 		_bag = GameObject.Find("1st Aid Bag");
-		Debug.Log("bag = " + _bag);
 		_bracket = GameObject.FindWithTag("bracket");
 		_bracketStartPosition = _bracket.transform.position;
-		Debug.Log("bracket start pos =  " + _bracketStartPosition);
 
 		//noAudio = new List<AudioClip> ();
 
@@ -343,8 +339,6 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator DropCoverHold () {
 		_quakeHasStarted = true;				// hoping this will stop the 2nd earthquake bug
 		_tvText.text = "";
-		//_timerText.text = ""; does not work
-		// _timerText = null;
 		_tvImage.material = dropCoverHoldImg;
 		_tvAudioSource.clip = getUnderTable;  // use the longer clip with "get under... hold on... hold on..."
 		_tvAudioSource.Play();
@@ -354,6 +348,7 @@ public class sequenceManager : MonoBehaviour {
 		yield return new WaitForSeconds(getUnderTable.length);
 		_tvAudioSource.clip = holdOn;
 		_tvAudioSource.Play();
+		_arrow.SetActive(false);					// turns off the arrow, in case it's still on.
 		_earthquakeController.StartQuake();
 	}
 		
