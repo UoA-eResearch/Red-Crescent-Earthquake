@@ -76,6 +76,7 @@ public class sequenceManager : MonoBehaviour {
 	public Material triangularBandageImg;
 	public Material lBracket;
 	public Material dropCoverHoldImg;
+	public Material gasElecSwitchImg;
 
 
 	// Hammer Targets
@@ -350,6 +351,14 @@ public class sequenceManager : MonoBehaviour {
 		_tvAudioSource.clip = holdOn;
 		_tvAudioSource.Play();
 		_earthquakeController.StartQuake();
+		yield return new WaitForSeconds(50);
+		Debug.Log("quake has ended");
+		StartCoroutine (GasElecSwitches());
+	}
+
+	IEnumerator GasElecSwitches () {
+		_tvImage.material = gasElecSwitchImg;
+		yield return null;
 	}
 		
 	public void NextHammerTarget (int nextStep) {
