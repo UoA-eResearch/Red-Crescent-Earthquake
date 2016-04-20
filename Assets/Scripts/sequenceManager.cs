@@ -345,10 +345,10 @@ public class sequenceManager : MonoBehaviour {
 		_redCircleUnderTable.SetActive(true);
 		_holdTarget.SetActive(true);
 		_greenCircleUnderTable.SetActive(false);
+		_arrowSequenceStep = 6;										//NB: this could bug out the arrow sequence if you add steps later.
 		yield return new WaitForSeconds(getUnderTable.length);
 		_tvAudioSource.clip = holdOn;
 		_tvAudioSource.Play();
-		_arrow.SetActive(false);					// turns off the arrow, in case it's still on.
 		_earthquakeController.StartQuake();
 	}
 		
