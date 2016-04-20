@@ -53,7 +53,8 @@ public class CheckList : MonoBehaviour
         }
 
         CheckForHammerTargets();
-        CheckForEarthquakeTasks(); 
+        CheckForEarthquakeTasks();
+        CheckLevers();
     }
 
     private void CheckStartEndTime()

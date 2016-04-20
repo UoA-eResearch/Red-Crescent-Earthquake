@@ -10,16 +10,20 @@ public class LeverController : MonoBehaviour {
     public bool gasOff = false;
     public bool electricityOff = false;
 
+    public Quaternion angleZ;
+
 	// Use this for initialization
 	void Start ()
     {
-        Debug.Log(gasAxle.gameObject.transform.rotation.z);
+       
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(electricAxle.transform.rotation.x >= -0.04316789)
+        angleZ.z = gasAxle.transform.rotation.z;
+
+        if(electricAxle.transform.rotation.x > -0.0616284)
         {
             electricityOff = true;
         }
@@ -28,13 +32,13 @@ public class LeverController : MonoBehaviour {
             electricityOff = false;
         }
 
-        if (gasAxle.transform.rotation.z <= -0.5)
+        if (gasAxle.transform.rotation.z < -0.4)
         {
             gasOff = true;
         }
         else
         {
-            electricityOff = false;
+            gasOff = false;
         }
     }
 }

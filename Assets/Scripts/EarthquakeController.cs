@@ -39,9 +39,6 @@ public class EarthquakeController : MonoBehaviour {
 	public GameObject BuildingSmoke3;
 	public GameObject BuildingSmoke4;
 
-    private CheckList _checkList;
-
-
 	void Start () {
 		// Find all of the objects we need for Special FX.
 		_ceilingDustPfx = GameObject.Find("Ceiling Dust PFX").GetComponent<ParticleSystem>();
@@ -61,8 +58,6 @@ public class EarthquakeController : MonoBehaviour {
 		} else {
 			_cameraToShake = GameObject.Find("FPSController/FirstPersonCharacter").transform;
 		}
-
-        _checkList = GameObject.Find("CheckList").GetComponent<CheckList>();
 	}
 	
 

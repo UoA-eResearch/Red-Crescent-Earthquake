@@ -173,6 +173,7 @@ public class sequenceManager : MonoBehaviour {
 			StartCoroutine(HammerIntro());
 		}
 		ArrowSequence();
+        StartLeverSequence();
 	} // end of Update()
 
 	void ArrowSequence () {
@@ -257,6 +258,14 @@ public class sequenceManager : MonoBehaviour {
 		ClosedBag.SetActive(true);
 		OpenBag.SetActive(false);
 	}
+
+    private void StartLeverSequence()
+    {
+        if(_earthquakeController._earthquakeSequenceFinished == true)
+        {
+            _leverController.enabled = true;
+        }
+    }
 
 	IEnumerator Intro () {
 		yield return new WaitForSeconds(2); //just a pause at the beginning
