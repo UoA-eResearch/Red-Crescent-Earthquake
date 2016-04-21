@@ -113,8 +113,6 @@ public class sequenceManager : MonoBehaviour {
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.Find("Door1").GetComponent<DoorSequence>();
 		_bagShiled = GameObject.Find("Bag Shield");
-		Debug.Log("bag shiled = " + _bagShiled);
-		//_bagShiled.SetActive(true);
 
         // Find and deactivate all hammer targets.  Each will be activated later during the sequence.
         _hammerTarget1 = GameObject.Find("Hammer Target 1");
