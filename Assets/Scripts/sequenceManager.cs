@@ -66,6 +66,11 @@ public class sequenceManager : MonoBehaviour {
 	public bool isTarget1done = false;
 	public bool isTarget2done = false;
 
+
+	// For Gas & Exit Sequence
+	public AudioClip SwitchesAudio;
+	public AudioClip ExitAudio;
+
 	// Textures for the TV
 	// New Order: roll, alc, cpr v, manual, band, tri, pins, scissors
 	public Material alcoholWipesImg;
@@ -79,6 +84,7 @@ public class sequenceManager : MonoBehaviour {
 	public Material lBracket;
 	public Material dropCoverHoldImg;
 	public Material gasElecSwitchImg;
+	public Material ExitImg;
 
 
 	// Hammer Targets
@@ -162,15 +168,21 @@ public class sequenceManager : MonoBehaviour {
 			_timerText.text = "";
 		}
 
+		// SHORTCUT FOR EARTHQUAKE SEQUENCE
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
             StopAllCoroutines();		
 			StartCoroutine(DropCoverHold());
 		}
-
+		// SHORTCUT FOR BRACKET SEQUENCE
 		if (Input.GetKeyDown(KeyCode.H)) {
 			StopAllCoroutines();
 			StartCoroutine(HammerIntro());
+		}
+		// SHORTCUT FOR EXIT SEQUENCE
+		if (Input.GetKeyDown(KeyCode.X)) {
+			StopAllCoroutines();
+			ExitTime();
 		}
 		ArrowSequence();
         StartLeverSequence();
@@ -264,6 +276,7 @@ public class sequenceManager : MonoBehaviour {
         if(_earthquakeController._earthquakeSequenceFinished == true)
         {
             _leverController.enabled = true;
+            Debug.Log("LEVERL SEQUENCE ACTIVE");
         }
     }
 
@@ -372,7 +385,19 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator GasElecSwitches () {
 		_tvImage.material = gasElecSwitchImg;
        // _leverController.enabled = true;
+		_tvAudioSource.clip = SwitchesAudio;
+		_tvAudioSource.Play();
+		_holdTarget.SetActive(false);
+		_greenCircleUnderTable.SetActive(false);
+		_redCircleUnderTable.SetActive(false);
 		yield return null;
+	}
+
+	public void ExitTime()
+	{
+		_tvImage.material = ExitImg;
+		_tvAudioSource.clip = ExitAudio;
+		_tvAudioSource.Play();
 	}
 		
 	public void NextHammerTarget (int nextStep) {

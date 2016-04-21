@@ -86,6 +86,7 @@ public class CheckList : MonoBehaviour
         {
             PlayerPrefs.SetInt("levers", 1);
             allLeversOff = true;
+			_sequenceManager.ExitTime();
         }
     }
 
