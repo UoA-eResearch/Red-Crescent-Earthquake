@@ -27,6 +27,7 @@ public class sequenceManager : MonoBehaviour {
 	public GameObject OpenBag;
 	public bool _headUnderTable;
 	public bool _handOnHoldTarget;
+	private GameObject _bagShiled;
 
 
 
@@ -111,6 +112,9 @@ public class sequenceManager : MonoBehaviour {
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.Find("Door1").GetComponent<DoorSequence>();
+		_bagShiled = GameObject.Find("Bag Shield");
+		Debug.Log("bag shiled = " + _bagShiled);
+		//_bagShiled.SetActive(true);
 
         // Find and deactivate all hammer targets.  Each will be activated later during the sequence.
         _hammerTarget1 = GameObject.Find("Hammer Target 1");
@@ -293,6 +297,7 @@ public class sequenceManager : MonoBehaviour {
 		_tvAudioSource.clip = introPostTime;
 		_tvAudioSource.Play();
 		yield return new WaitForSeconds(introPostTime.length);
+		_bagShiled.SetActive(false);
 		StartCoroutine(PackRollBandage());
 	}
 		
