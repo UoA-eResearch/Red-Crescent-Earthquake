@@ -11,7 +11,7 @@ public class CheckList : MonoBehaviour
     private LeverController _leverController;
     private holdTarget _holdTarget;
     public List<string> _CollectedItems;
-	private float duration;
+    public bool allLeversOff = false;
     public bool earthquakeFinished = false;
 
    
@@ -80,11 +80,12 @@ public class CheckList : MonoBehaviour
         }
 	}
 
-    private void CheckLevers()
+    public void CheckLevers()
     {
         if(_leverController.electricityOff == true && _leverController.gasOff == true)
         {
             PlayerPrefs.SetInt("levers", 1);
+            allLeversOff = true;
         }
     }
 

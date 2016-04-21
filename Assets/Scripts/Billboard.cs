@@ -6,18 +6,11 @@ public class Billboard : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-	    
-	}
-	
-	
-    // Update is called once per frame
-	void Update ()
-    {
-	    if(PlayerPrefs.GetInt("bag") == 1)
+        if (PlayerPrefs.GetInt("bag") == 1)
         {
             GameObject.Find("bagCross").SetActive(false);
         }
-        else
+        if (PlayerPrefs.GetInt("bag") == 0)
         {
             GameObject.Find("bagTick").SetActive(false);
         }
@@ -26,7 +19,8 @@ public class Billboard : MonoBehaviour {
         {
             GameObject.Find("furnitureCross").SetActive(false);
         }
-        else
+
+        if (PlayerPrefs.GetInt("furniture") == 0)
         {
             GameObject.Find("furnitureTick").SetActive(false);
         }
@@ -35,7 +29,8 @@ public class Billboard : MonoBehaviour {
         {
             GameObject.Find("coverCross").SetActive(false);
         }
-        else
+
+        if (PlayerPrefs.GetInt("cover") == 0)
         {
             GameObject.Find("coverTick").SetActive(false);
         }
@@ -44,10 +39,18 @@ public class Billboard : MonoBehaviour {
         {
             GameObject.Find("leversCross").SetActive(false);
         }
-        else
+
+        if (PlayerPrefs.GetInt("levers") == 0)
         {
             GameObject.Find("leversTick").SetActive(false);
         }
+    }
+	
+	
+    // Update is called once per frame
+	void Update ()
+    {
+	    
 
     }
 }
