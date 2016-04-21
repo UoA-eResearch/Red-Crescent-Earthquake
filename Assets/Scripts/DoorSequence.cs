@@ -15,7 +15,7 @@ public class DoorSequence : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (this.transform.rotation.y > 0.9396927)
+        if (this.transform.rotation.y >= 0.9396927)
         {
             doorOpened = true;
         }
