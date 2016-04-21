@@ -90,7 +90,7 @@ public class CheckList : MonoBehaviour
 
 	private void CheckForEarthquakeTasks()
 	{
-        if (_earthquakeController._earthquakeSequenceFinished == true )
+        if (_earthquakeController._earthquakeSequenceFinished == true && _circleUnderTable.durationOfStay >= _earthquakeController._shakeDuration)
 		{
 
             PlayerPrefs.SetInt("cover", 1);
