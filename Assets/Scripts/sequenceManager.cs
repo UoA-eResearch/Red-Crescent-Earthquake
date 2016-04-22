@@ -367,6 +367,12 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	IEnumerator DropCoverHold () {
+		// make all hammer target (rings) invisible when quake starts
+		_hammerTarget1.SetActive(false);
+		_hammerTarget2.SetActive(false);
+		_hammerTarget3.SetActive(false);
+		_hammerTarget4.SetActive(false);
+
 		_quakeHasStarted = true;				// hoping this will stop the 2nd earthquake bug
 		_tvText.text = "";
 		_tvImage.material = dropCoverHoldImg;
@@ -375,7 +381,7 @@ public class sequenceManager : MonoBehaviour {
 		_redCircleUnderTable.SetActive(true);
 		_holdTarget.SetActive(true);
 		_greenCircleUnderTable.SetActive(false);
-		_arrowSequenceStep = 6;										//NB: this could bug out the arrow sequence if you add steps later.
+		_arrowSequenceStep = 6;									//NB: if you add steps to the arrow sequence, then you'll need to change this int
 		yield return new WaitForSeconds(getUnderTable.length);
 		_tvAudioSource.clip = holdOn;
 		_tvAudioSource.Play();
