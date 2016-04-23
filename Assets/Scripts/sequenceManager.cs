@@ -11,7 +11,7 @@ public class sequenceManager : MonoBehaviour {
 	private float _timerStart;
 	private float _timeRemaining;
 	private Renderer _tvImage;
-	private int _itemsTotal = 8;				
+	private int _itemsTotal = 7;				// used to be 8 (with ventilator)		
 	public int _itemsCollected;			    
 	private bool _checkItem;
 	private string _itemName;
@@ -19,7 +19,7 @@ public class sequenceManager : MonoBehaviour {
     private LeverController _leverController;
     private DoorSequence _doorSequence;
     private Transform _timerRenderer;
-	public bool _quakeHasStarted;				//may not need to be pulic
+	public bool _quakeHasStarted;				//may not need to be public
 	private GameObject _redCircleUnderTable;
 	public GameObject _greenCircleUnderTable;
 	private GameObject _holdTarget;
@@ -232,8 +232,8 @@ public class sequenceManager : MonoBehaviour {
 					StartCoroutine(PackAlcoholWipes());
 				} else if (GameObject.Find("first aid manual")) {
 					StartCoroutine(PackFirstAidBook());
-				} else if (GameObject.Find("ventilator")) {
-					StartCoroutine(PackVentilator());
+				//} else if (GameObject.Find("ventilator")) {			// remove Ventilator from the scene
+				//	StartCoroutine(PackVentilator());
 				} else if (GameObject.Find("bandages")) {
 					StartCoroutine(PackBandages());
 				} else if (GameObject.Find("triangular bandage")) {
