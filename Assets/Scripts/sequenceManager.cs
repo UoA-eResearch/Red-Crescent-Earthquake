@@ -89,10 +89,10 @@ public class sequenceManager : MonoBehaviour {
 
 
 	// Hammer Targets
-	private GameObject _hammerTarget1;
-	private GameObject _hammerTarget2;
-	private GameObject _hammerTarget3;
-	private GameObject _hammerTarget4;
+	public GameObject _hammerTarget1;					// set to public so that bullseye.cs can move hammer sequence forward
+	public GameObject _hammerTarget2;
+	public GameObject _hammerTarget3;
+	public GameObject _hammerTarget4;
 
 
 	// for Arrow Sequence
@@ -451,6 +451,7 @@ public class sequenceManager : MonoBehaviour {
 		_tvAudioSource.clip = hammerIntro;
 		_tvAudioSource.Play();
 		_hammerTarget1.SetActive(true);
+		_hammerTarget3.SetActive(true);
 		yield return new WaitForSeconds(_tvAudioSource.clip.length);
 		_tvAudioSource.clip = topCorner;
 		_tvAudioSource.Play();
