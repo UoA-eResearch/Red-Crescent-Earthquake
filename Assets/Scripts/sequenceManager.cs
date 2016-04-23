@@ -308,7 +308,7 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	IEnumerator PackBandages () {
-		_tvText.text = "bandages";
+		_tvText.text = "box of plasters";
 		_tvImage.material = bandagesImg;
 		yield return new WaitForSeconds(1);
 		_tvAudioSource.clip = bandages;
