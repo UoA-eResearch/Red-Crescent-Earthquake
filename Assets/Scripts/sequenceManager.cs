@@ -465,7 +465,7 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	public void PlayYesAudio() {
-		if (_tvAudioSource.isPlaying == false) 
+		if (_tvAudioSource.isPlaying == false) 								// was causing bug: hammer intro audio not hear
 		{
 			new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
 			int randomYesClip = Random.Range(0, yesAudio.Count);

@@ -40,7 +40,7 @@ public class firstAidBag : MonoBehaviour {
             CollectedItems.Add(other.gameObject.name);
             Instantiate (ParticleSuccess,ParticleSpawn.transform.position, Quaternion.identity);
 			Success.Play();
-			_sequenceManager.PlayYesAudio();
+			//_sequenceManager.PlayYesAudio();
 		}
 
 		// DROPPING WRONG ITEM IN BAG
