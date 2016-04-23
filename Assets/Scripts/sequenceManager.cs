@@ -234,7 +234,7 @@ public class sequenceManager : MonoBehaviour {
 					StartCoroutine(PackFirstAidBook());
 				//} else if (GameObject.Find("ventilator")) {			// remove Ventilator from the scene
 				//	StartCoroutine(PackVentilator());
-				} else if (GameObject.Find("bandages")) {
+				} else if (GameObject.Find("box of plasters")) {
 					StartCoroutine(PackBandages());
 				} else if (GameObject.Find("triangular bandage")) {
 					StartCoroutine(PackTriangularBandage());
@@ -465,10 +465,13 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	public void PlayYesAudio() {
-		new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
-		int randomYesClip = Random.Range(0, yesAudio.Count);
-		_tvAudioSource.clip = yesAudio[randomYesClip];
-		_tvAudioSource.Play();
-		Debug.Log("play yes audio + " + _tvAudioSource.clip);
+		if (_tvAudioSource.isPlaying == false) 
+		{
+			new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
+			int randomYesClip = Random.Range(0, yesAudio.Count);
+			_tvAudioSource.clip = yesAudio[randomYesClip];
+			_tvAudioSource.Play();
+			Debug.Log("play yes audio + " + _tvAudioSource.clip);
+		}
 	}
 }
