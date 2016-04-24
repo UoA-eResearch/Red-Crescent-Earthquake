@@ -38,6 +38,12 @@ public class bullseye : MonoBehaviour {
 			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 			sequenceManager.NextHammerTarget(nextStep);
 
+			// if one hammer target is already disabled
+			if (sequenceManager._hammerTarget2.activeSelf == false || sequenceManager._hammerTarget4.activeSelf == false) 
+			{
+				// end hammer sequence
+				// begin vase sequence
+			}
 		}
 
 		if (collision.transform.tag == "bracket" && _hammerOrBracket == "bracket") 
