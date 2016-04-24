@@ -156,7 +156,7 @@ public class sequenceManager : MonoBehaviour {
 		// update time on TV screen
 		_timeRemaining = _timerStart + 179 - Time.time;
 		if (_timeRemaining < 0 && _quakeHasStarted == false) {
-			_quakeHasStarted = true;
+			//_quakeHasStarted = true;								// this boolean is now set in DropCoverHold()
 			StopAllCoroutines();	
 			StartCoroutine(DropCoverHold());
 			// hide TV timer
@@ -373,22 +373,25 @@ public class sequenceManager : MonoBehaviour {
 		_hammerTarget3.SetActive(false);
 		_hammerTarget4.SetActive(false);
 
-		_quakeHasStarted = true;				// hoping this will stop the 2nd earthquake bug
-		_tvText.text = "";
-		_tvImage.material = dropCoverHoldImg;
-		_tvAudioSource.clip = getUnderTable;  
-		_tvAudioSource.Play();
-		_redCircleUnderTable.SetActive(true);
-		_holdTarget.SetActive(true);
-		_greenCircleUnderTable.SetActive(false);
-		_arrowSequenceStep = 6;									//NB: if you add steps to the arrow sequence, then you'll need to change this int
-		yield return new WaitForSeconds(getUnderTable.length);
-		_tvAudioSource.clip = holdOn;
-		_tvAudioSource.Play();
-		_earthquakeController.StartQuake();
-		yield return new WaitForSeconds(50);
-		Debug.Log("quake has ended");
-		StartCoroutine (GasElecSwitches());
+		if (_quakeHasStarted == false)			// hoping this will stop the 2nd earthquake bug
+		{
+			_quakeHasStarted = true;				
+			_tvText.text = "";
+			_tvImage.material = dropCoverHoldImg;
+			_tvAudioSource.clip = getUnderTable;  
+			_tvAudioSource.Play();
+			_redCircleUnderTable.SetActive(true);
+			_holdTarget.SetActive(true);
+			_greenCircleUnderTable.SetActive(false);
+			_arrowSequenceStep = 6;									//NB: if you add steps to the arrow sequence, then you'll need to change this int
+			yield return new WaitForSeconds(getUnderTable.length);
+			_tvAudioSource.clip = holdOn;
+			_tvAudioSource.Play();
+			_earthquakeController.StartQuake();
+			yield return new WaitForSeconds(50);
+			Debug.Log("quake has ended");
+			StartCoroutine (GasElecSwitches());
+		}
 	}
 
 	IEnumerator GasElecSwitches () {
@@ -462,10 +465,12 @@ public class sequenceManager : MonoBehaviour {
 		int randomClip = Random.Range(0, noAudio.Count);
 		_tvAudioSource.clip = noAudio[randomClip];
 		_tvAudioSource.Play();
-		//Debug.Log("play no audio + " + _tvAudioSource.clip);
 	}
 
 	public void PlayYesAudio() {
+
+		// NOTE: this function is never called from bag script; disabled because it's annoying.  Reactivate it there.
+
 		if (_tvAudioSource.isPlaying == false) 								// was causing bug: hammer intro audio not hear
 		{
 			new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
