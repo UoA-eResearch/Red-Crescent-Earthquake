@@ -21,7 +21,7 @@ public class sequenceManager : MonoBehaviour {
     private Transform _timerRenderer;
 	public bool _quakeHasStarted;				//may not need to be public
 	private GameObject _redCircleUnderTable;
-	public GameObject _greenCircleUnderTable;
+	public GameObject _greenCircleUnderTable;	// defined publicly bacause Unity had trouble finding the gameObject?
 	private GameObject _holdTarget;
 	public GameObject ClosedBag;
 	public GameObject OpenBag;
@@ -47,7 +47,7 @@ public class sequenceManager : MonoBehaviour {
 	public AudioClip safetyPin;
 	public AudioClip scissors;
 	public AudioClip triangularBandage;
-
+	public AudioClip vaseIntro;
 	public AudioClip getUnderTable;
 	public AudioClip holdOn;
 
@@ -83,6 +83,7 @@ public class sequenceManager : MonoBehaviour {
 	public Material scissorsImg;
 	public Material triangularBandageImg;
 	public Material lBracket;
+	public Material vaseImg;
 	public Material dropCoverHoldImg;
 	public Material gasElecSwitchImg;
 	public Material ExitImg;
@@ -103,6 +104,8 @@ public class sequenceManager : MonoBehaviour {
 	private Transform _rollBandage;
 	private GameObject _bag;
 	private GameObject _bracket;
+	private GameObject _vase;
+	private Vector3 _vaseStartPosition;
 
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
@@ -124,10 +127,9 @@ public class sequenceManager : MonoBehaviour {
 		_hammerTarget3.SetActive(false);
 		_hammerTarget4.SetActive(false);
 
+		//  Circle Under Table
 		_redCircleUnderTable = GameObject.Find("Red Circle Under Table");
-		//_greenCircleUnderTable = GameObject.Find("Green Circle Under Table");
 		_holdTarget = GameObject.Find("Hold Target");
-
 		_redCircleUnderTable.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
 		_holdTarget.SetActive(false);
@@ -140,12 +142,13 @@ public class sequenceManager : MonoBehaviour {
 		_bag = GameObject.Find("1st Aid Bag");
 		_bracket = GameObject.FindWithTag("bracket");
 		_bracketStartPosition = _bracket.transform.position;
+		_vase = GameObject.Find("Vase 1");
+		_vaseStartPosition = _vase.transform.position;
 
-		//noAudio = new List<AudioClip> ();
 
-		//_timerRenderer = GameObject.Find("Timer Text").GetComponent<Renderer>();
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
 		_timerRenderer.gameObject.SetActive(false);
+
 
 		// Begin the game sequence
 		StartCoroutine(Intro());
@@ -197,10 +200,11 @@ public class sequenceManager : MonoBehaviour {
 			_arrowSequenceStep = 2;											// wait until player moves roll bandage
 		}
 		if (_arrowSequenceStep == 2 && _arrow.activeSelf == true) {
-			// check if arrow has moved (picked-up by player)
+			// check if roll bandage has moved 
 			if (Vector3.Distance(_rollBandage.position, _rollBandageStartPos) > 0.1f) {
+				// move arrow to bag
 				_arrow.transform.position = _bag.transform.position;
-				//_arrowSequenceStep = 3;
+				// when any item enters bag, arrow is deactivated in LateUpdate() by _checkItem
 			}
 		}
 		if (_arrowSequenceStep == 3 && rollBandage == null) {
@@ -209,19 +213,45 @@ public class sequenceManager : MonoBehaviour {
 		}	
 		if (_arrowSequenceStep == 4 ) {
 			_arrow.SetActive(true);
+			// place arrow over bracket
 			_arrow.transform.position = _bracket.transform.position;
-			// check if arrow has moved (picked-up by player)
+			// if bracket has moved, place arrow over bracket target
 			if (Vector3.Distance(_bracket.transform.position, _bracketStartPosition) > 0.1f) {
-				_arrowSequenceStep = 5;
-			}
-		}
-		if (_arrowSequenceStep == 5) {
+				//_arrowSequenceStep = 5;
 				_arrow.transform.position = _hammerTarget1.transform.position;
 			}
+		}
+		if (_arrowSequenceStep == 5) {					// never called?
+				// place arrow over bracket target
+				_arrow.transform.position = _hammerTarget1.transform.position;
+		}
+
+		if (_arrowSequenceStep == 6) {
+			// place Arrow over Vase
+			_arrow.SetActive(true);
+			_arrow.transform.position = _vase.transform.position;
+			// if Vase moves, place Arrow at vase Destination
+			if (Vector3.Distance(_vase.transform.position, _vaseStartPosition) > 0.1f) {
+				_arrowSequenceStep = 7;
+			}
+		}
+
+
+
+		/*										from before the Vase sequence
 		if (_arrowSequenceStep == 6) {			// set by NextHammerTarget() when hammer hits 1st green circle
 			_arrow.SetActive(false);			// turn off the arrow.  we are done with it.
 			_arrowSequenceStep = 7;
 		}
+		*/
+	}
+
+	public void VaseIntro () {					// called by bullseye.cs
+		_tvText.text = "";
+		_tvImage.material = vaseImg;
+		//yield return new WaitForSeconds(1);
+		_tvAudioSource.clip = vaseIntro;
+		_tvAudioSource.Play();
 	}
 
 
@@ -459,6 +489,8 @@ public class sequenceManager : MonoBehaviour {
 		_tvAudioSource.clip = topCorner;
 		_tvAudioSource.Play();
 	}
+
+
 
 	public void PlayNoAudio() {
 		new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag

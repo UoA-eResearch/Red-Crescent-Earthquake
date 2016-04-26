@@ -38,12 +38,16 @@ public class bullseye : MonoBehaviour {
 			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 			sequenceManager.NextHammerTarget(nextStep);
 
-			// if one hammer target is already disabled
+			// if one hammer target is already disabled, move on to next sequence
 			if (sequenceManager._hammerTarget2.activeSelf == false || sequenceManager._hammerTarget4.activeSelf == false) 
 			{
 				// end hammer sequence
 				// begin vase sequence
+				sequenceManager.VaseIntro();
 			}
+
+			// disable this green bullseye
+			transform.gameObject.SetActive(false);
 		}
 
 		if (collision.transform.tag == "bracket" && _hammerOrBracket == "bracket") 
@@ -58,17 +62,18 @@ public class bullseye : MonoBehaviour {
 
 			//sequenceManager.NextHammerTarget(nextStep);	
 
-			if (transform.name == "Hammer Target 1") {
+			// when bracket hits bullseye, change bullseye to Green
+			if (transform.name == "Hammer Target 1") 
+			{
 				sequenceManager._hammerTarget2.SetActive(true);
-
 			}
-
-			if (transform.name == "Hammer Target 3") {
+			if (transform.name == "Hammer Target 3") 
+			{
 				sequenceManager._hammerTarget4.SetActive(true);
-
 			}
 
-			transform.gameObject.SetActive(false);					// disable Red Bullseye
+			// disable this Red Bullseye
+			transform.gameObject.SetActive(false);					
 
 		}				
 	}
