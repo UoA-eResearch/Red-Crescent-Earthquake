@@ -12,6 +12,9 @@ public class toMainScene : MonoBehaviour {
 	private float _duration;
 	private float _elapsedTime;
 
+    public bool bookENG;
+    public bool bookTUR;
+
 	void Start () {
 	
 		_duration = this.GetComponent<ScreenFadeOut> ().fadeTime;
@@ -21,39 +24,30 @@ public class toMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (_earthquakeBookEN.GetComponent<NVRInteractableItem> ().IsAttached || Input.GetKeyDown(KeyCode.Space)) {
-		
+		if (_earthquakeBookEN.GetComponent<NVRInteractableItem> ().IsAttached) {
 
-			_triggered = true;
-		
+            bookENG = true;
+			_triggered = true;	
 		}
 
-		/*if (_earthquakeBookTR.GetComponent<NVRInteractableItem> ().IsAttached) {
+		if (_earthquakeBookTR.GetComponentInChildren<NVRInteractableItem> ().IsAttached) {
 
-
+            bookTUR = true;
 			_triggered = true;
 
-		}*/
+		}
 
 		if (_triggered) {
 			this.GetComponent<ScreenFadeOut> ().enabled = true;
 
 			StartCoroutine (StartFade ());
-
-		
 		}
-
-
-
 	}
 
 	IEnumerator StartFade(){
 	
 		yield return new WaitForSeconds (_duration);
 
-
 		SceneManager.LoadScene (_loadScene);
-
-	//	Debug.Log ("bitti");
 	}
 }

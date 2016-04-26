@@ -16,6 +16,7 @@ public class sequenceManager : MonoBehaviour {
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
+    private AudioManager _audioManager;
     private LeverController _leverController;
     private DoorSequence _doorSequence;
     private Transform _timerRenderer;
@@ -67,6 +68,10 @@ public class sequenceManager : MonoBehaviour {
 	public bool isTarget1done = false;
 	public bool isTarget2done = false;
 
+    //Language check
+    public bool isEnglish = false;
+    public bool isTurkish = false;
+
 
 	// For Gas & Exit Sequence
 	public AudioClip SwitchesAudio;
@@ -115,6 +120,7 @@ public class sequenceManager : MonoBehaviour {
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.Find("Door1").GetComponent<DoorSequence>();
+        _audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
 		_bagShiled = GameObject.Find("Bag Shield");
 
         // Find and deactivate all hammer targets.  Each will be activated later during the sequence.
@@ -149,6 +155,8 @@ public class sequenceManager : MonoBehaviour {
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
 		_timerRenderer.gameObject.SetActive(false);
 
+        //Check the language
+        LanguageCheck();
 
 		// Begin the game sequence
 		StartCoroutine(Intro());
@@ -192,6 +200,23 @@ public class sequenceManager : MonoBehaviour {
 		ArrowSequence();
         StartLeverSequence();
 	} // end of Update()
+
+    public void LanguageCheck()
+    {
+        if(PlayerPrefs.GetInt("english") == 1)
+        {
+            isEnglish = true;
+        }
+
+        if(PlayerPrefs.GetInt("turkish") == 1)
+        {
+            isEnglish = true;
+        }
+    }
+
+
+
+
 
 	void ArrowSequence () {
 		if (_arrowSequenceStep == 1 && _arrow.activeSelf == false) {
@@ -332,20 +357,40 @@ public class sequenceManager : MonoBehaviour {
 	}
 		
 	IEnumerator PackAlcoholWipes () {
-		_tvText.text = "alcohol wipes";
-		_tvImage.material = alcoholWipesImg;
-		yield return new WaitForSeconds(1);
-		_tvAudioSource.clip = alcoholWipes;
-		_tvAudioSource.Play();
-	}
+        _tvImage.material = alcoholWipesImg;
+        if (isEnglish == true)
+        {
+            _tvText.text = "Alcohol Wipes";
+            _tvAudioSource.clip = alcoholWipes;
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "Alkollü Mendil"; 
+            _tvAudioSource.clip = _audioManager.alcoholWipesTur;
+        }
+
+        yield return new WaitForSeconds(1);
+        _tvAudioSource.Play();
+    }
 
 	IEnumerator PackBandages () {
-		_tvText.text = "box of plasters";
-		_tvImage.material = bandagesImg;
-		yield return new WaitForSeconds(1);
-		_tvAudioSource.clip = bandages;
-		_tvAudioSource.Play();
-	}
+        _tvImage.material = bandagesImg;
+        if (isEnglish == true)
+        {
+            _tvText.text = "Box of Plasters";
+            _tvAudioSource.clip = bandages;
+        }
+
+        if (isTurkish == true)
+        {
+            _tvText.text = "Bir Kutu Yara Bandı";
+            _tvAudioSource.clip = _audioManager.bandagesTur;
+        }
+
+        yield return new WaitForSeconds(1);
+        _tvAudioSource.Play();
+    }
 
 	IEnumerator PackFirstAidBook () {
 		_tvText.text = "first aid manual";

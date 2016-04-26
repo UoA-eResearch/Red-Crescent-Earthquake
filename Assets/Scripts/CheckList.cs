@@ -29,6 +29,7 @@ public class CheckList : MonoBehaviour
         PlayerPrefs.SetInt("furniture", 0);
         PlayerPrefs.SetInt("cover", 0);
         PlayerPrefs.SetInt("levers", 0);
+        
     
     }
 
