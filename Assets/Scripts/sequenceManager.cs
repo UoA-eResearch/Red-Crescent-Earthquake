@@ -247,11 +247,13 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	public void VaseIntro () {					// called by bullseye.cs
+		Debug.Log("VaseIntro called");
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
 		//yield return new WaitForSeconds(1);
 		_tvAudioSource.clip = vaseIntro;
 		_tvAudioSource.Play();
+		_arrowSequenceStep = 6;
 	}
 
 

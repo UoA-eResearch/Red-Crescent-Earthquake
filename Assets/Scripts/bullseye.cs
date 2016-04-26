@@ -39,7 +39,7 @@ public class bullseye : MonoBehaviour {
 			sequenceManager.NextHammerTarget(nextStep);
 
 			// if one hammer target is already disabled, move on to next sequence
-			if (sequenceManager._hammerTarget2.activeSelf == false || sequenceManager._hammerTarget4.activeSelf == false) 
+			if (sequenceManager._hammerTarget2.activeSelf == false && sequenceManager._hammerTarget4.activeSelf == false) 
 			{
 				// end hammer sequence
 				// begin vase sequence
@@ -59,8 +59,6 @@ public class bullseye : MonoBehaviour {
 			collision.transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
 			collision.transform.rotation = transform.rotation;
 			collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
-			//sequenceManager.NextHammerTarget(nextStep);	
 
 			// when bracket hits bullseye, change bullseye to Green
 			if (transform.name == "Hammer Target 1") 
