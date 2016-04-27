@@ -30,40 +30,9 @@ public class sequenceManager : MonoBehaviour {
 	public bool _handOnHoldTarget;
 	private GameObject _bagShiled;
 
-
-
 	// Audio for the TV
 	private AudioSource _tvAudioSource;
-	public AudioClip warning;
-	public AudioClip intro;
-	public AudioClip introPreTime;
-	public AudioClip introTime;
-	public AudioClip introPostTime;
-
-	public AudioClip rollBandage;
-	public AudioClip alcoholWipes;
-	public AudioClip bandages;
-	public AudioClip firstAidBook;
-	public AudioClip ventilator;
-	public AudioClip safetyPin;
-	public AudioClip scissors;
-	public AudioClip triangularBandage;
-	public AudioClip vaseIntro;
-	public AudioClip getUnderTable;
-	public AudioClip holdOn;
-
-	public List<AudioClip> noAudio = new List<AudioClip> ();
-	public List<AudioClip> yesAudio = new List<AudioClip> ();
-    // end of Audio for TV
-    
-	// Audio for Hammer Sequence
-	public AudioClip hammerIntro;
-	public AudioClip target1done;
-	public AudioClip target2done;
-	public AudioClip topCorner;
-	public AudioClip bracket1done;
-	public AudioClip bracket2done;
-
+	
 	//Hammer sequence check
 	public bool isTarget1done = false;
 	public bool isTarget2done = false;
@@ -71,11 +40,6 @@ public class sequenceManager : MonoBehaviour {
     //Language check
     public bool isEnglish = false;
     public bool isTurkish = false;
-
-
-	// For Gas & Exit Sequence
-	public AudioClip SwitchesAudio;
-	public AudioClip ExitAudio;
 
 	// Textures for the TV
 	// New Order: roll, alc, cpr v, manual, band, tri, pins, scissors
@@ -115,7 +79,7 @@ public class sequenceManager : MonoBehaviour {
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
 		_timerText = GameObject.Find("Dynamic GUI/Timer Text").GetComponent<Text>();
-		_tvAudioSource = GameObject.Find("Sequence Manager/TV Audio Source").GetComponent<AudioSource>();
+		_tvAudioSource = GameObject.Find("Audio Manager/TV Audio Source").GetComponent<AudioSource>();
 		_tvImage = GameObject.Find("Dynamic GUI/Image").GetComponent<Renderer>();
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
@@ -229,7 +193,7 @@ public class sequenceManager : MonoBehaviour {
 				// when any item enters bag, arrow is deactivated in LateUpdate() by _checkItem
 			}
 		}
-		if (_arrowSequenceStep == 3 && rollBandage == null) {
+		if (_arrowSequenceStep == 3 && _audioManager.rollBandage == null) {
 			_arrow.SetActive(false);
 			_arrowSequenceStep = 4;
 		}	
@@ -273,7 +237,7 @@ public class sequenceManager : MonoBehaviour {
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
 		//yield return new WaitForSeconds(1);
-		_tvAudioSource.clip = vaseIntro;
+		_tvAudioSource.clip = _audioManager.vaseIntro;
 		_tvAudioSource.Play();
 		_arrowSequenceStep = 6;
 	}
@@ -336,180 +300,97 @@ public class sequenceManager : MonoBehaviour {
     }
 
 	IEnumerator Intro () {
-        if (isEnglish)
-        {
+        
             yield return new WaitForSeconds(2); //just a pause at the beginning
-            _tvAudioSource.clip = introPreTime;
+            _tvAudioSource.clip = _audioManager.introPreTime;
             _tvAudioSource.Play();
-            yield return new WaitForSeconds(introPreTime.length);
+            yield return new WaitForSeconds(_audioManager.introPreTime.length);
             _timerStart = Time.time;
-            _tvAudioSource.clip = introTime;
+            _tvAudioSource.clip = _audioManager.introTime;
             _tvAudioSource.Play();
             _timerRenderer.gameObject.SetActive(true);
-            yield return new WaitForSeconds(introTime.length);
-            _tvAudioSource.clip = introPostTime;
+            yield return new WaitForSeconds(_audioManager.introTime.length);
+            _tvAudioSource.clip = _audioManager.introPostTime;
             _tvAudioSource.Play();
-            yield return new WaitForSeconds(introPostTime.length);
+            yield return new WaitForSeconds(_audioManager.introPostTime.length);
             _bagShiled.SetActive(false);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2); //just a pause at the beginning
-            _tvAudioSource.clip = _audioManager.intro;
-            _tvAudioSource.Play();
-            yield return new WaitForSeconds(_audioManager.intro.length);
-            _timerStart = Time.time;
-            _tvAudioSource.clip = _audioManager.introBag;
-            _tvAudioSource.Play();
-            _timerRenderer.gameObject.SetActive(true);
-            yield return new WaitForSeconds(_audioManager.introBag.length);
-            _bagShiled.SetActive(false);
-        }
+        
 
 		StartCoroutine(PackRollBandage());
 	}
 		
 	IEnumerator PackAlcoholWipes () {
-        if (isEnglish)
-        {
+     
             _tvImage.material = alcoholWipesImg;
             _tvText.text = "alcohol wipes";
             _tvImage.material = alcoholWipesImg;
             yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = alcoholWipes;
+            _tvAudioSource.clip = _audioManager.alcoholWipes;
             _tvAudioSource.Play();
-        }
-
-        else if(isTurkish)
-        {
-            _tvImage.material = alcoholWipesImg;
-            _tvText.text = "alkollü mendil";
-            _tvImage.material = alcoholWipesImg;
-            yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.alcoholWipesTur;
-            _tvAudioSource.Play();
-        }
     }
 
 	IEnumerator PackBandages () {
-        if (isEnglish)
-        {
+       
             _tvText.text = "box of plasters";
             _tvImage.material = bandagesImg;
             yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = bandages;
+            _tvAudioSource.clip = _audioManager.bandages;
             _tvAudioSource.Play();
-        }
-        else
-        {
-            _tvText.text = "bir kutu yara bandi";
-            _tvImage.material = bandagesImg;
-            yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.bandagesTur;
-            _tvAudioSource.Play();
-        }
+       
     }
 
 	IEnumerator PackFirstAidBook () {
-        if (isEnglish)
-        {
+        
             _tvText.text = "first aid manual";
             _tvImage.material = firstAidBookImg;
             yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = firstAidBook;
+            _tvAudioSource.clip = _audioManager.firstAidBook;
             _tvAudioSource.Play();
-        }
-        else
-        {
-            _tvText.text = "ilk yardim kitapcigi";
-            _tvImage.material = firstAidBookImg;
-            yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.firstAidBookTur;
-            _tvAudioSource.Play();
-        }
+        
 	}
 
 	IEnumerator PackRollBandage () {
-        if (isEnglish)
-        {
+       
             _tvText.text = "roll bandage";
             _tvImage.material = rollBandageImg;
             _arrowSequenceStep = 1;
 
             //yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = rollBandage;
+            _tvAudioSource.clip = _audioManager.rollBandage;
             _tvAudioSource.Play();
             yield return null;
-        }
-        
-        if(isTurkish)
-        {
-            _tvText.text = "sargı bezi";
-            _tvImage.material = rollBandageImg;
-            _arrowSequenceStep = 1;
-
-            //yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.rollBandageTur;
-            _tvAudioSource.Play();
-            yield return null;
-        }
+       
 	}
 
 	IEnumerator PackSafetyPin () {
-        if (isEnglish)
-        {
+        
             _tvText.text = "safety pins";
             _tvImage.material = safetyPinImg;
             yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = safetyPin;
+            _tvAudioSource.clip = _audioManager.safetyPin;
             _tvAudioSource.Play();
-        }
-        else
-        {
-            _tvText.text = "cengelli igneler";
-            _tvImage.material = safetyPinImg;
-            yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.safetyPinTur;
-            _tvAudioSource.Play();
-        }
+        
+        
 	}
 
 	IEnumerator PackScissors () {
-        if (isEnglish)
-        {
+        
             _tvText.text = "scissors";
             _tvImage.material = scissorsImg;
             yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = scissors;
+            _tvAudioSource.clip = _audioManager.scissors;
             _tvAudioSource.Play();
-        }
-        else
-        {
-            _tvText.text = "makas";
-            _tvImage.material = scissorsImg;
-            yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.scissorsTur;
-            _tvAudioSource.Play();
-        }
+        
 	}
 
 	IEnumerator PackTriangularBandage () {
-        if (isEnglish)
-        {
+        
             _tvText.text = "triangular bandage";
             _tvImage.material = triangularBandageImg;
             yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = triangularBandage;
+            _tvAudioSource.clip = _audioManager.triangularBandage;
             _tvAudioSource.Play();
-        }
-        else
-        {
-            _tvText.text = "ucgen sargi bezi";
-            _tvImage.material = triangularBandageImg;
-            yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.triangularBandageTur;
-            _tvAudioSource.Play();
-        }
+       
 	}
 
 	IEnumerator DropCoverHold () {
@@ -524,14 +405,14 @@ public class sequenceManager : MonoBehaviour {
 			_quakeHasStarted = true;				
 			_tvText.text = "";
 			_tvImage.material = dropCoverHoldImg;
-			_tvAudioSource.clip = getUnderTable;  
+			_tvAudioSource.clip = _audioManager.getUnderTable;  
 			_tvAudioSource.Play();
 			_redCircleUnderTable.SetActive(true);
 			_holdTarget.SetActive(true);
 			_greenCircleUnderTable.SetActive(false);
 			_arrowSequenceStep = 6;									//NB: if you add steps to the arrow sequence, then you'll need to change this int
-			yield return new WaitForSeconds(getUnderTable.length);
-			_tvAudioSource.clip = holdOn;
+			yield return new WaitForSeconds(_audioManager.getUnderTable.length);
+			_tvAudioSource.clip = _audioManager.holdOn;
 			_tvAudioSource.Play();
 			_earthquakeController.StartQuake();
 			yield return new WaitForSeconds(50);
@@ -543,7 +424,7 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator GasElecSwitches () {
 		_tvImage.material = gasElecSwitchImg;
        // _leverController.enabled = true;
-		_tvAudioSource.clip = SwitchesAudio;
+		_tvAudioSource.clip = _audioManager.SwitchesAudio;
 		_tvAudioSource.Play();
 		_holdTarget.SetActive(false);
 		_greenCircleUnderTable.SetActive(false);
@@ -554,7 +435,7 @@ public class sequenceManager : MonoBehaviour {
 	public void ExitTime()
 	{
 		_tvImage.material = ExitImg;
-		_tvAudioSource.clip = ExitAudio;
+		_tvAudioSource.clip = _audioManager.ExitAudio;
 		_tvAudioSource.Play();
 	}
 		
@@ -563,7 +444,7 @@ public class sequenceManager : MonoBehaviour {
 			// HAMMER TARGET
 			_hammerTarget1.SetActive(false);		
 			_hammerTarget2.SetActive(true);
-			_tvAudioSource.clip = bracket1done;
+			_tvAudioSource.clip = _audioManager.bracket1done;
 			_tvAudioSource.Play();
 			isTarget1done = true;
 			_arrowSequenceStep = 6;
@@ -571,22 +452,22 @@ public class sequenceManager : MonoBehaviour {
 			// BRACKET TARGET
 			_hammerTarget2.SetActive(false);
 			_hammerTarget3.SetActive(true);
-			_tvAudioSource.clip = target1done;
+			_tvAudioSource.clip = _audioManager.target1done;
 			_tvAudioSource.Play();
 		} else if (nextStep == 4) {
 			// HAMMER TARGET
 			_hammerTarget3.SetActive(false);
 			_hammerTarget4.SetActive(true);
-			_tvAudioSource.clip = bracket2done;
+			_tvAudioSource.clip = _audioManager.bracket2done;
 			_tvAudioSource.Play();
 			isTarget2done = true;
 		} else if (nextStep == 5) {
 			// SECURING FINISHED
 			// START QUAKE
 			_hammerTarget4.SetActive(false);
-			_tvAudioSource.clip = target2done;
+			_tvAudioSource.clip = _audioManager.target2done;
 			_tvAudioSource.Play();
-			new WaitForSeconds(target2done.length);
+			new WaitForSeconds(_audioManager.target2done.length);
 			StopAllCoroutines();		
 			StartCoroutine(DropCoverHold());
 			// trigger start of quake?  or don't bother since it'll be timer based anyway?
@@ -597,12 +478,12 @@ public class sequenceManager : MonoBehaviour {
 		_arrowSequenceStep = 4;
 		_tvImage.material = lBracket;
 		_tvText.text = "";
-		_tvAudioSource.clip = hammerIntro;
+		_tvAudioSource.clip = _audioManager.hammerIntro;
 		_tvAudioSource.Play();
 		_hammerTarget1.SetActive(true);
 		_hammerTarget3.SetActive(true);
 		yield return new WaitForSeconds(_tvAudioSource.clip.length);
-		_tvAudioSource.clip = topCorner;
+		_tvAudioSource.clip = _audioManager.topCorner;
 		_tvAudioSource.Play();
 	}
 
@@ -610,8 +491,8 @@ public class sequenceManager : MonoBehaviour {
 
 	public void PlayNoAudio() {
 		new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
-		int randomClip = Random.Range(0, noAudio.Count);
-		_tvAudioSource.clip = noAudio[randomClip];
+		int randomClip = Random.Range(0, _audioManager.noAudio.Count);
+		_tvAudioSource.clip = _audioManager.noAudio[randomClip];
 		_tvAudioSource.Play();
 	}
 
@@ -622,8 +503,8 @@ public class sequenceManager : MonoBehaviour {
 		if (_tvAudioSource.isPlaying == false) 								// was causing bug: hammer intro audio not hear
 		{
 			new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
-			int randomYesClip = Random.Range(0, yesAudio.Count);
-			_tvAudioSource.clip = yesAudio[randomYesClip];
+			int randomYesClip = Random.Range(0, _audioManager.yesAudio.Count);
+			_tvAudioSource.clip = _audioManager.yesAudio[randomYesClip];
 			_tvAudioSource.Play();
 			Debug.Log("play yes audio + " + _tvAudioSource.clip);
 		}
