@@ -33,7 +33,7 @@ public class LanguageManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("english", 1);
         }
-        else
+        if(toMainSceneScript.bookTUR == true)
         {
             PlayerPrefs.SetInt("turkish", 1);
         }
