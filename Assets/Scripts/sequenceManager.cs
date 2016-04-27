@@ -41,8 +41,10 @@ public class sequenceManager : MonoBehaviour {
     public bool isEnglish = false;
     public bool isTurkish = false;
 
-	// Textures for the TV
-	// New Order: roll, alc, cpr v, manual, band, tri, pins, scissors
+    // Textures for the TV
+    // New Order: roll, alc, cpr v, manual, band, tri, pins, scissors
+    public Material warningImg;
+    public Material warningImgTr;
 	public Material alcoholWipesImg;
 	public Material bandagesImg;
 	public Material firstAidBookImg;
@@ -57,13 +59,11 @@ public class sequenceManager : MonoBehaviour {
 	public Material gasElecSwitchImg;
 	public Material ExitImg;
 
-
 	// Hammer Targets
 	public GameObject _hammerTarget1;					// set to public so that bullseye.cs can move hammer sequence forward
 	public GameObject _hammerTarget2;
 	public GameObject _hammerTarget3;
 	public GameObject _hammerTarget4;
-
 
 	// for Arrow Sequence
 	private GameObject _arrow;
@@ -178,7 +178,6 @@ public class sequenceManager : MonoBehaviour {
         }
     }
 
-
 	void ArrowSequence () {
 		if (_arrowSequenceStep == 1 && _arrow.activeSelf == false) {
 			_arrow.SetActive(true);
@@ -221,8 +220,6 @@ public class sequenceManager : MonoBehaviour {
 				_arrowSequenceStep = 7;
 			}
 		}
-
-
 
 		/*										from before the Vase sequence
 		if (_arrowSequenceStep == 6) {			// set by NextHammerTarget() when hammer hits 1st green circle
@@ -301,6 +298,9 @@ public class sequenceManager : MonoBehaviour {
 
 	IEnumerator Intro () {
         
+        if (isEnglish == true)
+        {
+            _tvImage.material = warningImg;
             yield return new WaitForSeconds(2); //just a pause at the beginning
             _tvAudioSource.clip = _audioManager.introPreTime;
             _tvAudioSource.Play();
@@ -314,43 +314,91 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.Play();
             yield return new WaitForSeconds(_audioManager.introPostTime.length);
             _bagShiled.SetActive(false);
-        
+        }
+
+        if(isTurkish == true)
+        {
+            _tvImage.material = warningImgTr;
+            yield return new WaitForSeconds(2); //just a pause at the beginning
+            _tvAudioSource.clip = _audioManager.introTr;
+            _tvAudioSource.Play();
+            yield return new WaitForSeconds(_audioManager.introTr.length);
+            _timerStart = Time.time;
+            _tvAudioSource.clip = _audioManager.introBagTr;
+            _tvAudioSource.Play();
+            _timerRenderer.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_audioManager.introBagTr.length);
+            _bagShiled.SetActive(false);
+        }
 
 		StartCoroutine(PackRollBandage());
 	}
 		
 	IEnumerator PackAlcoholWipes () {
-     
+        if (isEnglish == true)
+        { 
             _tvImage.material = alcoholWipesImg;
             _tvText.text = "alcohol wipes";
-            _tvImage.material = alcoholWipesImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.alcoholWipes;
             _tvAudioSource.Play();
+        }
+
+        if(isTurkish == true)
+        {
+            _tvImage.material = alcoholWipesImg;
+            _tvText.text = "alcohol wipes";
+            yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.alcoholWipesTr;
+            _tvAudioSource.Play();
+        }
     }
 
 	IEnumerator PackBandages () {
-       
+        if (isEnglish == true)
+        {
             _tvText.text = "box of plasters";
             _tvImage.material = bandagesImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.bandages;
             _tvAudioSource.Play();
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "box of plasters";
+            _tvImage.material = bandagesImg;
+            yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.bandagesTr;
+            _tvAudioSource.Play();
+        }
        
     }
 
 	IEnumerator PackFirstAidBook () {
-        
+        if (isEnglish == true)
+        {
             _tvText.text = "first aid manual";
             _tvImage.material = firstAidBookImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.firstAidBook;
             _tvAudioSource.Play();
-        
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "first aid manual";
+            _tvImage.material = firstAidBookImg;
+            yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.firstAidBookTr;
+            _tvAudioSource.Play();
+        }
 	}
 
-	IEnumerator PackRollBandage () {
-       
+	IEnumerator PackRollBandage ()
+    {
+        if (isEnglish == true)
+        {
             _tvText.text = "roll bandage";
             _tvImage.material = rollBandageImg;
             _arrowSequenceStep = 1;
@@ -359,38 +407,81 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.clip = _audioManager.rollBandage;
             _tvAudioSource.Play();
             yield return null;
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "roll bandage";
+            _tvImage.material = rollBandageImg;
+            _arrowSequenceStep = 1;
+
+            //yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.rollBandageTr;
+            _tvAudioSource.Play();
+            yield return null;
+        }
        
 	}
 
-	IEnumerator PackSafetyPin () {
-        
+    IEnumerator PackSafetyPin() {
+        if (isEnglish == true)
+        {
             _tvText.text = "safety pins";
             _tvImage.material = safetyPinImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.safetyPin;
             _tvAudioSource.Play();
-        
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "safety pins";
+            _tvImage.material = safetyPinImg;
+            yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.safetyPinTr;
+            _tvAudioSource.Play();
+        }
         
 	}
 
 	IEnumerator PackScissors () {
-        
+        if (isEnglish == true)
+        {
             _tvText.text = "scissors";
             _tvImage.material = scissorsImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.scissors;
             _tvAudioSource.Play();
-        
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "scissors";
+            _tvImage.material = scissorsImg;
+            yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.scissorsTr;
+            _tvAudioSource.Play();
+        }
 	}
 
 	IEnumerator PackTriangularBandage () {
-        
+        if (isEnglish == true)
+        {
             _tvText.text = "triangular bandage";
             _tvImage.material = triangularBandageImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.triangularBandage;
             _tvAudioSource.Play();
-       
+        }
+
+        if(isTurkish == true)
+        {
+            _tvText.text = "triangular bandage";
+            _tvImage.material = triangularBandageImg;
+            yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.triangularBandageTr;
+            _tvAudioSource.Play();
+        }
 	}
 
 	IEnumerator DropCoverHold () {
