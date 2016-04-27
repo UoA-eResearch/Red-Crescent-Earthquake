@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class sequenceManager : MonoBehaviour {
 
 	private Text _tvText;
+    private Text _tvTextTr;
 	private Text _timerText;
 	private string _timeString;
 	private float _timerStart;
@@ -78,7 +79,8 @@ public class sequenceManager : MonoBehaviour {
 
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
-		_timerText = GameObject.Find("Dynamic GUI/Timer Text").GetComponent<Text>();
+        _tvTextTr = GameObject.Find("Dynamic GUI/TV Text Tr").GetComponent<Text>();
+        _timerText = GameObject.Find("Dynamic GUI/Timer Text").GetComponent<Text>();
 		_tvAudioSource = GameObject.Find("Audio Manager/TV Audio Source").GetComponent<AudioSource>();
 		_tvImage = GameObject.Find("Dynamic GUI/Image").GetComponent<Renderer>();
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
@@ -348,6 +350,8 @@ public class sequenceManager : MonoBehaviour {
         {
             _tvImage.material = alcoholWipesImg;
             _tvText.text = "alcohol wipes";
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
+            _tvTextTr.text = "alkollu mendil";
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.alcoholWipesTr;
             _tvAudioSource.Play();
@@ -367,6 +371,8 @@ public class sequenceManager : MonoBehaviour {
         if(isTurkish == true)
         {
             _tvText.text = "box of plasters";
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
+            _tvTextTr.text = "bir kutu yara bandi";
             _tvImage.material = bandagesImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.bandagesTr;
@@ -388,6 +394,8 @@ public class sequenceManager : MonoBehaviour {
         if(isTurkish == true)
         {
             _tvText.text = "first aid manual";
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
+            _tvTextTr.text = "ilk yardim kitapcigi";
             _tvImage.material = firstAidBookImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.firstAidBookTr;
@@ -412,6 +420,8 @@ public class sequenceManager : MonoBehaviour {
         if(isTurkish == true)
         {
             _tvText.text = "roll bandage";
+            _tvText.transform.localScale = new Vector3(0,0,0);
+            _tvTextTr.text = "sargi bezi";
             _tvImage.material = rollBandageImg;
             _arrowSequenceStep = 1;
 
@@ -436,6 +446,8 @@ public class sequenceManager : MonoBehaviour {
         if(isTurkish == true)
         {
             _tvText.text = "safety pins";
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
+            _tvTextTr.text = "cengelli igneler";
             _tvImage.material = safetyPinImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.safetyPinTr;
@@ -457,6 +469,8 @@ public class sequenceManager : MonoBehaviour {
         if(isTurkish == true)
         {
             _tvText.text = "scissors";
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
+            _tvTextTr.text = "makas";
             _tvImage.material = scissorsImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.scissorsTr;
@@ -477,6 +491,8 @@ public class sequenceManager : MonoBehaviour {
         if(isTurkish == true)
         {
             _tvText.text = "triangular bandage";
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
+            _tvTextTr.text = "ucgen sargi bezi";
             _tvImage.material = triangularBandageImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.triangularBandageTr;
