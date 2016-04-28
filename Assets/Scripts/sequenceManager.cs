@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;  				// added by Andrew for Lists
 using UnityEngine.UI;
+using NewtonVR;
 
 public class sequenceManager : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class sequenceManager : MonoBehaviour {
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
+    private GameObject _flashlight;
+    private GameObject _firstAidBag;
     private AudioManager _audioManager;
     private LeverController _leverController;
     private DoorSequence _doorSequence;
@@ -87,6 +90,8 @@ public class sequenceManager : MonoBehaviour {
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.Find("Door1").GetComponent<DoorSequence>();
         _audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        _firstAidBag = GameObject.Find("1st Aid Bag");
+        _flashlight = GameObject.Find("FlashLight");
 		_bagShiled = GameObject.Find("Bag Shield");
 
         // Find and deactivate all hammer targets.  Each will be activated later during the sequence.
@@ -161,8 +166,17 @@ public class sequenceManager : MonoBehaviour {
 		// SHORTCUT FOR EXIT SEQUENCE
 		if (Input.GetKeyDown(KeyCode.X)) {
 			StopAllCoroutines();
+            _earthquakeController._earthquakeSequenceFinished = true;
 			ExitTime();
 		}
+
+        //SHORTCUT FOR VASE SEQUENCE
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            StopAllCoroutines();
+            VaseIntro();
+        }
+
 		ArrowSequence();
         StartLeverSequence();
 	} // end of Update()
@@ -194,7 +208,7 @@ public class sequenceManager : MonoBehaviour {
 				// when any item enters bag, arrow is deactivated in LateUpdate() by _checkItem
 			}
 		}
-		if (_arrowSequenceStep == 3 && _audioManager.rollBandage == null) {
+		if (_arrowSequenceStep == 3 && _audioManager.rollBandage == null /*|| _audioManager.rollBandageTr == null*/) {
 			_arrow.SetActive(false);
 			_arrowSequenceStep = 4;
 		}	
@@ -340,7 +354,7 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.Play();
             _timerRenderer.gameObject.SetActive(true);
             yield return new WaitForSeconds(_audioManager.introBagTr.length);
-            _bagShiled.SetActive(false);
+            //_bagShiled.SetActive(false);
         }
 
 		StartCoroutine(PackRollBandage());
@@ -586,11 +600,17 @@ public class sequenceManager : MonoBehaviour {
 
 	public void ExitTime()
 	{
+        //1st aid bag is pickable now
+        _firstAidBag.GetComponent<NVRInteractableItem>().enabled = true;
+        _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
+        
+
         if (isEnglish == true)
         {
             _tvImage.material = ExitImg;
             _tvAudioSource.clip = _audioManager.ExitAudio;
             _tvAudioSource.Play();
+
         }
 
         if(isTurkish == true)
@@ -599,7 +619,9 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.clip = _audioManager.ExitAudioTr;
             _tvAudioSource.Play();
         }
-	}
+
+    }
+
 		
 	public void NextHammerTarget (int nextStep) {
 		if (nextStep == 2) {

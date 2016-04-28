@@ -44,6 +44,16 @@ public class Billboard : MonoBehaviour {
         {
             GameObject.Find("leversTick").SetActive(false);
         }
+
+        if(PlayerPrefs.GetInt("exit") == 1)
+        {
+            GameObject.Find("exitCross").SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("exit") == 0)
+        {
+            GameObject.Find("exitTick").SetActive(false);
+        }
     }
 	
 	

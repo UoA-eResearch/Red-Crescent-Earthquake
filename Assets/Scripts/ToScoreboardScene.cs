@@ -23,7 +23,7 @@ public class ToScoreboardScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_earthquakeController.GetComponent<EarthquakeController>()._earthquakeSequenceFinished == false && _doorSequence.doorOpened == true)
+        if (_earthquakeController.GetComponent<EarthquakeController>()._earthquakeSequenceFinished == true && _doorSequence.doorOpened == true)
         {
              this.GetComponent<ScreenFadeOut>().enabled = true;
             StartCoroutine(StartFade());

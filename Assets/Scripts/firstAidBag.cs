@@ -8,6 +8,7 @@ public class firstAidBag : MonoBehaviour {
 	public GameObject ParticleSuccess;
 	public GameObject ParticleSpawn;
 	public GameObject ParticleFailure;
+    public bool isCarried = false;
 
 	//Audio
 	private AudioSource Success;
@@ -28,7 +29,15 @@ public class firstAidBag : MonoBehaviour {
 
 	void Update ()
     {
-       
+       if(this.GetComponent<Rigidbody>().useGravity == false )
+        {
+            isCarried = true;
+        }
+
+        if (this.GetComponent<Rigidbody>().useGravity == true)
+        {
+            isCarried = false;
+        }
 	}
 
 
@@ -42,6 +51,7 @@ public class firstAidBag : MonoBehaviour {
 			Success.Play();
 			//_sequenceManager.PlayYesAudio();
 		}
+
 
 		// DROPPING WRONG ITEM IN BAG
 		if (other.gameObject.tag == "WrongItem")

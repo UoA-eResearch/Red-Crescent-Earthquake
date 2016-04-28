@@ -9,6 +9,8 @@ public class CheckList : MonoBehaviour
 	private EarthquakeController _earthquakeController;
 	private circleUnderTable _circleUnderTable;
     private LeverController _leverController;
+    private DoorSequence _doorSequence;
+    private FlashLight _flashlight;
     private holdTarget _holdTarget;
     public List<string> _CollectedItems;
     public bool allLeversOff = false;
@@ -25,11 +27,13 @@ public class CheckList : MonoBehaviour
 		_circleUnderTable = GameObject.Find("Circle Under Table").GetComponent<circleUnderTable>();
 		_holdTarget = GameObject.Find("Hold Target").GetComponent<holdTarget>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
-        PlayerPrefs.SetInt("bag", 0);
+        _doorSequence = GameObject.FindGameObjectWithTag("Door").GetComponent<DoorSequence>();
+        _flashlight = GameObject.Find("FlashLight").GetComponent<FlashLight>();
+    PlayerPrefs.SetInt("bag", 0);
         PlayerPrefs.SetInt("furniture", 0);
         PlayerPrefs.SetInt("cover", 0);
         PlayerPrefs.SetInt("levers", 0);
-        
+        PlayerPrefs.SetInt("heavy", 0);
     
     }
 
@@ -56,6 +60,7 @@ public class CheckList : MonoBehaviour
         CheckForHammerTargets();
         CheckForEarthquakeTasks();
         CheckLevers();
+        ExitCheck();
     }
 
     private void CheckStartEndTime()
@@ -91,6 +96,19 @@ public class CheckList : MonoBehaviour
         }
     }
 
+    public void HeavyObjectsCheck()
+    {
+
+    }
+
+    public void ExitCheck()
+    {
+        if (_firstAidBag.isCarried == false && _flashlight.isCarried == false && _doorSequence.doorOpened == true)
+        {
+            PlayerPrefs.SetInt("exit", 1);
+        }
+    }
+
 	private void CheckForEarthquakeTasks()
 	{
         if (_earthquakeController._earthquakeSequenceFinished == true && _circleUnderTable.durationOfStay >= _earthquakeController._shakeDuration)
@@ -99,14 +117,5 @@ public class CheckList : MonoBehaviour
             PlayerPrefs.SetInt("cover", 1);
 
         }
-		
-        /*if (_earthquakeController._earthquakeSequenceFinished == true && _holdTarget.durationOfHold >= _earthquakeController._shakeDuration)
-		{
-			Debug.Log("The player successfully hold on to the table leg");
-		}
-		else
-		{
-			Debug.Log("The player did not successfully hold on to the table leg");
-		}*/
 	}
 }
