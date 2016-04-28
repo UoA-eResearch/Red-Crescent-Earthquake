@@ -45,6 +45,9 @@ namespace NewtonVR
         private Collider[] GhostColliders;
         private Renderer[] GhostRenderers;
 
+        private GameObject topCupboard;
+        private GameObject leftCupboard;
+
         private int DeviceIndex = -1;
 
         private bool RenderModelInitialized = false;
@@ -68,7 +71,8 @@ namespace NewtonVR
         private void Awake()
         {
             CurrentlyHoveringOver = new Dictionary<NVRInteractable, Dictionary<Collider, float>>();
-            
+            topCupboard = GameObject.FindGameObjectWithTag("TopCupboard");
+            leftCupboard = GameObject.FindGameObjectWithTag("LeftCupboard");
             LastPositions = new Vector3[EstimationSamples];
             LastRotations = new Quaternion[EstimationSamples];
             LastDeltas = new float[EstimationSamples];
@@ -141,6 +145,9 @@ namespace NewtonVR
            
             else if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == true)
             {
+                topCupboard.GetComponent<Rigidbody>().isKinematic = false;
+                leftCupboard.GetComponent<Rigidbody>().isKinematic = false;
+
                 if (CurrentHandState != HandState.GripDownInteracting && VisibilityLocked == false)
                 {
                     VisibilityLocked = true;
