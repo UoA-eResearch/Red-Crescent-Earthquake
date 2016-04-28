@@ -235,9 +235,19 @@ public class sequenceManager : MonoBehaviour {
 		Debug.Log("VaseIntro called");
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
-		//yield return new WaitForSeconds(1);
-		_tvAudioSource.clip = _audioManager.vaseIntro;
-		_tvAudioSource.Play();
+        if (isEnglish == true)
+        {
+            //yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.vaseIntro;
+            _tvAudioSource.Play();
+        }
+
+        if(isTurkish == true)
+        {
+            //yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.vaseIntroTr;
+            _tvAudioSource.Play();
+        }
 		_arrowSequenceStep = 6;
 	}
 
@@ -509,18 +519,38 @@ public class sequenceManager : MonoBehaviour {
 
 		if (_quakeHasStarted == false)			// hoping this will stop the 2nd earthquake bug
 		{
-			_quakeHasStarted = true;				
-			_tvText.text = "";
-			_tvImage.material = dropCoverHoldImg;
-			_tvAudioSource.clip = _audioManager.getUnderTable;  
-			_tvAudioSource.Play();
-			_redCircleUnderTable.SetActive(true);
-			_holdTarget.SetActive(true);
-			_greenCircleUnderTable.SetActive(false);
-			_arrowSequenceStep = 6;									//NB: if you add steps to the arrow sequence, then you'll need to change this int
-			yield return new WaitForSeconds(_audioManager.getUnderTable.length);
-			_tvAudioSource.clip = _audioManager.holdOn;
-			_tvAudioSource.Play();
+            if (isEnglish == true)
+            {
+                _quakeHasStarted = true;
+                _tvText.text = "";
+                _tvImage.material = dropCoverHoldImg;
+                _tvAudioSource.clip = _audioManager.getUnderTable;
+                _tvAudioSource.Play();
+                _redCircleUnderTable.SetActive(true);
+                _holdTarget.SetActive(true);
+                _greenCircleUnderTable.SetActive(false);
+                _arrowSequenceStep = 6;                                 //NB: if you add steps to the arrow sequence, then you'll need to change this int
+                yield return new WaitForSeconds(_audioManager.getUnderTable.length);
+                _tvAudioSource.clip = _audioManager.holdOn;
+                _tvAudioSource.Play();
+            }
+
+            if(isTurkish == true)
+            {
+                _quakeHasStarted = true;
+                _tvText.text = "";
+                _tvImage.material = dropCoverHoldImg; // turkish image will be here
+                _tvAudioSource.clip = _audioManager.getUnderTableTr;
+                _tvAudioSource.Play();
+                _redCircleUnderTable.SetActive(true);
+                _holdTarget.SetActive(true);
+                _greenCircleUnderTable.SetActive(false);
+                _arrowSequenceStep = 6;                                 //NB: if you add steps to the arrow sequence, then you'll need to change this int
+                yield return new WaitForSeconds(_audioManager.getUnderTableTr.length);
+                _tvAudioSource.clip = _audioManager.holdOnTr;
+                _tvAudioSource.Play();
+            }
+
 			_earthquakeController.StartQuake();
 			yield return new WaitForSeconds(50);
 			Debug.Log("quake has ended");
@@ -529,54 +559,129 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	IEnumerator GasElecSwitches () {
-		_tvImage.material = gasElecSwitchImg;
-       // _leverController.enabled = true;
-		_tvAudioSource.clip = _audioManager.SwitchesAudio;
-		_tvAudioSource.Play();
-		_holdTarget.SetActive(false);
-		_greenCircleUnderTable.SetActive(false);
-		_redCircleUnderTable.SetActive(false);
-		yield return null;
+        if (isEnglish == true)
+        {
+            _tvImage.material = gasElecSwitchImg;
+            // _leverController.enabled = true;
+            _tvAudioSource.clip = _audioManager.SwitchesAudio;
+            _tvAudioSource.Play();
+            _holdTarget.SetActive(false);
+            _greenCircleUnderTable.SetActive(false);
+            _redCircleUnderTable.SetActive(false);
+            yield return null;
+        }
+
+        if(isTurkish == true)
+        {
+            _tvImage.material = gasElecSwitchImg;
+            // _leverController.enabled = true;
+            _tvAudioSource.clip = _audioManager.SwitchesAudioTr;
+            _tvAudioSource.Play();
+            _holdTarget.SetActive(false);
+            _greenCircleUnderTable.SetActive(false);
+            _redCircleUnderTable.SetActive(false);
+            yield return null;
+        }
 	}
 
 	public void ExitTime()
 	{
-		_tvImage.material = ExitImg;
-		_tvAudioSource.clip = _audioManager.ExitAudio;
-		_tvAudioSource.Play();
+        if (isEnglish == true)
+        {
+            _tvImage.material = ExitImg;
+            _tvAudioSource.clip = _audioManager.ExitAudio;
+            _tvAudioSource.Play();
+        }
+
+        if(isTurkish == true)
+        {
+            _tvImage.material = ExitImg;
+            _tvAudioSource.clip = _audioManager.ExitAudioTr;
+            _tvAudioSource.Play();
+        }
 	}
 		
 	public void NextHammerTarget (int nextStep) {
 		if (nextStep == 2) {
-			// HAMMER TARGET
-			_hammerTarget1.SetActive(false);		
-			_hammerTarget2.SetActive(true);
-			_tvAudioSource.clip = _audioManager.bracket1done;
-			_tvAudioSource.Play();
-			isTarget1done = true;
-			_arrowSequenceStep = 6;
+            // HAMMER TARGET
+            if (isEnglish == true)
+            {
+                _hammerTarget1.SetActive(false);
+                _hammerTarget2.SetActive(true);
+                _tvAudioSource.clip = _audioManager.bracket1done;
+                _tvAudioSource.Play();
+                isTarget1done = true;
+                _arrowSequenceStep = 6;
+            }
+
+            if(isTurkish == true)
+            {
+                _hammerTarget1.SetActive(false);
+                _hammerTarget2.SetActive(true);
+                _tvAudioSource.clip = _audioManager.bracket1doneTr;
+                _tvAudioSource.Play();
+                isTarget1done = true;
+                _arrowSequenceStep = 6;
+            }
 		} else if (nextStep == 3) {
-			// BRACKET TARGET
-			_hammerTarget2.SetActive(false);
-			_hammerTarget3.SetActive(true);
-			_tvAudioSource.clip = _audioManager.target1done;
-			_tvAudioSource.Play();
+            // BRACKET TARGET
+            if (isEnglish == true)
+            {
+                _hammerTarget2.SetActive(false);
+                _hammerTarget3.SetActive(true);
+                _tvAudioSource.clip = _audioManager.target1done;
+                _tvAudioSource.Play();
+            }
+
+            if(isTurkish == true)
+            {
+                _hammerTarget2.SetActive(false);
+                _hammerTarget3.SetActive(true);
+                _tvAudioSource.clip = _audioManager.target1doneTr;
+                _tvAudioSource.Play();
+            }
+
 		} else if (nextStep == 4) {
-			// HAMMER TARGET
-			_hammerTarget3.SetActive(false);
-			_hammerTarget4.SetActive(true);
-			_tvAudioSource.clip = _audioManager.bracket2done;
-			_tvAudioSource.Play();
-			isTarget2done = true;
+            // HAMMER TARGET
+            if (isEnglish == true)
+            {
+                _hammerTarget3.SetActive(false);
+                _hammerTarget4.SetActive(true);
+                _tvAudioSource.clip = _audioManager.bracket2done;
+                _tvAudioSource.Play();
+                isTarget2done = true;
+            }
+
+            if(isTurkish == true)
+            {
+                _hammerTarget3.SetActive(false);
+                _hammerTarget4.SetActive(true);
+                _tvAudioSource.clip = _audioManager.bracket2doneTr;
+                _tvAudioSource.Play();
+                isTarget2done = true;
+            }
 		} else if (nextStep == 5) {
-			// SECURING FINISHED
-			// START QUAKE
-			_hammerTarget4.SetActive(false);
-			_tvAudioSource.clip = _audioManager.target2done;
-			_tvAudioSource.Play();
-			new WaitForSeconds(_audioManager.target2done.length);
-			StopAllCoroutines();		
-			StartCoroutine(DropCoverHold());
+            // SECURING FINISHED
+            // START QUAKE
+            if (isEnglish == true)
+            {
+                _hammerTarget4.SetActive(false);
+                _tvAudioSource.clip = _audioManager.target2done;
+                _tvAudioSource.Play();
+                new WaitForSeconds(_audioManager.target2done.length);
+                StopAllCoroutines();
+                StartCoroutine(DropCoverHold());
+            }
+
+            if(isTurkish == true)
+            {
+                _hammerTarget4.SetActive(false);
+                _tvAudioSource.clip = _audioManager.target2doneTr;
+                _tvAudioSource.Play();
+                new WaitForSeconds(_audioManager.target2doneTr.length);
+                StopAllCoroutines();
+                StartCoroutine(DropCoverHold());
+            }
 			// trigger start of quake?  or don't bother since it'll be timer based anyway?
 		} 
 	}
@@ -585,22 +690,47 @@ public class sequenceManager : MonoBehaviour {
 		_arrowSequenceStep = 4;
 		_tvImage.material = lBracket;
 		_tvText.text = "";
-		_tvAudioSource.clip = _audioManager.hammerIntro;
-		_tvAudioSource.Play();
-		_hammerTarget1.SetActive(true);
-		_hammerTarget3.SetActive(true);
-		yield return new WaitForSeconds(_tvAudioSource.clip.length);
-		_tvAudioSource.clip = _audioManager.topCorner;
-		_tvAudioSource.Play();
+        if (isEnglish == true)
+        {
+            _tvAudioSource.clip = _audioManager.hammerIntro;
+            _tvAudioSource.Play();
+            _hammerTarget1.SetActive(true);
+            _hammerTarget3.SetActive(true);
+            yield return new WaitForSeconds(_tvAudioSource.clip.length);
+            _tvAudioSource.clip = _audioManager.topCorner;
+            _tvAudioSource.Play();
+        }
+
+        if(isTurkish == true)
+        {
+            _tvAudioSource.clip = _audioManager.hammerIntroTr;
+            _tvAudioSource.Play();
+            _hammerTarget1.SetActive(true);
+            _hammerTarget3.SetActive(true);
+            yield return new WaitForSeconds(_tvAudioSource.clip.length);
+            _tvAudioSource.clip = _audioManager.topCornerTr;
+            _tvAudioSource.Play();
+        }
 	}
 
 
 
 	public void PlayNoAudio() {
-		new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
-		int randomClip = Random.Range(0, _audioManager.noAudio.Count);
-		_tvAudioSource.clip = _audioManager.noAudio[randomClip];
-		_tvAudioSource.Play();
+        if (isEnglish == true)
+        {
+            new WaitForSeconds(0.8f);                                       // slight delay for the "bad" sound from bag
+            int randomClip = Random.Range(0, _audioManager.noAudio.Count);
+            _tvAudioSource.clip = _audioManager.noAudio[randomClip];
+            _tvAudioSource.Play();
+        }
+
+        if(isTurkish == true)
+        {
+            new WaitForSeconds(0.8f);                                       // slight delay for the "bad" sound from bag
+            int randomClip = Random.Range(0, _audioManager.noAudioTr.Count);
+            _tvAudioSource.clip = _audioManager.noAudioTr[randomClip];
+            _tvAudioSource.Play();
+        }
 	}
 
 	public void PlayYesAudio() {
@@ -609,11 +739,23 @@ public class sequenceManager : MonoBehaviour {
 
 		if (_tvAudioSource.isPlaying == false) 								// was causing bug: hammer intro audio not hear
 		{
-			new WaitForSeconds (0.8f);										// slight delay for the "bad" sound from bag
-			int randomYesClip = Random.Range(0, _audioManager.yesAudio.Count);
-			_tvAudioSource.clip = _audioManager.yesAudio[randomYesClip];
-			_tvAudioSource.Play();
-			Debug.Log("play yes audio + " + _tvAudioSource.clip);
+            if (isEnglish == true)
+            {
+                new WaitForSeconds(0.8f);                                       // slight delay for the "bad" sound from bag
+                int randomYesClip = Random.Range(0, _audioManager.yesAudio.Count);
+                _tvAudioSource.clip = _audioManager.yesAudio[randomYesClip];
+                _tvAudioSource.Play();
+                Debug.Log("play yes audio + " + _tvAudioSource.clip);
+            }
+
+            if(isTurkish == true)
+            {
+                new WaitForSeconds(0.8f);                                       // slight delay for the "bad" sound from bag
+                int randomYesClip = Random.Range(0, _audioManager.yesAudioTr.Count);
+                _tvAudioSource.clip = _audioManager.yesAudioTr[randomYesClip];
+                _tvAudioSource.Play();
+                Debug.Log("play yes audio + " + _tvAudioSource.clip);
+            }
 		}
 	}
 }
