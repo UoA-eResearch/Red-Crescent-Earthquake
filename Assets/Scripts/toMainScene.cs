@@ -38,9 +38,9 @@ public class toMainScene : MonoBehaviour {
 		}
 
 		if (_triggered) {
-			this.GetComponent<ScreenFadeOut> ().enabled = true;
-
-			StartCoroutine (StartFade ());
+            //this.GetComponent<ScreenFadeOut> ().enabled = true;
+            GetComponent<SteamVR_LoadLevel>().enabled = true;
+			//StartCoroutine (StartFade ());
 		}
 	}
 
