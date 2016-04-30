@@ -36,9 +36,9 @@ public class bullseye : MonoBehaviour {
 		{
 			collision.transform.GetComponent<AudioSource>().Play();
 			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
-			sequenceManager.NextHammerTarget(nextStep);
+			//sequenceManager.NextHammerTarget(nextStep);  necessary?
 
-			// if one hammer target is already disabled, move on to next sequence
+			// if both targets are done, move on to next sequence
 			if (sequenceManager._hammerTarget2.activeSelf == false && sequenceManager._hammerTarget4.activeSelf == false) 
 			{
 				// end hammer sequence
@@ -71,7 +71,7 @@ public class bullseye : MonoBehaviour {
 			}
 
 			// disable this Red Bullseye
-			transform.gameObject.SetActive(false);					
+			transform.gameObject.SetActive(false);	
 
 		}				
 	}

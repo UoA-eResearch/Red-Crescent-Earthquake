@@ -213,18 +213,18 @@ public class sequenceManager : MonoBehaviour {
 			_arrowSequenceStep = 4;
 		}	
 		if (_arrowSequenceStep == 4 ) {
+			// make arrow visible
 			_arrow.SetActive(true);
 			// place arrow over bracket
 			_arrow.transform.position = _bracket.transform.position;
-			// if bracket has moved, place arrow over bracket target
+			// if bracket has moved, turn off arrow
 			if (Vector3.Distance(_bracket.transform.position, _bracketStartPosition) > 0.1f) {
-				//_arrowSequenceStep = 5;
-				_arrow.transform.position = _hammerTarget1.transform.position;
+				//_arrow.transform.position = _hammerTarget1.transform.position;
+				_arrow.SetActive(false);
 			}
 		}
 		if (_arrowSequenceStep == 5) {					// never called?
-				// place arrow over bracket target
-				_arrow.transform.position = _hammerTarget1.transform.position;
+			Debug.Log("arrow sequence step 5 set... but why?");
 		}
 
 		if (_arrowSequenceStep == 6) {
@@ -622,7 +622,7 @@ public class sequenceManager : MonoBehaviour {
 
     }
 
-		
+/*		
 	public void NextHammerTarget (int nextStep) {
 		if (nextStep == 2) {
             // HAMMER TARGET
@@ -707,6 +707,7 @@ public class sequenceManager : MonoBehaviour {
 			// trigger start of quake?  or don't bother since it'll be timer based anyway?
 		} 
 	}
+*/
 
 	IEnumerator HammerIntro () {
 		_arrowSequenceStep = 4;

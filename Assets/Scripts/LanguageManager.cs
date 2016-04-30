@@ -29,7 +29,13 @@ public class LanguageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(toMainSceneScript.bookENG == true)
+        // added by Andrew
+		if (Input.GetKey(KeyCode.L)) {
+			PlayerPrefs.SetInt("english", 1);
+		}
+		// end of Andrew's addition
+
+		if(toMainSceneScript.bookENG == true)
         {
             PlayerPrefs.SetInt("english", 1);
         }
