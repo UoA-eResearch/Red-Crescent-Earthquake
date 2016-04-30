@@ -254,13 +254,15 @@ public class sequenceManager : MonoBehaviour {
         if (isEnglish == true)
         {
             //yield return new WaitForSeconds(1);
-            _tvAudioSource.clip = _audioManager.vaseIntro;
+			_tvImage.material = vaseImg;
+			_tvAudioSource.clip = _audioManager.vaseIntro;
             _tvAudioSource.Play();
         }
 
         if(isTurkish == true)
         {
             //yield return new WaitForSeconds(1);
+			_tvImage.material = vaseImg;
             _tvAudioSource.clip = _audioManager.vaseIntroTr;
             _tvAudioSource.Play();
         }
