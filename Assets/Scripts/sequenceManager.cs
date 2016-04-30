@@ -79,6 +79,7 @@ public class sequenceManager : MonoBehaviour {
 	private GameObject _bracket;
 	private GameObject _vase;
 	private Vector3 _vaseStartPosition;
+	//private GameObject _vaseDestination;
 
 	void Start () {
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
@@ -121,6 +122,7 @@ public class sequenceManager : MonoBehaviour {
 		_bracketStartPosition = _bracket.transform.position;
 		_vase = GameObject.Find("Vase 1");
 		_vaseStartPosition = _vase.transform.position;
+		Debug.Log("vase = " + _vase);
 
 
 		_timerRenderer = GameObject.Find("Timer Text").GetComponent<Transform>();
@@ -221,7 +223,6 @@ public class sequenceManager : MonoBehaviour {
 			_arrow.transform.position = _bracket.transform.position;
 			// if bracket has moved, turn off arrow
 			if (Vector3.Distance(_bracket.transform.position, _bracketStartPosition) > 0.1f) {
-				//_arrow.transform.position = _hammerTarget1.transform.position;
 				_arrow.SetActive(false);
 			}
 		}
@@ -235,8 +236,18 @@ public class sequenceManager : MonoBehaviour {
 			_arrow.transform.position = _vase.transform.position;
 			// if Vase moves, place Arrow at vase Destination
 			if (Vector3.Distance(_vase.transform.position, _vaseStartPosition) > 0.1f) {
-				_arrowSequenceStep = 7;
+				//_arrowSequenceStep = 7;
+				Debug.Log("vase has moved far enough");
+				_arrow.transform.position = new Vector3(-12.3f, 1.5f, 2.5f);
+				_arrow.transform.Rotate(90f, 0f, 0f);
+				_arrowSequenceStep = 8;
 			}
+		}
+
+		if (_arrowSequenceStep == 8) {
+			// place Arrow at vase destination
+			// if vase enters destination, remove arrow and end sequence
+			// wait until called by Vase Destination
 		}
 
 		/*										from before the Vase sequence
@@ -248,7 +259,6 @@ public class sequenceManager : MonoBehaviour {
 	}
 
 	public void VaseIntro () {					// called by bullseye.cs
-		Debug.Log("VaseIntro called");
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
         if (isEnglish == true)
