@@ -15,6 +15,7 @@ public class toMainScene : MonoBehaviour {
     public bool bookENG;
     public bool bookTUR;
 
+
 	void Start () {
 	
 		_duration = this.GetComponent<ScreenFadeOut> ().fadeTime;
@@ -24,6 +25,15 @@ public class toMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		// added by Andrew
+		if (Input.GetKey(KeyCode.Space)) {
+			bookENG = true;
+			//_triggered = true;	
+			SceneManager.LoadScene (_loadScene);
+		}
+		// end of Andrew's addition
+
+
 		if (_earthquakeBookEN.GetComponent<NVRInteractableItem> ().IsAttached) {
 
             bookENG = true;
