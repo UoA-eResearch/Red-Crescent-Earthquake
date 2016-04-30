@@ -38,10 +38,9 @@ public class bullseye : MonoBehaviour {
 			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
 			//sequenceManager.NextHammerTarget(nextStep);  necessary?
 
-			// if both targets are done, move on to next sequence
-			if (sequenceManager._hammerTarget2.activeSelf == false && sequenceManager._hammerTarget4.activeSelf == false) 
+			// if one target is done, then this is the 2nd target... they're both done... call the next sequence
+			if (sequenceManager._hammerTarget2.activeSelf == false || sequenceManager._hammerTarget4.activeSelf == false) 
 			{
-				// end hammer sequence
 				// begin vase sequence
 				sequenceManager.VaseIntro();
 			}
