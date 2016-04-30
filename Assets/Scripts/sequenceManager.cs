@@ -152,6 +152,12 @@ public class sequenceManager : MonoBehaviour {
 			_timerText.text = "";
 		}
 
+		// SHORTCUT FOR VASE SEQUENCE
+		if (Input.GetKeyDown(KeyCode.V))
+		{
+			StopAllCoroutines();		
+			VaseIntro();
+		}
 		// SHORTCUT FOR EARTHQUAKE SEQUENCE
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -159,23 +165,19 @@ public class sequenceManager : MonoBehaviour {
 			StartCoroutine(DropCoverHold());
 		}
 		// SHORTCUT FOR BRACKET SEQUENCE
-		if (Input.GetKeyDown(KeyCode.H)) {
+		if (Input.GetKeyDown(KeyCode.H)) 
+		{
 			StopAllCoroutines();
 			StartCoroutine(HammerIntro());
 		}
 		// SHORTCUT FOR EXIT SEQUENCE
-		if (Input.GetKeyDown(KeyCode.X)) {
+		if (Input.GetKeyDown(KeyCode.X)) 
+		{
 			StopAllCoroutines();
             _earthquakeController._earthquakeSequenceFinished = true;
 			ExitTime();
 		}
-
-        //SHORTCUT FOR VASE SEQUENCE
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            StopAllCoroutines();
-            VaseIntro();
-        }
+			
 
 		ArrowSequence();
         StartLeverSequence();
