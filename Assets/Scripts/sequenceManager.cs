@@ -20,6 +20,7 @@ public class sequenceManager : MonoBehaviour {
     private EarthquakeController _earthquakeController;
     private GameObject _flashlight;
     private GameObject _firstAidBag;
+    private GameObject _slippers;
     private AudioManager _audioManager;
     private LeverController _leverController;
     private DoorSequence _doorSequence;
@@ -93,6 +94,7 @@ public class sequenceManager : MonoBehaviour {
         _audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         _firstAidBag = GameObject.Find("1st Aid Bag");
         _flashlight = GameObject.Find("FlashLight");
+        _slippers = GameObject.Find("SlippersPlaceHolder");
 		_bagShiled = GameObject.Find("Bag Shield");
 
         // Find and deactivate all hammer targets.  Each will be activated later during the sequence.
@@ -258,7 +260,7 @@ public class sequenceManager : MonoBehaviour {
 		}
 	}
 
-	public void VaseIntro () {					// called by bullseye.cs
+	public void  VaseIntro () {					// called by bullseye.cs
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
         if (isEnglish == true)
@@ -353,7 +355,7 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.clip = _audioManager.introPostTime;
             _tvAudioSource.Play();
             yield return new WaitForSeconds(_audioManager.introPostTime.length);
-            _bagShiled.SetActive(false);
+            //_bagShiled.SetActive(false);
         }
 
         if(isTurkish == true)
@@ -436,6 +438,9 @@ public class sequenceManager : MonoBehaviour {
             _tvTextTr.text = "ilk yardim kitapcigi";
             _tvImage.material = firstAidBookImg;
             yield return new WaitForSeconds(1);
+            _tvAudioSource.clip = _audioManager.drawersCupboardsTr;
+            _tvAudioSource.Play();
+            yield return new WaitForSeconds(_audioManager.drawersCupboardsTr.length);
             _tvAudioSource.clip = _audioManager.firstAidBookTr;
             _tvAudioSource.Play();
         }
@@ -558,9 +563,9 @@ public class sequenceManager : MonoBehaviour {
                 _holdTarget.SetActive(true);
                 _greenCircleUnderTable.SetActive(false);
                 _arrowSequenceStep = 6;                                 //NB: if you add steps to the arrow sequence, then you'll need to change this int
-                yield return new WaitForSeconds(_audioManager.getUnderTable.length);
-                _tvAudioSource.clip = _audioManager.holdOn;
-                _tvAudioSource.Play();
+               // yield return new WaitForSeconds(_audioManager.getUnderTable.length);
+               // _tvAudioSource.clip = _audioManager.holdOn;
+               // _tvAudioSource.Play();
             }
 
             if(isTurkish == true)
@@ -574,9 +579,9 @@ public class sequenceManager : MonoBehaviour {
                 _holdTarget.SetActive(true);
                 _greenCircleUnderTable.SetActive(false);
                 _arrowSequenceStep = 6;                                 //NB: if you add steps to the arrow sequence, then you'll need to change this int
-                yield return new WaitForSeconds(_audioManager.getUnderTableTr.length);
-                _tvAudioSource.clip = _audioManager.holdOnTr;
-                _tvAudioSource.Play();
+               // yield return new WaitForSeconds(_audioManager.getUnderTableTr.length);
+               // _tvAudioSource.clip = _audioManager.holdOnTr;
+               // _tvAudioSource.Play();
             }
 
 			_earthquakeController.StartQuake();
@@ -617,7 +622,7 @@ public class sequenceManager : MonoBehaviour {
         //1st aid bag is pickable now
         _firstAidBag.GetComponent<NVRInteractableItem>().enabled = true;
         _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
-        
+        _slippers.GetComponent<NVRInteractableItem>().enabled = true;
 
         if (isEnglish == true)
         {
@@ -640,9 +645,10 @@ public class sequenceManager : MonoBehaviour {
 	IEnumerator HammerIntro () {
 		_arrowSequenceStep = 4;
 		_tvImage.material = lBracket;
-		_tvText.text = "";
+        
         if (isEnglish == true)
         {
+            _tvText.transform.localScale = new Vector3(0, 0, 0);
             _tvAudioSource.clip = _audioManager.hammerIntro;
             _tvAudioSource.Play();
             _hammerTarget1.SetActive(true);
@@ -654,6 +660,7 @@ public class sequenceManager : MonoBehaviour {
 
         if(isTurkish == true)
         {
+            _tvTextTr.transform.localScale = new Vector3(0, 0, 0);
             _tvAudioSource.clip = _audioManager.hammerIntroTr;
             _tvAudioSource.Play();
             _hammerTarget1.SetActive(true);

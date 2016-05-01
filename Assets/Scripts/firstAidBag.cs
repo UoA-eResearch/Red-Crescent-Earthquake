@@ -32,6 +32,7 @@ public class firstAidBag : MonoBehaviour {
        if(this.GetComponent<Rigidbody>().useGravity == false )
         {
             isCarried = true;
+            Destroy(this);
         }
 
         if (this.GetComponent<Rigidbody>().useGravity == true)

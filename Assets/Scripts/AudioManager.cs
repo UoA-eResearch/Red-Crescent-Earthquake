@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip triangularBandage;
     public AudioClip vaseIntro;
     public AudioClip getUnderTable;
-    public AudioClip holdOn;
+   // public AudioClip holdOn;
 
     // Audio for Hammer Sequence
     public AudioClip hammerIntro;
@@ -42,6 +42,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip rollBandageTr;
     public AudioClip alcoholWipesTr;
+    public AudioClip drawersCupboardsTr;
     public AudioClip firstAidBookTr;
     public AudioClip bandagesTr;
     public AudioClip safetyPinTr;
@@ -49,7 +50,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip triangularBandageTr;
     public AudioClip vaseIntroTr;
     public AudioClip getUnderTableTr;
-    public AudioClip holdOnTr;
+   // public AudioClip holdOnTr;
 
     public AudioClip hammerIntroTr;
     public AudioClip target1doneTr;

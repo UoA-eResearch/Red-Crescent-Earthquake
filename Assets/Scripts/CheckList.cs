@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class CheckList : MonoBehaviour
 {
     private firstAidBag _firstAidBag;
+    private Slippers _slippers;
 	private sequenceManager _sequenceManager;
 	private EarthquakeController _earthquakeController;
 	private circleUnderTable _circleUnderTable;
@@ -29,12 +30,14 @@ public class CheckList : MonoBehaviour
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.FindGameObjectWithTag("Door").GetComponent<DoorSequence>();
         _flashlight = GameObject.Find("FlashLight").GetComponent<FlashLight>();
-    PlayerPrefs.SetInt("bag", 0);
+        _slippers = GameObject.Find("SlippersPlaceHolder").GetComponent<Slippers>();
+
+        PlayerPrefs.SetInt("bag", 0);
         PlayerPrefs.SetInt("furniture", 0);
         PlayerPrefs.SetInt("cover", 0);
         PlayerPrefs.SetInt("levers", 0);
         PlayerPrefs.SetInt("heavy", 0);
-    
+        PlayerPrefs.SetInt("exit", 0);
     }
 
     // Use this for initialization
@@ -60,6 +63,7 @@ public class CheckList : MonoBehaviour
         CheckForHammerTargets();
         CheckForEarthquakeTasks();
         CheckLevers();
+        HeavyObjectsCheck();
         ExitCheck();
     }
 
@@ -103,7 +107,7 @@ public class CheckList : MonoBehaviour
 
     public void ExitCheck()
     {
-        if (_firstAidBag.isCarried == false && _flashlight.isCarried == false && _doorSequence.doorOpened == true)
+        if (_firstAidBag.isCarried == true && _flashlight.isCarried == true && _slippers.isCarried == true  && _doorSequence.doorOpened == true)
         {
             PlayerPrefs.SetInt("exit", 1);
         }
