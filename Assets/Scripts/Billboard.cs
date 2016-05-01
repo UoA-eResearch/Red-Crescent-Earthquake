@@ -25,6 +25,16 @@ public class Billboard : MonoBehaviour {
             GameObject.Find("furnitureTick").SetActive(false);
         }
 
+        if (PlayerPrefs.GetInt("heavyObj") == 1)
+        {
+            GameObject.Find("heavyObjectCross").SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("heavyObj") == 0)
+        {
+            GameObject.Find("heavyObjectTick").SetActive(false);
+        }
+
         if (PlayerPrefs.GetInt("cover") == 1)
         {
             GameObject.Find("coverCross").SetActive(false);

@@ -12,7 +12,8 @@ public class CheckList : MonoBehaviour
     private LeverController _leverController;
     private DoorSequence _doorSequence;
     private FlashLight _flashlight;
-    private holdTarget _holdTarget;
+    private VaseDestination _vaseDest;
+   // private holdTarget _holdTarget;
     public List<string> _CollectedItems;
     public bool allLeversOff = false;
     public bool earthquakeFinished = false;
@@ -26,17 +27,17 @@ public class CheckList : MonoBehaviour
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
 		_circleUnderTable = GameObject.Find("Circle Under Table").GetComponent<circleUnderTable>();
-		_holdTarget = GameObject.Find("Hold Target").GetComponent<holdTarget>();
+		//_holdTarget = GameObject.Find("Hold Target").GetComponent<holdTarget>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.FindGameObjectWithTag("Door").GetComponent<DoorSequence>();
         _flashlight = GameObject.Find("FlashLight").GetComponent<FlashLight>();
         _slippers = GameObject.Find("SlippersPlaceHolder").GetComponent<Slippers>();
-
+        _vaseDest = GameObject.Find("Vase Destination").GetComponent<VaseDestination>();
         PlayerPrefs.SetInt("bag", 0);
         PlayerPrefs.SetInt("furniture", 0);
         PlayerPrefs.SetInt("cover", 0);
         PlayerPrefs.SetInt("levers", 0);
-        PlayerPrefs.SetInt("heavy", 0);
+        PlayerPrefs.SetInt("heavyObj", 0);
         PlayerPrefs.SetInt("exit", 0);
     }
 
@@ -102,7 +103,10 @@ public class CheckList : MonoBehaviour
 
     public void HeavyObjectsCheck()
     {
-
+        if(_vaseDest.vaseMoved == true)
+        {
+            PlayerPrefs.SetInt("heavyObj", 1);
+        }
     }
 
     public void ExitCheck()

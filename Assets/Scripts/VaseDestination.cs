@@ -4,6 +4,7 @@ using System.Collections;
 public class VaseDestination : MonoBehaviour {
 
 	private sequenceManager _sequenceManager;
+    public bool vaseMoved = false;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,7 @@ public class VaseDestination : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.transform.name == "Vase 1") {
+            vaseMoved = true;
 			_sequenceManager._arrowSequenceStep = 8;
 		}
 	}
