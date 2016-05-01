@@ -229,7 +229,6 @@ public class sequenceManager : MonoBehaviour {
 		if (_arrowSequenceStep == 5) {					// never called?
 			Debug.Log("arrow sequence step 5 set... but why?");
 		}
-
 		if (_arrowSequenceStep == 6) {
 			// place Arrow over Vase
 			_arrow.SetActive(true);
@@ -241,14 +240,22 @@ public class sequenceManager : MonoBehaviour {
 				_arrowSequenceStep = 7;
 			}
 		}
-
-		if (_arrowSequenceStep == 8) {
-			// place Arrow at vase destination
-			// if vase enters destination, remove arrow and end sequence
-			// wait until called by Vase Destination
+		if (_arrowSequenceStep == 7) {
+			// don't do anything
+			// we are just waiting for User to put vase into destination trigger
 		}
-
-
+		if (_arrowSequenceStep == 8) {
+			// disable the arrow
+			_arrow.SetActive(false);
+			// start the earthquake
+			StopAllCoroutines();		
+			StartCoroutine(DropCoverHold());
+			_arrowSequenceStep = 9;
+		}
+		if (_arrowSequenceStep == 9) {
+			// do nothing
+			// we are finished with the arrow
+		}
 	}
 
 	public void VaseIntro () {					// called by bullseye.cs

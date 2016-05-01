@@ -8,7 +8,6 @@ public class VaseDestination : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
-		Debug.Log("seqMan on VaseDestination = " + _sequenceManager);
 	}
 	
 	// Update is called once per frame
@@ -18,7 +17,7 @@ public class VaseDestination : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.transform.name == "Vase 1") {
-			Debug.Log("Vase 1 entered trigger on Vase Destination");
+			_sequenceManager._arrowSequenceStep = 8;
 		}
 	}
 }
