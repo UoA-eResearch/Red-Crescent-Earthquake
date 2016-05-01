@@ -435,7 +435,7 @@ public class sequenceManager : MonoBehaviour {
         {
             _tvText.text = "first aid manual";
             _tvText.transform.localScale = new Vector3(0, 0, 0);
-            _tvTextTr.text = "ilk yardim kitapcigi";
+            _tvTextTr.text = "ilk yardim kitabi";
             _tvImage.material = firstAidBookImg;
             yield return new WaitForSeconds(1);
             _tvAudioSource.clip = _audioManager.drawersCupboardsTr;

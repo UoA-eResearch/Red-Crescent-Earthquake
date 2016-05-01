@@ -49,10 +49,16 @@ public class toMainScene : MonoBehaviour {
 
 		if (_triggered) {
             //this.GetComponent<ScreenFadeOut> ().enabled = true;
+            WaitForSeconds(10);
             GetComponent<SteamVR_LoadLevel>().enabled = true;
 			//StartCoroutine (StartFade ());
 		}
 	}
+
+    IEnumerator WaitForSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
 
 	IEnumerator StartFade(){
 	
