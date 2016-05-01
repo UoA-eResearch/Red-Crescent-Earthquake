@@ -236,11 +236,9 @@ public class sequenceManager : MonoBehaviour {
 			_arrow.transform.position = _vase.transform.position;
 			// if Vase moves, place Arrow at vase Destination
 			if (Vector3.Distance(_vase.transform.position, _vaseStartPosition) > 0.1f) {
-				//_arrowSequenceStep = 7;
-				Debug.Log("vase has moved far enough");
 				_arrow.transform.position = new Vector3(-12.3f, 1.5f, 2.5f);
 				_arrow.transform.Rotate(90f, 0f, 0f);
-				_arrowSequenceStep = 8;
+				_arrowSequenceStep = 7;
 			}
 		}
 
@@ -250,12 +248,7 @@ public class sequenceManager : MonoBehaviour {
 			// wait until called by Vase Destination
 		}
 
-		/*										from before the Vase sequence
-		if (_arrowSequenceStep == 6) {			// set by NextHammerTarget() when hammer hits 1st green circle
-			_arrow.SetActive(false);			// turn off the arrow.  we are done with it.
-			_arrowSequenceStep = 7;
-		}
-		*/
+
 	}
 
 	public void VaseIntro () {					// called by bullseye.cs
