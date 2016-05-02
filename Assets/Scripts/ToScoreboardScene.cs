@@ -25,9 +25,9 @@ public class ToScoreboardScene : MonoBehaviour
     {
         if (_earthquakeController.GetComponent<EarthquakeController>()._earthquakeSequenceFinished == true && _doorSequence.doorOpened == true)
         {
-            //this.GetComponent<ScreenFadeOut>().enabled = true;
-            this.GetComponent<SteamVR_LoadLevel>().enabled = true;
-            //StartCoroutine(StartFade());
+            this.GetComponent<ScreenFadeOut>().enabled = true;
+            
+            StartCoroutine(StartFade());
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class toMainScene : MonoBehaviour {
 
-	//public string _loadScene;
+	public string _loadScene;
 	public GameObject _earthquakeBookEN;
 	public GameObject _earthquakeBookTR;
 	private bool _triggered;
@@ -67,21 +67,25 @@ public class toMainScene : MonoBehaviour {
             introText.GetComponent<Text>().enabled = true;
             _earthquakeBookTR.GetComponent<NVRInteractableItem>().enabled = false;
             yield return new WaitForSeconds(10);
-            GetComponent<SteamVR_LoadLevel>().enabled = true;
+            this.GetComponent<ScreenFadeOut>().enabled = true;
+            //GetComponent<SteamVR_LoadLevel>().enabled = true;
+            StartCoroutine(StartFade());
         }
         if (bookTUR == true)
         {
             introTextTr.GetComponent<Text>().enabled = true;
             _earthquakeBookEN.GetComponent<NVRInteractableItem>().enabled = false;
             yield return new WaitForSeconds(10);
-            GetComponent<SteamVR_LoadLevel>().enabled = true;
+            this.GetComponent<ScreenFadeOut>().enabled = true;
+            //GetComponent<SteamVR_LoadLevel>().enabled = true;
+            StartCoroutine(StartFade());
         }
     }
 
-	/*IEnumerator StartFade(){
+	IEnumerator StartFade(){
 	
 		yield return new WaitForSeconds (_duration);
 
 		SceneManager.LoadScene (_loadScene);
-	}*/
+	}
 }
