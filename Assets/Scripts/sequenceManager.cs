@@ -61,7 +61,8 @@ public class sequenceManager : MonoBehaviour {
 	public Material lBracket;
 	public Material vaseImg;
 	public Material dropCoverHoldImg;
-	public Material gasElecSwitchImg;
+    public Material dropCoverHoldImgTr;
+    public Material gasElecSwitchImg;
 	public Material ExitImg;
 
 	// Hammer Targets
@@ -572,7 +573,7 @@ public class sequenceManager : MonoBehaviour {
             {
                 _quakeHasStarted = true;
                 _tvText.text = "";
-                _tvImage.material = dropCoverHoldImg; // turkish image will be here
+                _tvImage.material = dropCoverHoldImgTr; // turkish image will be here
                 _tvAudioSource.clip = _audioManager.getUnderTableTr;
                 _tvAudioSource.Play();
                 _redCircleUnderTable.SetActive(true);
