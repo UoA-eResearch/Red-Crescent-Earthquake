@@ -31,17 +31,19 @@ public class LanguageManager : MonoBehaviour
     {
         // added by Andrew
 		if (Input.GetKey(KeyCode.L)) {
-			PlayerPrefs.SetInt("english", 1);
+			PlayerPrefs.SetInt("turkish", 1);
 		}
 		// end of Andrew's addition
 
 		if(toMainSceneScript.bookENG == true)
         {
             PlayerPrefs.SetInt("english", 1);
+            //PlayerPrefs.SetInt("turkish", 0);
         }
         if(toMainSceneScript.bookTUR == true)
         {
             PlayerPrefs.SetInt("turkish", 1);
+            //PlayerPrefs.SetInt("english", 0);
         }
     }
 }
