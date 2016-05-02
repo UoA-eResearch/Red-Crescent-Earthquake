@@ -5,15 +5,20 @@ using System.Collections.Generic;
 public class CheckList : MonoBehaviour
 {
     private firstAidBag _firstAidBag;
-    private Slippers _slippers;
+    private GameObject _slippers;
 	private sequenceManager _sequenceManager;
 	private EarthquakeController _earthquakeController;
 	private circleUnderTable _circleUnderTable;
     private LeverController _leverController;
     private DoorSequence _doorSequence;
-    private FlashLight _flashlight;
+    private GameObject _flashlight;
+    public PickupBag _pickupBag;
+    public PickupSlippers _pickupSlippers;
+    public PickupTorch _pickupTorch;
     private VaseDestination _vaseDest;
-   // private holdTarget _holdTarget;
+    private bullseye _bullseye2;
+    private bullseye _bullseye4;
+    // private holdTarget _holdTarget;
     public List<string> _CollectedItems;
     public bool allLeversOff = false;
     public bool earthquakeFinished = false;
@@ -27,12 +32,15 @@ public class CheckList : MonoBehaviour
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
 		_circleUnderTable = GameObject.Find("Circle Under Table").GetComponent<circleUnderTable>();
+
 		//_holdTarget = GameObject.Find("Hold Target").GetComponent<holdTarget>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.FindGameObjectWithTag("Door").GetComponent<DoorSequence>();
-        _flashlight = GameObject.Find("FlashLight").GetComponent<FlashLight>();
-        _slippers = GameObject.Find("SlippersPlaceHolder").GetComponent<Slippers>();
+        _flashlight = GameObject.Find("FlashLight");
+        _slippers = GameObject.Find("SlippersPlaceHolder");
         _vaseDest = GameObject.Find("Vase Destination").GetComponent<VaseDestination>();
+        _bullseye2 = GameObject.Find("Hammer Target 2").GetComponent<bullseye>();
+        _bullseye4 = GameObject.Find("Hammer Target 4").GetComponent<bullseye>();
         PlayerPrefs.SetInt("bag", 0);
         PlayerPrefs.SetInt("furniture", 0);
         PlayerPrefs.SetInt("cover", 0);
@@ -85,7 +93,7 @@ public class CheckList : MonoBehaviour
 
 	private void CheckForHammerTargets()
 	{
-		if(_sequenceManager.isTarget1done == true && _sequenceManager.isTarget2done == true)
+		if(_bullseye2.hammerSequenceDone == true || _bullseye4.hammerSequenceDone == true)
 		{
             PlayerPrefs.SetInt("furniture", 1);
         }
@@ -111,7 +119,7 @@ public class CheckList : MonoBehaviour
 
     public void ExitCheck()
     {
-        if (_firstAidBag.isCarried == true && _flashlight.isCarried == true && _slippers.isCarried == true  && _doorSequence.doorOpened == true)
+        if (_pickupBag.pickedUp == true && _pickupSlippers.pickedUp == true && _pickupTorch.pickedUp == true  && _doorSequence.doorOpened == true)
         {
             PlayerPrefs.SetInt("exit", 1);
         }

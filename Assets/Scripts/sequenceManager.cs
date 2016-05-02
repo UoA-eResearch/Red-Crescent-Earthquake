@@ -18,9 +18,8 @@ public class sequenceManager : MonoBehaviour {
 	private bool _checkItem;
 	private string _itemName;
     private EarthquakeController _earthquakeController;
-    private GameObject _flashlight;
-    private GameObject _firstAidBag;
-    private GameObject _slippers;
+    public GameObject _flashlight;
+    public GameObject _slippers;
     private AudioManager _audioManager;
     private LeverController _leverController;
     private DoorSequence _doorSequence;
@@ -33,10 +32,13 @@ public class sequenceManager : MonoBehaviour {
 	public GameObject OpenBag;
 	public bool _headUnderTable;
 	public bool _handOnHoldTarget;
-	private GameObject _bagShiled;
+    public bool bagPicked = false;
+    public bool lightPicked = false;
+    public bool slippersPicked = false;
+    private GameObject _bagShiled;
 
-	// Audio for the TV
-	private AudioSource _tvAudioSource;
+    // Audio for the TV
+    private AudioSource _tvAudioSource;
 	
 	//Hammer sequence check
 	public bool isTarget1done = false;
@@ -74,6 +76,9 @@ public class sequenceManager : MonoBehaviour {
 	// for Arrow Sequence
 	private GameObject _arrow;
 	private Vector3 _rollBandageStartPos;
+    private Vector3 _torchStartPos;
+    private Vector3 _bagStartPos;
+    private Vector3 _slippersStartPos;
 	private Vector3 _bracketStartPosition;
 	public int _arrowSequenceStep = 0;  // return to private after testing.  Andrew.
 	private Transform _rollBandage;
@@ -84,6 +89,9 @@ public class sequenceManager : MonoBehaviour {
 	//private GameObject _vaseDestination;
 
 	void Start () {
+        _torchStartPos = _flashlight.transform.localPosition;
+        Debug.Log("Torch start pos: " + _torchStartPos);
+
 		_tvText = GameObject.Find("Dynamic GUI/TV Text").GetComponent<Text>();
         _tvTextTr = GameObject.Find("Dynamic GUI/TV Text Tr").GetComponent<Text>();
         _timerText = GameObject.Find("Dynamic GUI/Timer Text").GetComponent<Text>();
@@ -93,8 +101,7 @@ public class sequenceManager : MonoBehaviour {
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.Find("Door1").GetComponent<DoorSequence>();
         _audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
-        _firstAidBag = GameObject.Find("1st Aid Bag");
-        _flashlight = GameObject.Find("FlashLight");
+       // _flashlight = GameObject.Find("FlashLight");
         _slippers = GameObject.Find("SlippersPlaceHolder");
 		_bagShiled = GameObject.Find("Bag Shield");
 
@@ -149,6 +156,8 @@ public class sequenceManager : MonoBehaviour {
 			// hide TV timer
 			_timerRenderer.gameObject.SetActive(false);
 		}
+
+
 			
 		_timeString = string.Format("{0:0}:{1:00}", Mathf.Floor(_timeRemaining/60), _timeRemaining % 60);
 		if (_quakeHasStarted == false ) {
@@ -592,6 +601,11 @@ public class sequenceManager : MonoBehaviour {
 		}
 	}
 
+    IEnumerator WaitForSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
+
 	IEnumerator GasElecSwitches () {
         if (isEnglish == true)
         {
@@ -620,8 +634,7 @@ public class sequenceManager : MonoBehaviour {
 
 	public void ExitTime()
 	{
-        //1st aid bag is pickable now
-        _firstAidBag.GetComponent<NVRInteractableItem>().enabled = true;
+        //closed bag, flashlight and slippers are pickable now
         _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
         _slippers.GetComponent<NVRInteractableItem>().enabled = true;
 
@@ -640,8 +653,8 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.Play();
         }
 
+        
     }
-		
 
 	IEnumerator HammerIntro () {
 		_arrowSequenceStep = 4;

@@ -8,8 +8,7 @@ public class firstAidBag : MonoBehaviour {
 	public GameObject ParticleSuccess;
 	public GameObject ParticleSpawn;
 	public GameObject ParticleFailure;
-    public bool isCarried = false;
-
+    
 	//Audio
 	private AudioSource Success;
 	private AudioSource Failure;
@@ -29,16 +28,7 @@ public class firstAidBag : MonoBehaviour {
 
 	void Update ()
     {
-       if(this.GetComponent<Rigidbody>().useGravity == false )
-        {
-            isCarried = true;
-            Destroy(this);
-        }
-
-        if (this.GetComponent<Rigidbody>().useGravity == true)
-        {
-            isCarried = false;
-        }
+       
 	}
 
 

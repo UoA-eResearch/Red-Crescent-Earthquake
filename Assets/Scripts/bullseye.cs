@@ -8,7 +8,7 @@ public class bullseye : MonoBehaviour {
 	private sequenceManager sequenceManager;
 	public int nextStep;
 	public string _hammerOrBracket = "bracket" ;
-
+    public bool hammerSequenceDone = false;
 	// Particle
 	public GameObject ParticleSystemSuccess;
 
@@ -41,8 +41,10 @@ public class bullseye : MonoBehaviour {
 			// if one target is done, then this is the 2nd target... they're both done... call the next sequence
 			if (sequenceManager._hammerTarget2.activeSelf == false || sequenceManager._hammerTarget4.activeSelf == false) 
 			{
+                hammerSequenceDone = true;
 				// begin vase sequence
-				sequenceManager.VaseIntro();
+
+                sequenceManager.VaseIntro();
 			}
 
 			// disable this green bullseye
