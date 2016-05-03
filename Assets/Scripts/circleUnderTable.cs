@@ -9,6 +9,7 @@ public class circleUnderTable : MonoBehaviour {
 	private GameObject _greenCircle;
 	private sequenceManager _sequenceManager;
     private EarthquakeController _earthquakeController;
+    public bool _headUnderTable;
     public float durationOfStay;
 
 	// Particle System
@@ -30,24 +31,24 @@ public class circleUnderTable : MonoBehaviour {
         {
             if (_greenCircle.activeInHierarchy == true)
             {
-                durationOfStay += Time.deltaTime;
-                Debug.Log("Duration of stay: " + (int)durationOfStay);
+                //durationOfStay += Time.deltaTime;
+                //Debug.Log("Duration of stay: " + (int)durationOfStay);
             }
             else
             {
-                durationOfStay = 0.0f;
+                //durationOfStay = 0.0f;
             }
         }
     }
 
-	void OnTriggerStay (Collider other) {
+	void OnTriggerEnter (Collider other) {
 		if (other.name == "BullSkull") {
 			if (_redCircle.activeInHierarchy) 
 			{
 				_redCircle.SetActive(false);
 				_greenCircle.SetActive(true);
                 _sequenceManager._headUnderTable = true;	// is this bool called by another function? nothing in sequenceManager.
-
+                _headUnderTable = true;
 				ParticleSystemTable.SetActive(true);		// Particles On
 			}
 		}

@@ -22,6 +22,7 @@ public class CheckList : MonoBehaviour
     public List<string> _CollectedItems;
     public bool allLeversOff = false;
     public bool earthquakeFinished = false;
+    private bool _leversOK;
 
    
 
@@ -93,19 +94,30 @@ public class CheckList : MonoBehaviour
 
 	private void CheckForHammerTargets()
 	{
-		if(_bullseye2.hammerSequenceDone == true || _bullseye4.hammerSequenceDone == true)
-		{
+		//if(_bullseye2.hammerSequenceDone == true && _bullseye4.hammerSequenceDone == true)
+		//{
+        //    PlayerPrefs.SetInt("furniture", 1);
+       // }
+
+        if(GameObject.Find("Hammer").GetComponent<hammerCount>()._target1 && GameObject.Find("Hammer").GetComponent<hammerCount>()._target2)
+        {
             PlayerPrefs.SetInt("furniture", 1);
         }
+
 	}
 
     public void CheckLevers()
     {
         if(_leverController.electricityOff == true && _leverController.gasOff == true)
         {
+            _leversOK = true;
+            Debug.Log("leverOK");
+        }
+
+        if (_leversOK)
+        {
             PlayerPrefs.SetInt("levers", 1);
             allLeversOff = true;
-			_sequenceManager.ExitTime();
         }
     }
 
@@ -127,7 +139,7 @@ public class CheckList : MonoBehaviour
 
 	private void CheckForEarthquakeTasks()
 	{
-        if (_earthquakeController._earthquakeSequenceFinished == true && _circleUnderTable.durationOfStay >= _earthquakeController._shakeDuration)
+        if (_earthquakeController._earthquakeSequenceFinished == true && _circleUnderTable._headUnderTable)
 		{
 
             PlayerPrefs.SetInt("cover", 1);

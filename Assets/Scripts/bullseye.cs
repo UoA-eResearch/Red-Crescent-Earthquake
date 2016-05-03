@@ -36,16 +36,25 @@ public class bullseye : MonoBehaviour {
 		{
 			collision.transform.GetComponent<AudioSource>().Play();
 			Instantiate (ParticleSystemSuccess, this.transform.position + new Vector3 (0.1f, 0, 0), Quaternion.identity); // Calling Particle System
-			//sequenceManager.NextHammerTarget(nextStep);  necessary?
+                                                                                                                          //sequenceManager.NextHammerTarget(nextStep);  necessary?
 
-			// if one target is done, then this is the 2nd target... they're both done... call the next sequence
-			if (sequenceManager._hammerTarget2.activeSelf == false || sequenceManager._hammerTarget4.activeSelf == false) 
-			{
+            // if one target is done, then this is the 2nd target... they're both done... call the next sequence
+
+            if (GameObject.Find("Hammer").GetComponent<hammerCount>()._target1 && GameObject.Find("Hammer").GetComponent<hammerCount>()._target2)
+            {
                 hammerSequenceDone = true;
-				// begin vase sequence
+                // begin vase sequence
 
                 sequenceManager.VaseIntro();
-			}
+            }
+
+           // if (sequenceManager._hammerTarget2.activeSelf == false && sequenceManager._hammerTarget4.activeSelf == false) 
+			//{
+              //  hammerSequenceDone = true;
+				// begin vase sequence
+
+               // sequenceManager.VaseIntro();
+			//}
 
 			// disable this green bullseye
 			transform.gameObject.SetActive(false);

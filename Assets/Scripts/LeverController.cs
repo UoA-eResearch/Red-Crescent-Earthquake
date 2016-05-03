@@ -27,9 +27,10 @@ public class LeverController : MonoBehaviour {
         {
             electricityOff = true;
         }
+
         else
         {
-            electricityOff = false;
+            //electricityOff = false;
         }
 
         if (gasAxle.transform.rotation.z < -0.4)
@@ -38,7 +39,7 @@ public class LeverController : MonoBehaviour {
         }
         else
         {
-            gasOff = false;
+            //gasOff = false;
         }
     }
 }

@@ -36,6 +36,7 @@ public class sequenceManager : MonoBehaviour {
     public bool lightPicked = false;
     public bool slippersPicked = false;
     private GameObject _bagShiled;
+    private bool _exitOn = false;
 
     // Audio for the TV
     private AudioSource _tvAudioSource;
@@ -190,11 +191,16 @@ public class sequenceManager : MonoBehaviour {
 			StopAllCoroutines();
             _earthquakeController._earthquakeSequenceFinished = true;
 			ExitTime();
-		}
-			
+		} 
 
-		ArrowSequence();
+
+        ArrowSequence();
         StartLeverSequence();
+
+        if (_leverController.gasOff == true && _leverController.electricityOff == true && _exitOn == false)
+        {
+            StartCoroutine(ExitTime());
+        }
 	} // end of Update()
 
     public void LanguageCheck()
@@ -595,7 +601,7 @@ public class sequenceManager : MonoBehaviour {
             }
 
 			_earthquakeController.StartQuake();
-			yield return new WaitForSeconds(50);
+			yield return new WaitForSeconds(40);
 			Debug.Log("quake has ended");
 			StartCoroutine (GasElecSwitches());
 		}
@@ -632,28 +638,37 @@ public class sequenceManager : MonoBehaviour {
         }
 	}
 
-	public void ExitTime()
+
+    IEnumerator ExitTime()
 	{
-        //closed bag, flashlight and slippers are pickable now
-        _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
-        _slippers.GetComponent<NVRInteractableItem>().enabled = true;
-
-        if (isEnglish == true)
-        {
-            _tvImage.material = ExitImg;
-            _tvAudioSource.clip = _audioManager.ExitAudio;
-            _tvAudioSource.Play();
-
-        }
-
-        if(isTurkish == true)
-        {
-            _tvImage.material = ExitImg;
-            _tvAudioSource.clip = _audioManager.ExitAudioTr;
-            _tvAudioSource.Play();
-        }
-
         
+            Debug.Log("exittimeEnter");
+            //closed bag, flashlight and slippers are pickable now
+            _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
+            _slippers.GetComponent<NVRInteractableItem>().enabled = true;
+            ClosedBag.GetComponent<NVRInteractableItem>().enabled = true;
+            _tvImage.material = ExitImg;
+            _exitOn = true;
+
+            if (isEnglish == true)
+            {
+
+
+                _tvAudioSource.clip = _audioManager.ExitAudio;
+                _tvAudioSource.Play();
+
+            }
+
+            if (isTurkish == true)
+            {
+
+
+                _tvAudioSource.clip = _audioManager.ExitAudioTr;
+                _tvAudioSource.Play();
+            }
+        
+
+        yield return null;
     }
 
 	IEnumerator HammerIntro () {
