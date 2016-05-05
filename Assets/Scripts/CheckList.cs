@@ -99,7 +99,7 @@ public class CheckList : MonoBehaviour
         //    PlayerPrefs.SetInt("furniture", 1);
        // }
 
-        if(GameObject.Find("Hammer").GetComponent<hammerCount>()._target1 && GameObject.Find("Hammer").GetComponent<hammerCount>()._target2)
+        if(GameObject.FindGameObjectWithTag("Hammer").GetComponent<hammerCount>()._target1 && GameObject.FindGameObjectWithTag("Hammer").GetComponent<hammerCount>()._target2)
         {
             PlayerPrefs.SetInt("furniture", 1);
         }

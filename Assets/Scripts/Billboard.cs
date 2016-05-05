@@ -94,39 +94,4 @@ public class Billboard : MonoBehaviour {
             Debug.Log("turkish");
         }
     }
-	
-	void CheckImageLanguage ()
-    {
-	    
-
-        /*if (PlayerPrefs.GetInt("english") == 0)
-        {
-            GameObject.Find("FirstAidBagStatic").SetActive(false);
-            GameObject.Find("SecureFurnitureStatic").SetActive(false);
-            GameObject.Find("HeavyObjectsStatic").SetActive(false);
-            GameObject.Find("DropCoverStatic").SetActive(false);
-            GameObject.Find("GasElecStatic").SetActive(false);
-            GameObject.Find("ExitStatic").SetActive(false);
-        }*/
-
-        if (PlayerPrefs.GetInt("turkish") == 1)
-        {
-            GameObject.Find("FirstAidBagStatic").SetActive(false);
-            GameObject.Find("SecureFurnitureStatic").SetActive(false);
-            GameObject.Find("HeavyObjectsStatic").SetActive(false);
-            GameObject.Find("DropCoverStatic").SetActive(false);
-            GameObject.Find("GasElecStatic").SetActive(false);
-            GameObject.Find("ExitStatic").SetActive(false);
-        }
-
-       /* if (PlayerPrefs.GetInt("turkish") == 0)
-        {
-            GameObject.Find("FirstAidBagStaticTr").SetActive(false);
-            GameObject.Find("SecureFurnitureStaticTr").SetActive(false);
-            GameObject.Find("HeavyObjectsStaticTr").SetActive(false);
-            GameObject.Find("DropCoverStaticTr").SetActive(false);
-            GameObject.Find("GasElecStaticTr").SetActive(false);
-            GameObject.Find("ExitStaticTr").SetActive(false);
-        }*/
-    }
 }

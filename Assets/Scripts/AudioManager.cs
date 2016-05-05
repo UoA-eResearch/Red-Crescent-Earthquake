@@ -23,10 +23,10 @@ public class AudioManager : MonoBehaviour
 
     // Audio for Hammer Sequence
     public AudioClip hammerIntro;
-    public AudioClip target1done;
-    public AudioClip target2done;
+   // public AudioClip target1done;
+   // public AudioClip target2done;
     public AudioClip topCorner;
-    public AudioClip bracket1done;
+   // public AudioClip bracket1done;
     public AudioClip bracket2done;
 
     // For Gas & Exit Sequence

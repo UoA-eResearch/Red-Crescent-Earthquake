@@ -40,7 +40,7 @@ public class bullseye : MonoBehaviour {
 
             // if one target is done, then this is the 2nd target... they're both done... call the next sequence
 
-            if (GameObject.Find("Hammer").GetComponent<hammerCount>()._target1 && GameObject.Find("Hammer").GetComponent<hammerCount>()._target2)
+            if (GameObject.FindGameObjectWithTag("Hammer").GetComponent<hammerCount>()._target1 && GameObject.FindGameObjectWithTag("Hammer").GetComponent<hammerCount>()._target2)
             {
                 hammerSequenceDone = true;
                 // begin vase sequence
