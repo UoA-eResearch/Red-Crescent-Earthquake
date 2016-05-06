@@ -145,8 +145,11 @@ namespace NewtonVR
            
             else if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == true)
             {
-                topCupboard.GetComponent<Rigidbody>().isKinematic = false;
-                leftCupboard.GetComponent<Rigidbody>().isKinematic = false;
+                if (topCupboard != null && leftCupboard != null)
+                {
+                    topCupboard.GetComponent<Rigidbody>().isKinematic = false;
+                    leftCupboard.GetComponent<Rigidbody>().isKinematic = false;
+                }
 
                 if (CurrentHandState != HandState.GripDownInteracting && VisibilityLocked == false)
                 {

@@ -65,20 +65,4 @@ public class AudioManager : MonoBehaviour
 
     public List<AudioClip> noAudioTr = new List<AudioClip>();
     public List<AudioClip> yesAudioTr = new List<AudioClip>();
-
-
-
-
-
-
-
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
