@@ -15,12 +15,26 @@ public class EarthquakeController : MonoBehaviour {
 	// Room Events Objects
 
 	public GameObject Picture;
+    public GameObject Picture2;
 	public GameObject Plant;
 	public GameObject Lamp;
 	public GameObject Mirror;
 	public GameObject Vase;
 	public GameObject Lamp1;
 	public GameObject Lamp2;
+    public GameObject SmallVase;
+    public GameObject SmallVase2;
+    public GameObject ShellObj;
+    public GameObject Plant2Obj;
+    public GameObject TopVase1;
+    public GameObject TopVase2;
+    public GameObject GoldVase1;
+    public GameObject GoldVase2;
+    public GameObject CoffeeCup1;
+    public GameObject CoffeeCup2;
+    public GameObject Sculpture1;
+    public GameObject Sculpture2;
+    public GameObject PicSet;
 
 	// camera shake effect
 	private Transform _cameraToShake;
@@ -106,11 +120,25 @@ public class EarthquakeController : MonoBehaviour {
 		// Room Events
 
 		Invoke ("PictureFall", 5);
-		Invoke ("MirrorFall", 7);
+        Invoke("TopVase1Fall", 4);
+        Invoke("TopVase2Fall", 5);
+        Invoke("Coffee1Fall", 2);
+        Invoke("Coffee2Fall", 3);
+        Invoke("Sculpture1Fall", 9);
+        Invoke("Sculpture2Fall", 7);
+        Invoke("GoldVase1Fall", 14);
+        Invoke("GoldVase2Fall", 13);
+        Invoke("Picture2Fall", 11);
+        Invoke("PicSetFall", 7);
+        Invoke ("MirrorFall", 7);
 		Invoke ("PlantFall", 8);
 		Invoke ("LampFall", 10);
-		Invoke ("VaseFall", 3);
-		Invoke ("Lamps", 1);
+        Invoke("SmallVaseFall", 4);
+        Invoke("SmallVase2Fall", 2);
+        Invoke("Shell", 6);
+        Invoke ("VaseFall", 3);
+        Invoke("Plant2Fall", 9);
+        Invoke ("Lamps", 1);
 	}
 
 	IEnumerator QuakeSequence () {
@@ -154,7 +182,12 @@ public class EarthquakeController : MonoBehaviour {
 		Picture.GetComponent<Rigidbody>().useGravity = true;
 	}
 
-	void MirrorFall()
+    void Picture2Fall()
+    {
+        Picture2.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    void MirrorFall()
 	{
 		Mirror.GetComponent<Rigidbody>().useGravity = true;
 	}
@@ -169,12 +202,77 @@ public class EarthquakeController : MonoBehaviour {
 		Lamp.GetComponent<Rigidbody>().AddForce (new Vector3 (0, 0, 1.5f), ForceMode.Impulse);
 	}
 
-	void VaseFall()
+    void SmallVaseFall()
+    {
+        SmallVase.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 1.5f), ForceMode.Impulse);
+    }
+
+    void SmallVase2Fall()
+    {
+        SmallVase2.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -1f), ForceMode.Impulse);
+    }
+
+    void VaseFall()
 	{
-		Vase.GetComponent<Rigidbody>().AddForce (new Vector3 (1.5f, 0, 0), ForceMode.Impulse);
+		//Vase.GetComponent<Rigidbody>().AddForce (new Vector3 (0.1f, 0, 0), ForceMode.Impulse);
 	}
 
-	void Lamps()
+    void Shell()
+    {
+        ShellObj.GetComponent<Rigidbody>().AddForce(new Vector3(-1.5f, 0, 0), ForceMode.Impulse);
+    }
+
+    void Plant2Fall()
+    {
+        Plant2Obj.GetComponent<Rigidbody>().AddForce(new Vector3(-1.5f, 0, 0), ForceMode.Impulse);
+    }
+
+    void TopVase1Fall()
+    {
+        TopVase1.GetComponent<Rigidbody>().AddForce(new Vector3(1f, 0, 0), ForceMode.Impulse);
+    }
+
+    void TopVase2Fall()
+    {
+        TopVase2.GetComponent<Rigidbody>().AddForce(new Vector3(1f, 0, 0), ForceMode.Impulse);
+    }
+
+    void GoldVase1Fall()
+    {
+        GoldVase1.GetComponent<Rigidbody>().AddForce(new Vector3(1.5f, -0.2f, 0), ForceMode.Impulse);
+    }
+
+    void GoldVase2Fall()
+    {
+        GoldVase2.GetComponent<Rigidbody>().AddForce(new Vector3(-1.5f, 0.2f, 0), ForceMode.Impulse);
+    }
+
+    void Coffee1Fall()
+    {
+        CoffeeCup1.GetComponent<Rigidbody>().AddForce(new Vector3(1.5f, 0.2f, 0), ForceMode.Impulse);
+    }
+
+    void Coffee2Fall()
+    {
+        CoffeeCup2.GetComponent<Rigidbody>().AddForce(new Vector3(1.5f, -0.2f, 0), ForceMode.Impulse);
+    }
+
+    void Sculpture1Fall()
+    {
+        Sculpture1.GetComponent<Rigidbody>().AddForce(new Vector3(1.5f, -0.2f, 0), ForceMode.Impulse);
+    }
+
+    void Sculpture2Fall()
+    {
+        Sculpture2.GetComponent<Rigidbody>().AddForce(new Vector3(1.5f, -0.2f, 0), ForceMode.Impulse);
+    }
+
+    void PicSetFall()
+    {
+        PicSet.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+    void Lamps()
 	{
 		Lamp1.GetComponent<LampSwing1>().Lamp1Go();
 		Lamp2.GetComponent<LampSwing2>().Lamp2Go();
