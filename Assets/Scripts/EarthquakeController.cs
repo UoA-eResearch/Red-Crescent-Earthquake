@@ -22,6 +22,8 @@ public class EarthquakeController : MonoBehaviour {
 	public GameObject Vase;
 	public GameObject Lamp1;
 	public GameObject Lamp2;
+	public GameObject Door1;
+	public GameObject Door2;
     public GameObject SmallVase;
     public GameObject SmallVase2;
     public GameObject ShellObj;
@@ -35,6 +37,12 @@ public class EarthquakeController : MonoBehaviour {
     public GameObject Sculpture1;
     public GameObject Sculpture2;
     public GameObject PicSet;
+    public GameObject CrackObj;
+    public GameObject TVHinge;
+    public GameObject ShelfVase1;
+    public GameObject ShelfVase2;
+    public GameObject ShelfPlant;
+    public GameObject Chandelier;
 
 	// camera shake effect
 	private Transform _cameraToShake;
@@ -139,6 +147,13 @@ public class EarthquakeController : MonoBehaviour {
         Invoke ("VaseFall", 3);
         Invoke("Plant2Fall", 9);
         Invoke ("Lamps", 1);
+        Invoke ("Crack", 15);
+		Invoke ("TVHingeFall", 12);
+		Invoke ("ShelfVase1Fall", 10);
+		Invoke ("ShelfVase2Fall", 11);
+		Invoke ("ShelfPlantFall", 12);
+		Invoke ("ChandelierFall", 15);
+		Invoke ("DoorSwing", 1);
 	}
 
 	IEnumerator QuakeSequence () {
@@ -209,7 +224,7 @@ public class EarthquakeController : MonoBehaviour {
 
     void SmallVase2Fall()
     {
-        SmallVase2.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -1f), ForceMode.Impulse);
+        SmallVase2.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -1.2f), ForceMode.Impulse);
     }
 
     void VaseFall()
@@ -220,6 +235,11 @@ public class EarthquakeController : MonoBehaviour {
     void Shell()
     {
         ShellObj.GetComponent<Rigidbody>().AddForce(new Vector3(-1.5f, 0, 0), ForceMode.Impulse);
+    }
+
+	void ChandelierFall()
+    {
+		Chandelier.AddComponent<Rigidbody>(); 
     }
 
     void Plant2Fall()
@@ -267,15 +287,46 @@ public class EarthquakeController : MonoBehaviour {
         Sculpture2.GetComponent<Rigidbody>().AddForce(new Vector3(1.5f, -0.2f, 0), ForceMode.Impulse);
     }
 
+	void ShelfVase1Fall()
+    {
+        ShelfVase1.GetComponent<Rigidbody>().AddForce(new Vector3(0.9f, -0.2f, 0), ForceMode.Impulse);
+    }
+
+	void ShelfVase2Fall()
+    {
+        ShelfVase2.GetComponent<Rigidbody>().AddForce(new Vector3(1f, 0.2f, 0), ForceMode.Impulse);
+    }
+
+	void ShelfPlantFall()
+    {
+        ShelfPlant.GetComponent<Rigidbody>().AddForce(new Vector3(1.1f, -0.2f, 0), ForceMode.Impulse);
+    }
+
     void PicSetFall()
     {
         PicSet.GetComponent<Rigidbody>().useGravity = true;
+    }
+
+	void Crack()
+    {
+        CrackObj.SetActive(true);
+    }
+
+	void TVHingeFall ()
+    {
+        TVHinge.SetActive(false);
     }
 
     void Lamps()
 	{
 		Lamp1.GetComponent<LampSwing1>().Lamp1Go();
 		Lamp2.GetComponent<LampSwing2>().Lamp2Go();
+	}
+
+	void DoorSwing()
+	{
+		Door1.GetComponent<DoorSwing1>().DoorSwing1Go();
+		Door2.GetComponent<DoorSwing2>().DoorSwing2Go();
 	}
 
 
