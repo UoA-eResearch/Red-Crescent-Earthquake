@@ -9,6 +9,8 @@ public class sequenceManager : MonoBehaviour {
 	private Text _tvText;
     private Text _tvTextTr;
 	private Text _timerText;
+    public Text _curtainText;
+    public Text _curtainTextTr;
 	private string _timeString;
 	private float _timerStart;
 	private float _timeRemaining;
@@ -185,13 +187,22 @@ public class sequenceManager : MonoBehaviour {
 			StopAllCoroutines();
 			StartCoroutine(HammerIntro());
 		}
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            StopAllCoroutines();
+            _earthquakeController._earthquakeSequenceFinished = true;
+            StartLeverSequence();
+            StartCoroutine(GasElecSwitches());
+
+        }
 		// SHORTCUT FOR EXIT SEQUENCE
 		if (Input.GetKeyDown(KeyCode.X)) 
 		{
 			StopAllCoroutines();
             _earthquakeController._earthquakeSequenceFinished = true;
-			ExitTime();
-		} 
+            StartCoroutine(ExitTime());
+        } 
 
 
         ArrowSequence();
@@ -604,8 +615,22 @@ public class sequenceManager : MonoBehaviour {
 			yield return new WaitForSeconds(40);
 			Debug.Log("quake has ended");
 			StartCoroutine (GasElecSwitches());
+            StartCurtainGUI();
 		}
 	}
+
+    public void StartCurtainGUI()
+    {
+        if(isEnglish == true)
+        {
+            _curtainText.enabled = true;
+        }
+
+        if(isTurkish == true)
+        {
+            _curtainTextTr.enabled = true;
+        }
+    }
 
     IEnumerator WaitForSeconds(float time)
     {
