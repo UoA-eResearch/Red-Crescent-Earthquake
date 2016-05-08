@@ -49,6 +49,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip scissorsTr;
     public AudioClip triangularBandageTr;
     public AudioClip vaseIntroTr;
+    public AudioClip vaseIntro2Tr;
     public AudioClip getUnderTableTr;
    // public AudioClip holdOnTr;
 

@@ -45,7 +45,7 @@ public class bullseye : MonoBehaviour {
                 hammerSequenceDone = true;
                 // begin vase sequence
 
-                sequenceManager.VaseIntro();
+                StartCoroutine(sequenceManager.VaseIntro());
             }
 
            // if (sequenceManager._hammerTarget2.activeSelf == false && sequenceManager._hammerTarget4.activeSelf == false) 
