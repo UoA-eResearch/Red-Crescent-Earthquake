@@ -14,6 +14,7 @@ public class EarthquakeController : MonoBehaviour {
 
 	// Room Events Objects
 
+	[Header("Earthquake Affected Objects")]
 	public GameObject Picture;
     public GameObject Picture2;
 	public GameObject Plant;
@@ -43,6 +44,15 @@ public class EarthquakeController : MonoBehaviour {
     public GameObject ShelfVase2;
     public GameObject ShelfPlant;
     public GameObject Chandelier;
+    public GameObject EarthquakeAudio2;
+
+	[Header("Glass Breaking from Windows")]
+	public GameObject GlassLeft;
+	public GameObject GlassMiddle1;
+	public GameObject GlassMiddle2;
+	public GameObject GlassMiddle3;
+	public GameObject GlassMiddle4;
+	public GameObject GlassRight;
 
 	// camera shake effect
 	private Transform _cameraToShake;
@@ -128,6 +138,7 @@ public class EarthquakeController : MonoBehaviour {
 		// Room Events
 
 		Invoke ("PictureFall", 5);
+		Invoke ("EarthquakeAudioTwo", 1);
         Invoke("TopVase1Fall", 4);
         Invoke("TopVase2Fall", 5);
         Invoke("Coffee1Fall", 2);
@@ -154,6 +165,15 @@ public class EarthquakeController : MonoBehaviour {
 		Invoke ("ShelfPlantFall", 12);
 		Invoke ("ChandelierFall", 15);
 		Invoke ("DoorSwing", 1);
+
+		// Glass Breaking
+		Invoke ("GlassBreakLeft", 5);
+		Invoke ("GlassBreak1", 8);
+		Invoke ("GlassBreak2", 9);
+		Invoke ("GlassBreak3", 10);
+		Invoke ("GlassBreak4", 7);
+		Invoke ("GlassBreakRight", 12);
+
 	}
 
 	IEnumerator QuakeSequence () {
@@ -329,5 +349,41 @@ public class EarthquakeController : MonoBehaviour {
 		Door2.GetComponent<DoorSwing2>().DoorSwing2Go();
 	}
 
+	// GLASS BREAKING
+
+	void GlassBreakLeft()
+	{
+	GlassLeft.SetActive(true);
+	}
+
+	void GlassBreak1()
+	{
+	GlassMiddle1.SetActive(true);
+	}
+
+	void GlassBreak2()
+	{
+	GlassMiddle2.SetActive(true);
+	}
+
+	void GlassBreak3()
+	{
+	GlassMiddle3.SetActive(true);
+	}
+
+	void GlassBreak4()
+	{
+	GlassMiddle4.SetActive(true);
+	}
+
+	void GlassBreakRight()
+	{
+	GlassRight.SetActive(true);
+	}
+
+	void EarthquakeAudioTwo()
+	{
+	EarthquakeAudio2.SetActive(true);
+	}
 
 }
