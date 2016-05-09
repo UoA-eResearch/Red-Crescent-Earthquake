@@ -173,7 +173,7 @@ public class sequenceManager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.V))
 		{
 			StopAllCoroutines();		
-			StartCoroutine(VaseIntro());
+			VaseIntro();
 		}
 		// SHORTCUT FOR EARTHQUAKE SEQUENCE
 		if (Input.GetKeyDown(KeyCode.Space))
@@ -287,7 +287,7 @@ public class sequenceManager : MonoBehaviour {
 		}
 	}
 
-	public IEnumerator  VaseIntro () {					// called by bullseye.cs
+	public void VaseIntro () {					// called by bullseye.cs
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
         if (isEnglish == true)
@@ -304,9 +304,7 @@ public class sequenceManager : MonoBehaviour {
 			_tvImage.material = vaseImg;
             _tvAudioSource.clip = _audioManager.vaseIntroTr;
             _tvAudioSource.Play();
-            yield return new WaitForSeconds(_audioManager.vaseIntroTr.length);
-            _tvAudioSource.clip = _audioManager.vaseIntro2Tr;
-            _tvAudioSource.Play();
+           
         }
 		_arrowSequenceStep = 6;
 	}

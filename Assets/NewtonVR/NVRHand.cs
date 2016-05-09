@@ -47,6 +47,7 @@ namespace NewtonVR
 
         private GameObject topCupboard;
         private GameObject leftCupboard;
+        private GameObject television;
 
         private int DeviceIndex = -1;
 
@@ -73,6 +74,7 @@ namespace NewtonVR
             CurrentlyHoveringOver = new Dictionary<NVRInteractable, Dictionary<Collider, float>>();
             topCupboard = GameObject.FindGameObjectWithTag("TopCupboard");
             leftCupboard = GameObject.FindGameObjectWithTag("LeftCupboard");
+            television = GameObject.FindGameObjectWithTag("Tv");
             LastPositions = new Vector3[EstimationSamples];
             LastRotations = new Quaternion[EstimationSamples];
             LastDeltas = new float[EstimationSamples];
@@ -145,7 +147,7 @@ namespace NewtonVR
            
             else if (HoldButtonDown == true || UseButtonDown == true && IsInteracting == true)
             {
-                if (topCupboard != null && leftCupboard != null)
+                if (topCupboard != null && leftCupboard != null )
                 {
                     topCupboard.GetComponent<Rigidbody>().isKinematic = false;
                     leftCupboard.GetComponent<Rigidbody>().isKinematic = false;
