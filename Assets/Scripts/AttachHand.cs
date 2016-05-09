@@ -8,7 +8,7 @@ public class AttachHand : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        transform.localPosition = new Vector3(0, -1.33f, -5.83f);
+        transform.localPosition = new Vector3(0, 3.42f, -14.85f);
     }
 	
 	// Update is called once per frame

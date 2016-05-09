@@ -58,8 +58,8 @@ public class circleUnderTable : MonoBehaviour {
 		if (other.name == "BullSkull") {
 			if (_greenCircle.activeInHierarchy) 
 			{
-				_greenCircle.SetActive(false);
-				_redCircle.SetActive(true);
+				//_greenCircle.SetActive(false);
+				//_redCircle.SetActive(true);
 
 				ParticleSystemTable.SetActive(false);		// Particles off
 			}

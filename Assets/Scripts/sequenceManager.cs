@@ -671,8 +671,14 @@ public class sequenceManager : MonoBehaviour {
 	{
         
             Debug.Log("exittimeEnter");
-            //closed bag, flashlight and slippers are pickable now
-            _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
+        GameObject.Find("Arrow flashlight").GetComponentInChildren<MeshRenderer>().enabled = true;
+        GameObject.Find("Arrow slippers").GetComponentInChildren<MeshRenderer>().enabled = true;
+        GameObject.Find("Arrow bag").GetComponentInChildren<MeshRenderer>().enabled = true;
+
+
+
+        //closed bag, flashlight and slippers are pickable now
+        _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
             _slippers.GetComponent<NVRInteractableItem>().enabled = true;
             ClosedBag.GetComponent<NVRInteractableItem>().enabled = true;
             _tvImage.material = ExitImg;
