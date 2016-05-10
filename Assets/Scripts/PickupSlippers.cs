@@ -8,12 +8,16 @@ public class PickupSlippers : MonoBehaviour {
     private AudioSource Success;
     public GameObject ParticleSpawn;
     public GameObject ParticleSuccess;
+    public GameObject slippersDestroyCollider;
 
     public void Start()
     {
         Success = GameObject.Find("SuccessSound").GetComponent<AudioSource>();
     }
-    public void OnTriggerExit(Collider other)
+
+   
+
+    public void OnTriggerEnter(Collider other)
     {
         if (other.name == "SlippersPlaceHolder")
         {
@@ -23,5 +27,17 @@ public class PickupSlippers : MonoBehaviour {
             Instantiate(ParticleSuccess, ParticleSpawn.transform.position, Quaternion.identity);
             Success.Play();
         }
+
+  /* if (other.name == "slippersCollider")
+        {
+            pickedUp = true;
+            _slippers.SetActive(false);
+
+            Instantiate(ParticleSuccess, ParticleSpawn.transform.position, Quaternion.identity);
+            Success.Play();
+        } */
+
     }
+
+    
 }

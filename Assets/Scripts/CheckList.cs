@@ -13,6 +13,7 @@ public class CheckList : MonoBehaviour
     private DoorSequence _doorSequence;
     private GameObject _flashlight;
     public PickupBag _pickupBag;
+    private destroyItselfSlippers _wearSlippers;
     public PickupSlippers _pickupSlippers;
     public PickupTorch _pickupTorch;
     private VaseDestination _vaseDest;
@@ -33,7 +34,6 @@ public class CheckList : MonoBehaviour
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
 		_earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
 		_circleUnderTable = GameObject.Find("Circle Under Table").GetComponent<circleUnderTable>();
-
 		//_holdTarget = GameObject.Find("Hold Target").GetComponent<holdTarget>();
         _leverController = GameObject.Find("Levers").GetComponent<LeverController>();
         _doorSequence = GameObject.FindGameObjectWithTag("Door").GetComponent<DoorSequence>();
@@ -131,7 +131,7 @@ public class CheckList : MonoBehaviour
 
     public void ExitCheck()
     {
-        if (_pickupBag.pickedUp == true && _pickupSlippers.pickedUp == true && _pickupTorch.pickedUp == true  && _doorSequence.doorOpened == true)
+        if (_pickupBag.pickedUp == true && _pickupTorch.pickedUp == true && _slippers.GetComponent<destroyItselfSlippers>().pickedUp == true  && _doorSequence.doorOpened == true)
         {
             PlayerPrefs.SetInt("exit", 1);
         }

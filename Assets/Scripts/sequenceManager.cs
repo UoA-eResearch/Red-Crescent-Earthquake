@@ -92,6 +92,7 @@ public class sequenceManager : MonoBehaviour {
 	//private GameObject _vaseDestination;
 
 	void Start () {
+        GameObject.Find("SlippersPlaceHolder").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         _torchStartPos = _flashlight.transform.localPosition;
         Debug.Log("Torch start pos: " + _torchStartPos);
 
@@ -193,7 +194,7 @@ public class sequenceManager : MonoBehaviour {
             StopAllCoroutines();
             _earthquakeController._earthquakeSequenceFinished = true;
             StartLeverSequence();
-            StartCoroutine(GasElecSwitches());
+            //GasElecSwitches();
 
         }
 		// SHORTCUT FOR EXIT SEQUENCE
@@ -233,7 +234,7 @@ public class sequenceManager : MonoBehaviour {
 			_arrow.transform.position = _rollBandage.position;
 			_arrowSequenceStep = 2;											// wait until player moves roll bandage
 		}
-		if (_arrowSequenceStep == 2 && _arrow.activeSelf == true) {
+		if (_arrowSequenceStep == 2 && _arrow.activeSelf == true && _rollBandage != null) {
 			// check if roll bandage has moved 
 			if (Vector3.Distance(_rollBandage.position, _rollBandageStartPos) > 0.1f) {
 				// move arrow to bag
@@ -362,7 +363,9 @@ public class sequenceManager : MonoBehaviour {
         if(_earthquakeController._earthquakeSequenceFinished == true)
         {
             _leverController.enabled = true;
-            Debug.Log("LEVERL SEQUENCE ACTIVE");
+            //Debug.Log("LEVERL SEQUENCE ACTIVE");
+            //GasElecSwitches();
+
         }
     }
 
@@ -613,9 +616,9 @@ public class sequenceManager : MonoBehaviour {
             }
 
 			_earthquakeController.StartQuake();
-			yield return new WaitForSeconds(40);
+			yield return new WaitForSeconds(37);
 			Debug.Log("quake has ended");
-			StartCoroutine (GasElecSwitches());
+			GasElecSwitches();
             StartCurtainGUI();
 		}
 	}
@@ -638,7 +641,7 @@ public class sequenceManager : MonoBehaviour {
         yield return new WaitForSeconds(time);
     }
 
-	IEnumerator GasElecSwitches () {
+	public void GasElecSwitches () {
         if (isEnglish == true)
         {
             _tvImage.material = gasElecSwitchImg;
@@ -648,7 +651,7 @@ public class sequenceManager : MonoBehaviour {
             _holdTarget.SetActive(false);
             _greenCircleUnderTable.SetActive(false);
             _redCircleUnderTable.SetActive(false);
-            yield return null;
+            
         }
 
         if(isTurkish == true)
@@ -660,7 +663,7 @@ public class sequenceManager : MonoBehaviour {
             _holdTarget.SetActive(false);
             _greenCircleUnderTable.SetActive(false);
             _redCircleUnderTable.SetActive(false);
-            yield return null;
+            
         }
 	}
 
@@ -669,16 +672,23 @@ public class sequenceManager : MonoBehaviour {
 	{
         
             Debug.Log("exittimeEnter");
+        GameObject.Find("SlippersPlaceHolder").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("SlippersPlaceHolder").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         GameObject.Find("Arrow flashlight").GetComponentInChildren<MeshRenderer>().enabled = true;
+
         GameObject.Find("Arrow slippers").GetComponentInChildren<MeshRenderer>().enabled = true;
-        GameObject.Find("Arrow bag").GetComponentInChildren<MeshRenderer>().enabled = true;
-
-
-
+        GameObject.Find("slippersCollider").GetComponentInChildren<BoxCollider>().enabled = true;
+        if (ClosedBag.activeInHierarchy)
+        {
+            
+            GameObject.Find("Arrow bag").GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
         //closed bag, flashlight and slippers are pickable now
         _flashlight.GetComponent<NVRInteractableItem>().enabled = true;
             _slippers.GetComponent<NVRInteractableItem>().enabled = true;
             ClosedBag.GetComponent<NVRInteractableItem>().enabled = true;
+        GameObject.Find("DestroyerColliderSlippers").GetComponent<BoxCollider>().enabled = true;
+        GameObject.Find("SlippersPlaceHolder").GetComponent<destroyItselfSlippers>().enabled = true;
             _tvImage.material = ExitImg;
             _exitOn = true;
 

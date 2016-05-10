@@ -66,10 +66,7 @@ public class Billboard : MonoBehaviour {
         {
             GameObject.Find("exitTick").SetActive(false);
         }
-    }
 
-    void Update()
-    {
         if (PlayerPrefs.GetInt("english") == 1)
         {
             GameObject.Find("FirstAidBagStaticTr").SetActive(false);
@@ -93,5 +90,10 @@ public class Billboard : MonoBehaviour {
 
             Debug.Log("turkish");
         }
+    }
+
+    void Update()
+    {
+       
     }
 }
