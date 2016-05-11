@@ -42,7 +42,7 @@ public class holdTarget : MonoBehaviour {
         // angle UI to User's face
         transform.LookAt(_lookTarget, Vector3.up);
 
-        if (_earthquakeController._shakeCamera == true)
+        /*if (_earthquakeController._shakeCamera == true)
         {
             if (_greenSphere.activeInHierarchy == true)
             {
@@ -53,7 +53,7 @@ public class holdTarget : MonoBehaviour {
             {
                 durationOfHold = 0.0f;
             }
-        }
+        }*/
 
     }
 

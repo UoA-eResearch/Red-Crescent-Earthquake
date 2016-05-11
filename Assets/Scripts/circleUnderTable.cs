@@ -22,23 +22,23 @@ public class circleUnderTable : MonoBehaviour {
         _earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
 		_redCircle = GameObject.Find("Red Circle Under Table");
 		_greenCircle = GameObject.Find("Green Circle Under Table");
-		_greenCircle.SetActive(false);
+		//_greenCircle.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (_earthquakeController._shakeCamera == true)
-        {
-            if (_greenCircle.activeInHierarchy == true)
-            {
+        //if (_earthquakeController._shakeCamera == true)
+        //{
+            //if (_greenCircle.activeInHierarchy == true)
+           // {
                 //durationOfStay += Time.deltaTime;
                 //Debug.Log("Duration of stay: " + (int)durationOfStay);
-            }
-            else
-            {
+           // }
+           // else
+           // {
                 //durationOfStay = 0.0f;
-            }
-        }
+           // }
+       // }
     }
 
 	void OnTriggerEnter (Collider other) {

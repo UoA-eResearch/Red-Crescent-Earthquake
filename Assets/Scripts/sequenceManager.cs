@@ -156,7 +156,7 @@ public class sequenceManager : MonoBehaviour {
 		if (_timeRemaining < 0 && _quakeHasStarted == false) {
 			//_quakeHasStarted = true;								// this boolean is now set in DropCoverHold()
 			StopAllCoroutines();	
-			StartCoroutine(DropCoverHold());
+			DropCoverHold();
 			// hide TV timer
 			_timerRenderer.gameObject.SetActive(false);
 		}
@@ -180,7 +180,7 @@ public class sequenceManager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
             StopAllCoroutines();		
-			StartCoroutine(DropCoverHold());
+			DropCoverHold();
 		}
 		// SHORTCUT FOR BRACKET SEQUENCE
 		if (Input.GetKeyDown(KeyCode.H)) 
@@ -194,7 +194,7 @@ public class sequenceManager : MonoBehaviour {
             StopAllCoroutines();
             _earthquakeController._earthquakeSequenceFinished = true;
             StartLeverSequence();
-            //GasElecSwitches();
+            GasElecSwitches();
 
         }
 		// SHORTCUT FOR EXIT SEQUENCE
@@ -279,7 +279,7 @@ public class sequenceManager : MonoBehaviour {
 			_arrow.SetActive(false);
 			// start the earthquake
 			StopAllCoroutines();		
-			StartCoroutine(DropCoverHold());
+			DropCoverHold();
 			_arrowSequenceStep = 9;
 		}
 		if (_arrowSequenceStep == 9) {
@@ -574,7 +574,7 @@ public class sequenceManager : MonoBehaviour {
         }
 	}
 
-	IEnumerator DropCoverHold () {
+	public void DropCoverHold () {
 		// make all hammer target (rings) invisible when quake starts
 		_hammerTarget1.SetActive(false);
 		_hammerTarget2.SetActive(false);
@@ -616,12 +616,19 @@ public class sequenceManager : MonoBehaviour {
             }
 
 			_earthquakeController.StartQuake();
-			yield return new WaitForSeconds(37);
-			Debug.Log("quake has ended");
-			GasElecSwitches();
-            StartCurtainGUI();
+
+            Invoke("EarthOver", 37);
+			
+
 		}
 	}
+
+    void EarthOver()
+    {
+        GasElecSwitches();
+        StartCurtainGUI();
+        Debug.Log("POST EARTHQUAKE HAS BEEN CALLED");
+    }
 
     public void StartCurtainGUI()
     {
@@ -651,6 +658,7 @@ public class sequenceManager : MonoBehaviour {
             _holdTarget.SetActive(false);
             _greenCircleUnderTable.SetActive(false);
             _redCircleUnderTable.SetActive(false);
+            Debug.Log("I AM BEING CALLED");
             
         }
 
