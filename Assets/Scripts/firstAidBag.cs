@@ -35,7 +35,7 @@ public class firstAidBag : MonoBehaviour {
 
 	void OnCollisionEnter (Collision other) 
 	{
-		if (other.gameObject.tag == "FirstAidItem" && _earthquakeController._earthquakeSequenceFinished == false ) {
+		if (other.gameObject.tag == "FirstAidItem") {
 			Destroy (other.gameObject);
 			_sequenceManager.NewItemCollected(other.gameObject.name);
             CollectedItems.Add(other.gameObject.name);

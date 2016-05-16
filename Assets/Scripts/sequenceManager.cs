@@ -19,6 +19,7 @@ public class sequenceManager : MonoBehaviour {
 	public int _itemsCollected;			    
 	private bool _checkItem;
 	private string _itemName;
+    private GameObject[] items;
     private EarthquakeController _earthquakeController;
     public GameObject _flashlight;
     public GameObject _slippers;
@@ -50,6 +51,8 @@ public class sequenceManager : MonoBehaviour {
     //Language check
     public bool isEnglish = false;
     public bool isTurkish = false;
+
+    public bool vaseStarted = false;
 
     // Textures for the TV
     // New Order: roll, alc, cpr v, manual, band, tri, pins, scissors
@@ -213,6 +216,12 @@ public class sequenceManager : MonoBehaviour {
         {
             StartCoroutine(ExitTime());
         }
+
+        if(_quakeHasStarted == true)
+        {
+            AvoidMakingBag();
+        }
+
 	} // end of Update()
 
     public void LanguageCheck()
@@ -291,6 +300,7 @@ public class sequenceManager : MonoBehaviour {
 	public void VaseIntro () {					// called by bullseye.cs
 		_tvText.text = "";
 		_tvImage.material = vaseImg;
+        vaseStarted = true;
         if (isEnglish == true)
         {
             //yield return new WaitForSeconds(1);
@@ -573,6 +583,16 @@ public class sequenceManager : MonoBehaviour {
             _tvAudioSource.Play();
         }
 	}
+
+    public void AvoidMakingBag()
+    {
+        items = GameObject.FindGameObjectsWithTag("FirstAidItem");
+
+        foreach(GameObject bagItems in items)
+        {
+            bagItems.GetComponent<NVRInteractableItem>().enabled = false;
+        }
+    }
 
 	public void DropCoverHold () {
 		// make all hammer target (rings) invisible when quake starts
