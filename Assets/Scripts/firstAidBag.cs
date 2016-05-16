@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class firstAidBag : MonoBehaviour {
 
 	private sequenceManager _sequenceManager;
+    private EarthquakeController _earthquakeController;
 	public AudioSource _sfx;
 	public GameObject ParticleSuccess;
 	public GameObject ParticleSpawn;
@@ -19,7 +20,7 @@ public class firstAidBag : MonoBehaviour {
 
     void Start () {
 		_sequenceManager = GameObject.Find("Sequence Manager").GetComponent<sequenceManager>();
-       
+        _earthquakeController = GameObject.Find("Earthquake Controller").GetComponent<EarthquakeController>();
 		Success = GameObject.Find("SuccessSound").GetComponent<AudioSource>();
 		Failure = GameObject.Find("FailureSound").GetComponent<AudioSource>();
         CollectedItems = new List<string>();
@@ -34,7 +35,7 @@ public class firstAidBag : MonoBehaviour {
 
 	void OnCollisionEnter (Collision other) 
 	{
-		if (other.gameObject.tag == "FirstAidItem") {
+		if (other.gameObject.tag == "FirstAidItem" && _earthquakeController._earthquakeSequenceFinished == false ) {
 			Destroy (other.gameObject);
 			_sequenceManager.NewItemCollected(other.gameObject.name);
             CollectedItems.Add(other.gameObject.name);

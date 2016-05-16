@@ -453,9 +453,9 @@ namespace NewtonVR
                     {
                         dk2Trackhat = new GameObject("trackhat").transform;
                         dk2Trackhat.parent = this.transform;
-                        dk2Trackhat.localPosition = new Vector3(0, -0.033f, 0.014f);
+                        dk2Trackhat.localPosition = new Vector3(0.5f, -2.13f, 1.99f);
                         dk2Trackhat.localScale = Vector3.one * 0.1f;
-                        dk2Trackhat.localEulerAngles = new Vector3(325, 0, 0);
+                        dk2Trackhat.localEulerAngles = new Vector3(0, 0, 0);
                         dk2Trackhat.gameObject.SetActive(true);
                     }
                     else
@@ -468,6 +468,8 @@ namespace NewtonVR
                     {
                         dk2TrackhatCollider = dk2Trackhat.gameObject.AddComponent<SphereCollider>();
                         dk2TrackhatCollider.isTrigger = true;
+                        dk2Trackhat.GetComponent<SphereCollider>().radius = 55;
+                        dk2Trackhat.GetComponent<SphereCollider>().center = new Vector3(9.17f, 27.57f, -22f);
                     }
 
                     Colliders = new Collider[] { dk2TrackhatCollider };
